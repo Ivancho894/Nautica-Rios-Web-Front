@@ -13,6 +13,8 @@ import Contactar from './components/Paginas/contactar';
 import QuienesSomos from './components/Paginas/quienesSomos';
 import Detalle from './components/Barco/detalleBarcos';
 import TodosLosBarcos from './components/Paginas/todosLosBarcos';
+import Navbar from './components/navbar/Navbar';
+
 
 
 
@@ -31,6 +33,7 @@ function App() {
 
   return (
     <div>
+        <Navbar />
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/landingpage' element={<LandingPage/>}/>

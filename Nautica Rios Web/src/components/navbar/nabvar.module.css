@@ -1,0 +1,46 @@
+nav {
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0%;
+  position: fixed;
+  width: 99%;
+  left: 0%;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+}
+
+li {
+  margin-right: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+a:hover {
+  opacity: 1;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4fa3d1;
+}
+
