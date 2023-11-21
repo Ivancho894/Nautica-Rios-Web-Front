@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import {Route,Routes } from "react-router-dom";
 
 import RenderBarco from "../Barco/renderBarco";
 
 export default function TodosLosBarcos(){
     //Renderizar todos los barcos
     const barcos = useSelector(state=>state.barcos)
-    console.log(barcos)
 
     return (
         <div>

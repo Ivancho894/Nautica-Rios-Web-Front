@@ -11,6 +11,7 @@ export default function RenderBarco({barco}){
                 <h1>Marca: {barco.marcaBarco}</h1>
             </Link>
             <h2>Marca del motor: {barco.marcaMotor}</h2>
+            <h2>Marca del barco: {barco.modelo}</h2>
         </div>
     )
 }
