@@ -6,7 +6,7 @@ import './App.css'
 //redux
 import { useDispatch, useSelector} from "react-redux";
 import { useNavigate,Route,Routes } from "react-router-dom";
-import { GET_BARCOS } from './redux/actions';
+import { GET_BARCOS, GET_FILTERS } from './redux/actions';
 import Home from './components/Paginas/homePage';
 import LandingPage from './components/Paginas/landingPage';
 import Contactar from './components/Paginas/contactar';

@@ -17,4 +17,7 @@ export function GET_BARCOS(){
 export function ADD_FILTER(newFilter){
     return {type:'ADD_FILTER',payload:newFilter}
 }
+export function GET_FILTERS(){
+    return {type:'GET_FILTERS'}
+}
 

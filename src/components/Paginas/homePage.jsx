@@ -1,5 +1,6 @@
 // ACA VA LA PAGINA HOME
 import { useNavigate } from "react-router-dom";
+import precios from "../pruebas";
 
 
 
@@ -9,6 +10,7 @@ export default function Home(){
         <div>
             <h1>Esta es la Home page</h1>
             <button onClick={()=>{navigate('/todoslosbarcos')}}>VER BARCOS</button>
+
         </div>
     )
 }
