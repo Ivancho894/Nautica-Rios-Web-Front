@@ -73,16 +73,23 @@ export default function reducer(state=initialState,action){
                 })
             })
             //Si hay al menos dos rangos
-            rangos>1?filtros.push({precios : [...rangos]}):null;
+            rangos.length>1?filtros.push({precios : [...rangos]}):null;
 
 
             //Year filter
             rangos = []
             function newYearRange(year){
-                rangos.unshift(
-                    {min:year-String(year)[String(year).length-1],
-                        max: year-String(year)[String(year).length-1]+5
-                    })
+                let min
+                let max
+                if(String(year)[String(year).length-1]>5){
+                    min = year-String(year)[String(year).length-1]+5
+                    max = year-String(year)[String(year).length-1]+10
+                }else{
+                    min = year-String(year)[String(year).length-1]
+                    max = year-String(year)[String(year).length-1]
+                    }
+                rangos.find(x=>x.min===min)?null:rangos.unshift({min,max});
+                
             }
 
             newYearRange(state.barcos[0]?.year)
@@ -91,12 +98,12 @@ export default function reducer(state=initialState,action){
                         rango.min<barco.year?
                             rango.max>=barco.year?
                                 null
-                            :newRange(barco.precio)
-                            :newRange(barco.precio)
+                            :newYearRange(barco.year)
+                            :newYearRange(barco.year)
                 })
             })
 
-            rangos>1?filtros.unshift({years : [...rangos]}):null;
+            rangos.length>1?filtros.unshift({years : [...rangos]}):null;
 
             return {...state,allFilters:filtros}
         default:
