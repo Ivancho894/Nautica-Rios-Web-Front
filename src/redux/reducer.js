@@ -32,14 +32,23 @@ export default function reducer(state=initialState,action){
             let filtros=[]
 
             //LLENA EL OBJETO FILTROS CON LOS DISPONIBLES CON LOS BARCOS ACTUALES, SE EJECUTA 1 VEZ
-            const properties = ['tipo','marcaBarco','marcaMotor','accesorios']
+            const properties = ['tipo','marcaBarco','marcaMotor']
             properties.map(prop=>{
                 let values=[]
-                state.barcos.map(barco=>values.push(barco[prop]))
-                console.log(state.barcos,'nofuncs')
+                state.barcos.map(barco=>values.find(x=>x===barco[prop])?null:values.push(barco[prop]))
                 values.length>1?filtros.unshift({[prop]:[...values]}):null;
             })
-            console.log(filtros,'seee')
+
+
+            //Para cargar Accesorios
+            let values = []
+            state.barcos.map(barco=>{
+                barco.accesorios.split(/, |,/).map(accesorio=>{
+                    values.find(x=>x===accesorio)?null:values.push(accesorio)
+                })
+            })
+            values.length>1?filtros.unshift({accesorios:[...values]}):null;
+
 
             //Para cargar los rangos de precios
             let rangos = []
@@ -64,7 +73,6 @@ export default function reducer(state=initialState,action){
                 })
             })
             //Si hay al menos dos rangos
-            console.log(rangos)
             rangos>1?filtros.push({precios : [...rangos]}):null;
 
 

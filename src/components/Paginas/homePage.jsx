@@ -1,6 +1,5 @@
 // ACA VA LA PAGINA HOME
 import { useNavigate } from "react-router-dom";
-import precios from "../pruebas";
 
 
 
