@@ -21,23 +21,23 @@ const Navbar = () => {
       </div>
       <ul>
         <li>
-          <Link to="/" className={styles.link}>
-            Home
+          <Link to="/todoslosbarcos" className={styles.link} disabled={!isLoggedIn}>
+            Barcos
           </Link>
         </li>
         <li>
-          <Link to="/barcos" className={styles.link} disabled={!isLoggedIn}>
-            Agregar Barcos
+          <Link to="/" className={styles.link} disabled={!isLoggedIn}>
+            Accesorios
           </Link>
         </li>
         <li>
-          <Link to=""className={styles.link}>
-            Services
+          <Link to="/contactar"className={styles.link}>
+            Contacto
           </Link>
         </li>
         <li>
-          <Link to=""className={styles.link}>
-            Quienes Somos
+          <Link to="/quienessomos"className={styles.link}>
+            Nosotros
           </Link>
         </li>
       </ul>

@@ -18,6 +18,7 @@ import Navbar from './components/navbar/Navbar';
 
 
 
+
 function App() {
   const barcos = useSelector(state=>state.barcos)
   const dispatch = useDispatch();
