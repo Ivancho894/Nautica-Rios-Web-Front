@@ -15,11 +15,20 @@ ul {
   list-style: none;
   display: flex;
 }
+.logoContainer {
+  margin-right: 15px; 
+}
 
+.logo {
+  height: 100px; 
+  width: 120px; 
+}
 li {
   margin-right: 20px;
 }
-
+.nav a {
+  color: white;
+}
 a {
   text-decoration: none;
   color: white;
