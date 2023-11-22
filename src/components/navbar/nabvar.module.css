@@ -1,6 +1,6 @@
 nav {
   background-color: #333;
-  padding: 10px;
+  padding: 5px;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -8,6 +8,7 @@ nav {
   top: 0%;
   position: fixed;
   width: 99%;
+  height: 65px;
   left: 0%;
 }
 
@@ -16,11 +17,11 @@ ul {
   display: flex;
 }
 .logoContainer {
-  margin-right: 15px; 
+  margin-right: 8px; 
 }
 
 .logo {
-  height: 100px; 
+  height: 76px; 
   width: 100%; 
 }
 li {
