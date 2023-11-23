@@ -21,3 +21,8 @@ export function GET_FILTERS(){
     return {type:'GET_FILTERS'}
 }
 
+export function SET_FILTER(newFilter) {
+    console.log('SET_FILTER Action:', newFilter);
+    return { type: 'SET_FILTER', payload: { filter: newFilter } };
+}
+

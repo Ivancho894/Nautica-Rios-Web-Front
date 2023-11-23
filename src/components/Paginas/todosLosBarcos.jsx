@@ -8,6 +8,8 @@ export default function TodosLosBarcos(){
     //Renderizar todos los barcos
     const barcos = useSelector(state=>state.barcos)
     const allFilters = useSelector(state=>state.allFilters)
+    console.log(barcos);
+    console.log(barcos.length);
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(GET_FILTERS())
