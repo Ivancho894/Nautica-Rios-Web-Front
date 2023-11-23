@@ -1,0 +1,39 @@
+import AuthProvider from "../AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import DashboardWrapper from "./DashboardWrapper";
+const DashboardView = () => {
+  const navigate = useNavigate();
+  const [curretUser, setCurrentUser] = useState({});
+  const [state, setState] = useState(0);
+
+  function handleUserLoggedIn(user) {
+    setCurrentUser(user);
+    setState(2);
+  }
+  function handleUserNotRegistered(user) {
+    navigate("/login");
+  }
+  function handleUserNotLoogedIn() {
+    navigate("login");
+  }
+
+  if (state === 0) {
+    return (
+      <AuthProvider
+        onUserLoggedIn={handleUserLoggedIn}
+        onUserNotLoogedIn={handleUserNotLoogedIn}
+        onUserNotRegistered={handleUserNotRegistered}
+      ></AuthProvider>
+    );
+  }
+  return (
+    <DashboardWrapper>
+      <div>
+        <h1>Dashboard</h1>
+      </div>
+    </DashboardWrapper>
+  );
+};
+
+export default DashboardView;
