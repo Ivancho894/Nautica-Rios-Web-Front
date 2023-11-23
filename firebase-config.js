@@ -79,9 +79,11 @@ export async function updateUser(user) {
 
 export async function getUserInfo(uid) {
   try {
+    console.log(uid);
     const docRef = doc(db, "users", uid);
+    console.log(docRef);
     const document = await getDoc(docRef);
-
+    console.log(document);
     return document.data();
   } catch (error) {
     console.error(error);
@@ -102,8 +104,17 @@ export async function getProfilePhotoUrl(profilePicture) {
   try {
     const imageRef = ref(storage, profilePicture);
     const url = await getDownloadURL(imageRef);
+    console.log(url);
     return url;
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function getUserPublicProfile({ uid }) {
+  console.log(uid);
+  const profileInfo = await getUserInfo(uid);
+  return {
+    profileInfo: profileInfo,
+  };
 }

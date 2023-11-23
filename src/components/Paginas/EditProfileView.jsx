@@ -11,13 +11,15 @@ import {
 const EditProfileView = () => {
   const ref = useRef(null);
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
   const [state, setState] = useState(0);
-  const [profileUrl, setProfileUrl] = useState(undefined);
+  const [profileUrl, setProfileUrl] = useState(null);
   const fileRef = useRef(null);
 
-  function handleUserLoggedIn(user) {
+  async function handleUserLoggedIn(user) {
     setCurrentUser(user);
+    const url = await getProfilePhotoUrl(user.profilePicture);
+    setProfileUrl(url);
     setState(2);
   }
   function handleUserNotRegistered(user) {
@@ -45,8 +47,8 @@ const EditProfileView = () => {
         if (res) {
           const tmpUser = { ...currentUser };
           tmpUser.profilePicture = res.metadata.fullPath;
-          setCurrentUser({ ...tmpUser });
           await updateUser(tmpUser);
+          setCurrentUser({ ...tmpUser });
           const url = await getProfilePhotoUrl(currentUser.profilePicture);
           setProfileUrl(url);
         }
@@ -68,8 +70,11 @@ const EditProfileView = () => {
         <h2>Edit profile info</h2>
         <div>
           <div>
-            {profileUrl}
-            <img src={profileUrl} alt="" width={100} />
+            <img
+              src={profileUrl}
+              alt="no se puedo abrir la imagen"
+              width={100}
+            />
           </div>
           <div>
             <button onClick={handleOpenFilePicker}>

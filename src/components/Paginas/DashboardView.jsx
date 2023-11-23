@@ -28,11 +28,13 @@ const DashboardView = () => {
     );
   }
   return (
-    <DashboardWrapper>
+    <div>
+      {/* <DashboardWrapper> */}
       <div>
         <h1>Dashboard</h1>
       </div>
-    </DashboardWrapper>
+      {/* </DashboardWrapper> */}
+    </div>
   );
 };
 

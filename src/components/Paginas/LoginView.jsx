@@ -22,6 +22,7 @@ const LoginView = () => {
   4: no hay nadie logeado
   5: ya existe username
   6: nuevo username, click para continuar
+  7: user name no existe
 */
   // useEffect(() => {
   //   setCurrentState(1);

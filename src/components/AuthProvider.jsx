@@ -21,11 +21,14 @@ export default function AuthProvider({
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
+      console.log(user);
       if (user) {
+        console.log(user.uid);
         const isRegistred = await userExist(user.uid);
         if (isRegistred) {
           //TODO: redirigir a Dashboard
           const userInfo = await getUserInfo(user.uid);
+          console.log(userInfo);
           if (userInfo.processCompleted) {
             onUserLoggedIn(userInfo);
           } else {
