@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './nabvar.module.css'; 
-import Logo from '../../assets/logo.png'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./nabvar.module.css";
+import Logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
+    navigate("/login");
     setIsLoggedIn(true);
   };
 
@@ -21,7 +24,11 @@ const Navbar = () => {
       </div>
       <ul>
         <li>
-          <Link to="/todoslosbarcos" className={styles.link} disabled={!isLoggedIn}>
+          <Link
+            to="/todoslosbarcos"
+            className={styles.link}
+            disabled={!isLoggedIn}
+          >
             Barcos
           </Link>
         </li>
@@ -31,12 +38,12 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/contactar"className={styles.link}>
+          <Link to="/contactar" className={styles.link}>
             Contacto
           </Link>
         </li>
         <li>
-          <Link to="/quienessomos"className={styles.link}>
+          <Link to="/quienessomos" className={styles.link}>
             Nosotros
           </Link>
         </li>
@@ -57,8 +64,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-
-
