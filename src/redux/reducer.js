@@ -1,7 +1,7 @@
 const initialState = {
     allBarcos:[],
     barcos: [],
-    allFilters:{},
+    allFilters:[],
     filter: {}
 }
 
@@ -14,19 +14,31 @@ export default function reducer(state=initialState,action){
 
         case 'ADD_FILTER':
             //AGREGA UN FILTRO AL OBJETO DE FILTROS
+            // console.log(action.payload.name,'f',JSON.parse(action.payload.value))
+            action.payload.value = action.payload.value!='-' && (action.payload.name === 'year' || action.payload.name ==='precio')?JSON.parse(action.payload.value):action.payload.value
             const newFilter = {
                 ...state.filter,
-                [action.payload]:action.payload.value
+                [action.payload.name]:action.payload.value
             }
+            action.payload.value==='-'?delete newFilter[action.payload.name]:null;
+
             return {...state,filter:newFilter}
 
         case 'SET_FILTER':
-            let barcosFilt = barcos
-            Object.keys(filter).map(prop=>{
-                //NO LO PROBE, DEBERIA HACER UN FILTRO ACA
-                // barcosFilt = barcosFilt.filter(barco=>barco[prop]===filter[prop])
-            })
-            return {...state,barcos:barcosFilt}
+            let newBarcos = state.allBarcos
+            Object.keys(state.filter).map(prop=>{
+                switch(prop){
+                    case 'precio': case 'year':
+                        newBarcos = newBarcos.filter(b => {
+                            return b[prop]>state.filter[prop].min && b[prop]<state.filter[prop].max})
+                        break
+                    case 'marcaBarco': case 'tipo': 
+                        newBarcos = newBarcos.filter(b => {return b[prop] === state.filter[prop]})
+                        break
+           
+            }})
+            return {...state,barcos:newBarcos}
+        
         case 'GET_FILTERS':
 
             let filtros=[]
@@ -73,7 +85,7 @@ export default function reducer(state=initialState,action){
                 })
             })
             //Si hay al menos dos rangos
-            rangos.length>1?filtros.push({precios : [...rangos]}):null;
+            rangos.length>1?filtros.push({precio : [...rangos]}):null;
 
 
             //Year filter
@@ -86,7 +98,7 @@ export default function reducer(state=initialState,action){
                     max = year-String(year)[String(year).length-1]+10
                 }else{
                     min = year-String(year)[String(year).length-1]
-                    max = year-String(year)[String(year).length-1]
+                    max = year-String(year)[String(year).length-1]+5
                     }
                 rangos.find(x=>x.min===min)?null:rangos.unshift({min,max});
                 
@@ -103,7 +115,7 @@ export default function reducer(state=initialState,action){
                 })
             })
 
-            rangos.length>1?filtros.unshift({years : [...rangos]}):null;
+            rangos.length>1?filtros.unshift({year : [...rangos]}):null;
 
             return {...state,allFilters:filtros}
         default:
