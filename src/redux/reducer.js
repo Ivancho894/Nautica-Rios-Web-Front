@@ -14,25 +14,31 @@ export default function reducer(state=initialState,action){
 
         case 'ADD_FILTER':
             //AGREGA UN FILTRO AL OBJETO DE FILTROS
-            // console.log(action.payload.name,'f',JSON.parse(action.payload.value))
+            //Paso de string a objeto si es preio o year
             action.payload.value = action.payload.value!='-' && (action.payload.name === 'year' || action.payload.name ==='precio')?JSON.parse(action.payload.value):action.payload.value
+            //Agrego el filtro seleccionado al store
             const newFilter = {
                 ...state.filter,
                 [action.payload.name]:action.payload.value
             }
+            //Si el valor del filtro seleccionado es - elimina ese filtro
             action.payload.value==='-'?delete newFilter[action.payload.name]:null;
 
             return {...state,filter:newFilter}
 
         case 'SET_FILTER':
+
+            //Agarra los filtros actuales del store y lo aplica
             let newBarcos = state.allBarcos
             Object.keys(state.filter).map(prop=>{
                 switch(prop){
                     case 'precio': case 'year':
                         newBarcos = newBarcos.filter(b => {
+                            //Filtro por precio o year
                             return b[prop]>state.filter[prop].min && b[prop]<state.filter[prop].max})
                         break
-                    case 'marcaBarco': case 'tipo': 
+                        case 'marcaBarco': case 'tipo': 
+                        //Filtro por marca o tipo
                         newBarcos = newBarcos.filter(b => {return b[prop] === state.filter[prop]})
                         break
            
@@ -90,6 +96,7 @@ export default function reducer(state=initialState,action){
 
             //Year filter
             rangos = []
+            //Funcion creadora de rangos
             function newYearRange(year){
                 let min
                 let max
@@ -104,7 +111,9 @@ export default function reducer(state=initialState,action){
                 
             }
 
+            //Agrego por default el primer barco a los rangos de years
             newYearRange(state.barcos[0]?.year)
+            //Agrego todos los rangos de los barcos que hay
             state.barcos.map(barco=>{
                 rangos.map(rango=>{
                         rango.min<barco.year?
@@ -114,7 +123,7 @@ export default function reducer(state=initialState,action){
                             :newYearRange(barco.year)
                 })
             })
-
+            //Chequeo que haya mas de un rango para filtrar si no directamente no existe el filtro years
             rangos.length>1?filtros.unshift({year : [...rangos]}):null;
 
             return {...state,allFilters:filtros}
