@@ -1,4 +1,8 @@
 .photo {
-    width: 100%;
-    height: auto;
+    width: 93%;
+    height: 100%;
+}
+.container{
+    background-color:cyan;
+  
 }
