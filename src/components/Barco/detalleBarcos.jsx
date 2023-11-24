@@ -11,11 +11,12 @@ export default function Detalle() {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Esta es la página de detalle</h2>
+
       {barco
         ? Object.keys(barco)?.map((key) => {
             return (
               <h3 className={styles.detailItem} key={keyId++}>
-                {barco[key]}
+                {key} : {barco[key]}
               </h3>
             );
           })
