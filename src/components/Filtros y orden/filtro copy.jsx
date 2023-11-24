@@ -120,7 +120,7 @@ const Filtros = ({ barcos, onFiltrosChange }) => {
   };
 
   return (
-    <div style={{ marginTop: '80px' }}>
+    <div style={{ marginTop: '80px',display:'flex' }}>
       {Object.entries(filtros).map(([prop, valores], index) => (
         <div key={index}>
           <label>{prop}:</label>

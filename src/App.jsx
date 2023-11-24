@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import { GET_BARCOS, GET_FILTERS } from "./redux/actions";
 import Home from "./components/Paginas/homePage";
-import LandingPage from "./components/Paginas/landingPage";
+import LandingPage from "./components/Paginas/Landing/landingPage";
 import Contactar from "./components/Paginas/contactar";
 import QuienesSomos from "./components/Paginas/quienesSomos";
 import Detalle from "./components/Barco/detalleBarcos";
@@ -20,16 +20,15 @@ import SignOutView from "./components/Paginas/SignOutView";
 import PublicProfileView from "./components/Paginas/PublicProfileView";
 import ChooseUserNameView from "./components/Paginas/ChooseUserNameView";
 import LoginView from "./components/Paginas/LoginView";
+import Accesorios from "./components/Paginas/Accesorios";
 
 function App() {
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-
-
-  useEffect(()=>{
-    dispatch(GET_BARCOS())
+  useEffect(() => {
+    dispatch(GET_BARCOS());
     // navigate('/home')
   }, []);
 
@@ -37,12 +36,16 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/landingpage" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/contactar" element={<Contactar />} />
         <Route path="/quienessomos" element={<QuienesSomos />} />
         <Route path="/detalle/:id" element={<Detalle />} />
-        <Route path="/todoslosbarcos" element={<TodosLosBarcos  barcos={barcos}/>} />
+        <Route
+          path="/todoslosbarcos"
+          element={<TodosLosBarcos barcos={barcos} />}
+        />
+        <Route path="/accesorios" element={<Accesorios />} />
         {/* //*  mis rutas  */}
         <Route path="/login" element={<LoginView />} />
         <Route path="/dashboard" element={<DashboardView />} />

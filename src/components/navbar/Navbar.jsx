@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./nabvar.module.css";
 import Logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,9 +20,10 @@ const Navbar = () => {
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.logoContainer}>
+      <NavLink to="/" clsassName={styles.logoContainer}>
         <img src={Logo} alt="Logo" className={styles.logo} />
-      </div>
+      </NavLink>
+
       <ul>
         <li>
           <Link
@@ -33,7 +35,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/" className={styles.link} disabled={!isLoggedIn}>
+          <Link to="/accesorios" className={styles.link} disabled={!isLoggedIn}>
             Accesorios
           </Link>
         </li>
