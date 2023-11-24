@@ -83,15 +83,15 @@ export default function reducer(state=initialState,action){
             //Lleno los rangos con todos los precios
             state.barcos.map(barco=>{
                 rangos.map(rango=>{
-                        rango.min<barco.precio?
+                        return rango.min<barco.precio?
                             rango.max>=barco.precio?
-                                null
-                            :newRange(barco.precio)
-                            :newRange(barco.precio)
-                })
+                            true
+                            :false
+                            :false
+                }).find(x=>x)?null:newRange(barco.precio);
             })
             //Si hay al menos dos rangos
-            rangos.length>1?filtros.push({precio : [...rangos]}):null;
+            rangos.length>1?filtros.push({precio : rangos}):null;
 
 
             //Year filter
