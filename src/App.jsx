@@ -10,7 +10,7 @@ import { GET_BARCOS, GET_FILTERS } from "./redux/actions";
 import Home from "./components/Paginas/homePage";
 import LandingPage from "./components/Paginas/Landing/landingPage";
 import Contactar from "./components/Paginas/contactar";
-import QuienesSomos from "./components/Paginas/quienesSomos";
+import QuienesSomos from "./components/Paginas/Nosotros/quienesSomos";
 import Detalle from "./components/Barco/detalleBarcos";
 import TodosLosBarcos from "./components/Paginas/todosLosBarcos";
 import Navbar from "./components/navbar/Navbar";

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './quienesSomos.module.css';
-import Logo from '../../assets/Logonegro.png';
+import Logo from '../../../assets/Logonegro.png';
 
 export default function QuienesSomos(){
     return (
