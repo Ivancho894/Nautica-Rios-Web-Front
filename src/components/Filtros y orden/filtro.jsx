@@ -20,7 +20,6 @@ export default function Filtro(){
     dispatch(SET_FILTER())
 
   }
-  console.log(allFilters)
 
   return (
     <div style={{ marginTop: '80px' }}>
