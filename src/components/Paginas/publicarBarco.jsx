@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { useNavigate } from 'react-router-dom';
+import cargarImg from './PublicarBarco/Nueva Imagen';
+
 
 const PublicarBarco = () => {
 const navigate = useNavigate(); 
@@ -21,11 +23,15 @@ const navigate = useNavigate();
     tiempos: '',
     tipo: '',
     year: '',
+    imagen: ''
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNuevoBarco((prev) => ({ ...prev, [name]: value }));
+  };  
+  const handleImagenChange = (e) => {
+    setNuevoBarco((prev) => ({ ...prev, imagen: e.target.files }));
   };
 
   const handleSubmit = async (e) => {
@@ -34,6 +40,7 @@ const navigate = useNavigate();
     if (nuevoBarco.tipo && nuevoBarco.marcaBarco && nuevoBarco.marcaMotor && nuevoBarco.precio && nuevoBarco.eslora && nuevoBarco.year
         && nuevoBarco.accesorios && nuevoBarco.capacidad && nuevoBarco.consumo && nuevoBarco.horas && nuevoBarco.manga && nuevoBarco.modelo
         && nuevoBarco.modeloMotor && nuevoBarco.puntal && nuevoBarco.tiempos) {
+          const arImagenes = Object.keys(nuevoBarco.imagen).map(num => cargarImg(nuevoBarco.imagen[num],nuevoBarco.marcaBarco))
       try {
         await addDoc(collection(db, 'barcos'), nuevoBarco);
         console.log('Barco agregado correctamente a Firestore');
@@ -116,6 +123,9 @@ const navigate = useNavigate();
       <br/>
       <label>Año: </label>
       <input type="number" name="year" pattern="[0-9]+([.][0-9]+)?" value={nuevoBarco.year} onChange={handleInputChange} />
+      <br/>
+      <label>Imagen: </label>
+      <input type="file" name="Imagen" onChange={handleImagenChange} />
       <br/>
 
       <button type="submit">Publicar</button>
