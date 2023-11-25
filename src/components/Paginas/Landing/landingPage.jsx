@@ -18,7 +18,7 @@ export default function LandingPage() {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <h1>Bienvenido a Nautica Ríos</h1>
             <h2>Ventas y Accesorios</h2>
             <p>Navega por nuestra página y encuentra el producto perfecto para tu barco.</p>

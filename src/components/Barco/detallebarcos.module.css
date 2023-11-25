@@ -1,0 +1,20 @@
+.container {
+    max-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #aaf0ff; /* Color celeste clarito */
+    text-align: center; /* Texto centrado */
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .detailItem {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  
+  
