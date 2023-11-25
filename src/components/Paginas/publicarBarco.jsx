@@ -47,6 +47,7 @@ const navigate = useNavigate();
           const arImagenes =await Object.keys(nuevoBarco.imagen).map(async num => await cargarImg(nuevoBarco.imagen[num],nuevoBarco.marcaBarco).then(data=>{imagenes.push(data) }))
           console.log(arImagenes,nuevoBarco)
       try {
+        //CUANTO TODO ESTE LISTO DESCOMENTAR LA SIGUIENTE LINEA
         // await addDoc(collection(db, 'barcos'), nuevoBarco);
         console.log('Barco agregado correctamente a Firestore');
         alert('¡Barco agregado correctamente!');
