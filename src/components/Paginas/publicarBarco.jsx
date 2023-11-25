@@ -8,22 +8,22 @@ import cargarImg from './PublicarBarco/Nueva Imagen';
 const PublicarBarco = () => {
 const navigate = useNavigate(); 
   const [nuevoBarco, setNuevoBarco] = useState({
-    accesorios: '',
-    capacidad: '',
-    consumo: '',
-    eslora: '',
-    horas: '',
-    manga: '',
-    marcaBarco: '',
-    marcaMotor: '',
-    modelo: '',
-    modeloMotor: '',
-    precio: '',
-    puntal: '',
-    tiempos: '',
-    tipo: '',
-    year: '',
-    imagen: ''
+    accesorios: 'ss',
+    capacidad: '3',
+    consumo: '3',
+    eslora: '3',
+    horas: '3',
+    manga: '3',
+    marcaBarco: 'f',
+    marcaMotor: 'f',
+    modelo: 'f',
+    modeloMotor: 'f',
+    precio: '3',
+    puntal: '3',
+    tiempos: '3',
+    tipo: 'f',
+    year: '3',
+    imagen: []
   });
 
   const handleInputChange = (e) => {
@@ -40,9 +40,14 @@ const navigate = useNavigate();
     if (nuevoBarco.tipo && nuevoBarco.marcaBarco && nuevoBarco.marcaMotor && nuevoBarco.precio && nuevoBarco.eslora && nuevoBarco.year
         && nuevoBarco.accesorios && nuevoBarco.capacidad && nuevoBarco.consumo && nuevoBarco.horas && nuevoBarco.manga && nuevoBarco.modelo
         && nuevoBarco.modeloMotor && nuevoBarco.puntal && nuevoBarco.tiempos) {
-          const arImagenes = Object.keys(nuevoBarco.imagen).map(num => cargarImg(nuevoBarco.imagen[num],nuevoBarco.marcaBarco))
+          let imagenes = []
+
+          //Por cada imagen que se cargo llamo a cargar imagen
+          //Deberia devolver un link pero devuelve la promesas
+          const arImagenes =await Object.keys(nuevoBarco.imagen).map(async num => await cargarImg(nuevoBarco.imagen[num],nuevoBarco.marcaBarco).then(data=>{imagenes.push(data) }))
+          console.log(arImagenes,nuevoBarco)
       try {
-        await addDoc(collection(db, 'barcos'), nuevoBarco);
+        // await addDoc(collection(db, 'barcos'), nuevoBarco);
         console.log('Barco agregado correctamente a Firestore');
         alert('¡Barco agregado correctamente!');
         setNuevoBarco({
