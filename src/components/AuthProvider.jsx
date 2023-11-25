@@ -12,6 +12,7 @@ import {
   userExist,
 } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
+
 export default function AuthProvider({
   children,
   onUserLoggedIn,

@@ -21,6 +21,7 @@ import PublicProfileView from "./components/Paginas/PublicProfileView";
 import ChooseUserNameView from "./components/Paginas/ChooseUserNameView";
 import LoginView from "./components/Paginas/LoginView";
 import Accesorios from "./components/Paginas/Accesorios";
+import PublicarBarco from "./components/Paginas/publicarBarco";
 
 function App() {
   const barcos = useSelector((state) => state.barcos);
@@ -54,6 +55,7 @@ function App() {
         <Route path="/signout" element={<SignOutView />} />
         <Route path="/user/:username" element={<PublicProfileView />} />
         <Route path="/choose-username" element={<ChooseUserNameView />} />
+        <Route path="/publicarBarco" element={<PublicarBarco/>}/>
       </Routes>
     </div>
   );
