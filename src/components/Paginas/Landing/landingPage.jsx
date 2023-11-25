@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom';
 import React, {useState} from 'react';
 import photo1 from '../../../assets/photo1.jpg';
 import photo2 from '../../../assets/photo2.jpg';
 import photo3 from '../../../assets/photo3.jpg';
-import styles from './LandingPage.module.css';
 
 const photos = [photo1, photo2, photo3];
 
@@ -17,16 +15,32 @@ export default function LandingPage() {
         }
     };
 
+    const handlePrevious = () => {
+        setIndex(index - 1);
+        if (index === 0) {
+            setIndex(photos.length - 1);
+        }
+    };
+
     return (
-        <div className={styles.container}>
-            <h1>Bienvenido a Nautica Ríos</h1>
-            <h2>Ventas y Accesorios</h2>
-            <p>Navega por nuestra página y encuentra el producto perfecto para tu barco.</p>
-            <img className={styles.photo} src={photos[index]} alt="Barco" />
-            <button onClick={handleNext}>Siguiente</button>
-            <Link to="/home">
-                <button>Home</button>
-            </Link>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingTop: '20px'}}>
+            <h1 style={{fontSize: '2rem'}}>Bienvenido a Nautica Ríos</h1>
+            <h2 style={{fontSize: '1.5rem'}}>Ventas y Accesorios</h2>
+            <p style={{color: '#7e7e7e'}}>Navega por nuestra página y encuentra el producto perfecto para tu barco.</p>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <div style={{position: 'relative', width: '100%', height: '50%'}}>
+                    <img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={photos[index]} alt="Barco" />
+                    <button onClick={handlePrevious} style={{position: 'absolute', top: '50%', left: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px'}}>
+                        &larr;
+                    </button>
+                    <button onClick={handleNext} style={{position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px'}}>
+                        &rarr;
+                    </button>
+                </div>
+            </div>
+            <a href="/home" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
+                Home
+            </a>
         </div>
     );
 }
