@@ -48,7 +48,7 @@ export default function LandingPage() {
                     </button>
                 </div>
             </div>
-            <a href="/home" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
+            <a href="/todoslosbarcos" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
                 Home
             </a>
         </div>
