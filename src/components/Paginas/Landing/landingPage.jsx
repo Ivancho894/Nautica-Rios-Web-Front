@@ -5,6 +5,7 @@ import photo3 from '../../../assets/photo3.jpg';
 import { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import {GET_BARCOS } from "../../../redux/actions";
+import { Link } from 'react-router-dom';
 
 const photos = [photo1, photo2, photo3];
 
@@ -48,9 +49,9 @@ export default function LandingPage() {
                     </button>
                 </div>
             </div>
-            <a href="/todoslosbarcos" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
+            <Link to="/home" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
                 Home
-            </a>
+            </Link>
         </div>
     );
 }
