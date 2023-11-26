@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderBarco from "../Barco/renderBarco";
 import Filtros from "../Filtros y orden/filtro";
 import { useEffect } from "react";
-import { GET_FILTERS } from "../../redux/actions";
+import { GET_FILTERS,GET_BARCOS } from "../../redux/actions";
 import styles from "./todoslosbarcos.module.css"
 
 export default function TodosLosBarcos() {
@@ -12,6 +12,7 @@ export default function TodosLosBarcos() {
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(GET_FILTERS())
+    dispatch(GET_BARCOS())
 
     },[])
   return (
