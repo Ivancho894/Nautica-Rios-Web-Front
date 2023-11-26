@@ -13,22 +13,23 @@ export default function Detalle() {
       <h2 className={styles.title}>{barco.marcaBarco}</h2>
       <div className={styles.container2}>
         <div className={styles.detailItem}>
-          {barco
-            ? Object.keys(barco)?.map((key) => {
+          {barco?
+             Object.keys(barco)?.map((key) => {
+                if(key!='imagenes'){
                 return (
                   <h3 key={keyId++}>
                     <b>{key}</b>: <span>{barco[key]}</span>
                   </h3>
-                );
+                );}
               })
             : ""}
         </div>
         <div>
-          <img
+          {barco.imagenes.map(img=>{
+            return (<img
             className={styles.image}
-            src="https://img.interempresas.net/fotos/3114349.jpeg"
-            alt="imagen referencial"
-          />
+            src={img}
+          />)})}
           <h2>precio: ${barco.precio}</h2>
         </div>
       </div>

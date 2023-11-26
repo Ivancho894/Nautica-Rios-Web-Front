@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getStorage, ref ,uploadBytes,getDownloadURL} from "firebase/storage";
+import {v4} from "uuid"
+
 
 const PublicarBarco = () => {
   const navigate = useNavigate();
@@ -22,12 +25,15 @@ const PublicarBarco = () => {
     tipo: "",
     year: "",
   });
+  const [imagen,setImagen] = useState([])
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setNuevoBarco((prev) => ({ ...prev, [id]: value }));
-    console.log(nuevoBarco);
   };
+  const handleImagenChange = (e) => {
+    setImagen((prev) => ([ ...prev, e.target.files[0] ]));
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,8 +55,16 @@ const PublicarBarco = () => {
       nuevoBarco.puntal &&
       nuevoBarco.tiempos
     ) {
+      const storage = getStorage();
+      //Referencia de la img a cargar
+      const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}/${nuevoBarco.marcaBarco+v4()}`);
+      //Agrego la imagen a la base de datos
+      const data = await uploadBytes(mountainsRef, imagen[0])
+      //Busco el link de la imagen
+      const link = await getDownloadURL(data.ref)
+
       try {
-        await addDoc(collection(db, "barcos"), nuevoBarco);
+        await addDoc(collection(db, "barcos"), {...nuevoBarco,imagenes:[link]});
         console.log("Barco agregado correctamente a Firestore");
         alert("¡Barco agregado correctamente!");
         setNuevoBarco({
@@ -85,6 +99,38 @@ const PublicarBarco = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
+        <div className="mb-6">
+          <label
+            htmlFor="marca"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Marca
+          </label>
+          <input
+            type="text"
+            id="marcaBarco"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={nuevoBarco.marcaBarco}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="modelo"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Modelo
+          </label>
+          <input
+            type="text"
+            id="modelo"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={nuevoBarco.modelo}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
       <div className="mt-10">
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
@@ -119,22 +165,7 @@ const PublicarBarco = () => {
               required
             />
           </div>
-          <div>
-            <label
-              htmlFor="consumo"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Consumo
-            </label>
-            <input
-              type="number"
-              id="consumo"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={nuevoBarco.consumo}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+
           <div>
             <label
               htmlFor="eslora"
@@ -151,22 +182,7 @@ const PublicarBarco = () => {
               required
             />
           </div>
-          <div>
-            <label
-              htmlFor="horas"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Horas
-            </label>
-            <input
-              type="number"
-              id="horas"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={nuevoBarco.horas}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+
           <div>
             <label
               htmlFor="manga"
@@ -184,22 +200,23 @@ const PublicarBarco = () => {
               required
             />
           </div>
-        </div>
-        <div className="mb-6">
+          <div className="mb-6">
           <label
-            htmlFor="marca"
+            htmlFor="puntal"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Marca
+            Puntal
           </label>
           <input
-            type="text"
-            id="marcaBarco"
+            type="number"
+            id="puntal"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            value={nuevoBarco.marcaBarco}
+            pattern="[0-9]+([.][0-9]+)?"
+            value={nuevoBarco.puntal}
             onChange={handleInputChange}
             required
           />
+        </div>
         </div>
         <div className="mb-6">
           <label
@@ -217,22 +234,7 @@ const PublicarBarco = () => {
             required
           />
         </div>
-        <div className="mb-6">
-          <label
-            htmlFor="modelo"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Modelo
-          </label>
-          <input
-            type="text"
-            id="modelo"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            value={nuevoBarco.modelo}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+
         <div className="mb-6">
           <label
             htmlFor="modeloMotor"
@@ -245,6 +247,54 @@ const PublicarBarco = () => {
             id="modeloMotor"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             value={nuevoBarco.modeloMotor}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+            <label
+              htmlFor="horas"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Horas
+            </label>
+            <input
+              type="number"
+              id="horas"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value={nuevoBarco.horas}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="consumo"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Consumo
+            </label>
+            <input
+              type="number"
+              id="consumo"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value={nuevoBarco.consumo}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+        <div className="mb-6">
+          <label
+            htmlFor="tiempos"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Tiempos
+          </label>
+          <input
+            type="number"
+            id="tiempos"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={nuevoBarco.tiempos}
             onChange={handleInputChange}
             required
           />
@@ -265,39 +315,8 @@ const PublicarBarco = () => {
             required
           />
         </div>
-        <div className="mb-6">
-          <label
-            htmlFor="puntal"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Puntal
-          </label>
-          <input
-            type="number"
-            id="puntal"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            pattern="[0-9]+([.][0-9]+)?"
-            value={nuevoBarco.puntal}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="tiempos"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Tiempos
-          </label>
-          <input
-            type="number"
-            id="tiempos"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            value={nuevoBarco.tiempos}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+
+        
         <div className="mb-6">
           <label
             htmlFor="tipo"
@@ -315,7 +334,7 @@ const PublicarBarco = () => {
           />
         </div>
         <div className="mb-6">
-          <label
+        <label
             htmlFor="year"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
@@ -327,6 +346,21 @@ const PublicarBarco = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             value={nuevoBarco.year}
             onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="mb-6">
+        <label
+            htmlFor="imgen"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Imagen
+          </label>
+          <input
+            type="file"
+            id="imagen"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onChange={handleImagenChange}
             required
           />
         </div>

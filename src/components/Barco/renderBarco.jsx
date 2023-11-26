@@ -9,8 +9,7 @@ export default function RenderBarco({ barco }) {
       {/* //* la imagen es solo referencial, aun falta ver como traer las imgaes de la store de firebase  */}
       <img
         className={style.image}
-        src="https://img.interempresas.net/fotos/3114349.jpeg"
-        alt="alguna imagen"
+        src={barco.imagenes[0]}
       />
       <h3>
         {barco.marcaBarco} {barco.modelo}
