@@ -3,7 +3,6 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { Link, useNavigate } from "react-router-dom";
 import { getStorage, ref ,uploadBytes,getDownloadURL} from "firebase/storage";
-import {v4} from "uuid"
 
 
 const PublicarBarco = () => {
@@ -57,7 +56,7 @@ const PublicarBarco = () => {
     ) {
       const storage = getStorage();
       //Referencia de la img a cargar
-      const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}/${nuevoBarco.marcaBarco+v4()}`);
+      const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}/${nuevoBarco.marcaBarco}`);
       //Agrego la imagen a la base de datos
       const data = await uploadBytes(mountainsRef, imagen[0])
       //Busco el link de la imagen
