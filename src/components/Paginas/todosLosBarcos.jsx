@@ -4,6 +4,7 @@ import RenderBarco from "../Barco/renderBarco";
 import Filtros from "../Filtros y orden/filtro";
 import { useEffect } from "react";
 import { GET_FILTERS } from "../../redux/actions";
+import styles from "./todoslosbarcos.module.css"
 
 export default function TodosLosBarcos() {
   //Renderizar todos los barcos
@@ -14,14 +15,23 @@ export default function TodosLosBarcos() {
 
     },[])
   return (
-    <div>
-      <Filtros />
+   <div  >
+    
+    
+   
+   
+   <div className={styles.conthome}>
+     
+   <Filtros />
+    
 
-      <div style={{ display: "flex", margin: "3px" }}>
+      <div className={styles.cardscont}>
         {barcos.map((barco) => {
           return <RenderBarco key={barco.id} barco={barco} />;
         })}
       </div>
     </div>
+   </div>
+   
   );
 }
