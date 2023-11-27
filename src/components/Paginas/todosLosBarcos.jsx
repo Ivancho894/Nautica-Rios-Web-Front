@@ -11,10 +11,8 @@ export default function TodosLosBarcos() {
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(GET_FILTERS())
-    dispatch(GET_BARCOS())
-
-    },[])
+        dispatch(GET_FILTERS())
+      },[])
   return (
    <div  >
     
@@ -23,7 +21,7 @@ export default function TodosLosBarcos() {
    
    <div className={styles.conthome}>
      
-   <Filtros />
+      <Filtros />
     
 
       <div className={styles.cardscont}>

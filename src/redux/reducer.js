@@ -10,7 +10,7 @@ export default function reducer(state=initialState,action){
     
     switch(action.type){
         case 'GET_BARCOS':            
-            return {barcos: action.payload,allBarcos:action.payload,filter:{},allFilter:{}}
+            return {barcos: action.payload,allBarcos:action.payload,filter:{},allFilters:[]}
 
         case 'ADD_FILTER':
             //AGREGA UN FILTRO AL OBJETO DE FILTROS

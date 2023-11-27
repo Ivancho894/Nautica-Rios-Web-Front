@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GET_BARCOS } from "../../redux/actions";
+import { GET_BARCOS,GET_FILTERS } from "../../redux/actions";
 
 
 
@@ -10,7 +10,8 @@ export default function Home(){
     const navigate = useNavigate()
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(GET_BARCOS())
+        // dispatch(GET_FILTERS())
+        // dispatch(GET_BARCOS())
     },[])
     return (
         <div>

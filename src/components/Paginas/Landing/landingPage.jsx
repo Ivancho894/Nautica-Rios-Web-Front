@@ -2,11 +2,21 @@ import React, {useState} from 'react';
 import photo1 from '../../../assets/photo1.jpg';
 import photo2 from '../../../assets/photo2.jpg';
 import photo3 from '../../../assets/photo3.jpg';
+import { useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import {GET_BARCOS } from "../../../redux/actions";
+import { Link } from 'react-router-dom';
 
 const photos = [photo1, photo2, photo3];
 
 export default function LandingPage() {
     const [index, setIndex] = useState(0);
+    const barcos = useSelector(state=>state.barcos)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        //   dispatch(GET_BARCOS())
+  
+      },[])
 
     const handleNext = () => {
         setIndex(index + 1);
@@ -26,6 +36,7 @@ export default function LandingPage() {
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingTop: '20px'}}>
             <h1 style={{fontSize: '2rem'}}>Bienvenido a Nautica Ríos</h1>
             <h2 style={{fontSize: '1.5rem'}}>Ventas y Accesorios</h2>
+            <h3>Hay {barcos.length} embarcaciones publicadas</h3>
             <p style={{color: '#7e7e7e'}}>Navega por nuestra página y encuentra el producto perfecto para tu barco.</p>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <div style={{position: 'relative', width: '100%', height: '50%'}}>
@@ -38,9 +49,9 @@ export default function LandingPage() {
                     </button>
                 </div>
             </div>
-            <a href="/home" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
+            <Link to="/home" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
                 Home
-            </a>
+            </Link>
         </div>
     );
 }

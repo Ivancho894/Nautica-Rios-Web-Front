@@ -29,7 +29,8 @@ function App() {
   // const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(GET_BARCOS());
+    dispatch(GET_BARCOS())
+    dispatch(GET_FILTERS());
     // navigate('/home')
   }, []);
 
@@ -44,7 +45,7 @@ function App() {
         <Route path="/detalle/:id" element={<Detalle />} />
         <Route
           path="/todoslosbarcos"
-          element={<TodosLosBarcos barcos={barcos} />}
+          element={<TodosLosBarcos/>}
         />
         <Route path="/accesorios" element={<Accesorios />} />
         {/* //*  mis rutas  */}

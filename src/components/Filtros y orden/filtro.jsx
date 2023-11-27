@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import styles from "./filtro.module.css"
 
 
-export default function Filtro(){
+export default function Filtros(){
   // const [filtros,setFiltros] = useState({})
   const allFilters = useSelector(state => state.allFilters)
   const filtrosAplicados = useSelector(state => state.filter)
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(GET_FILTERS())
+
+    // dispatch(GET_FILTERS())
       // setFiltros()
     },[])
 
@@ -20,13 +21,16 @@ export default function Filtro(){
     dispatch(SET_FILTER())
 
   }
-
   return (
     <div className={styles.contfilters}>
       {allFilters?.map((filtro,i)=>{
         
         let prop = Object.keys(filtro)[0]
+<<<<<<< HEAD
         console.log(prop);
+=======
+         
+>>>>>>> ce991a8f75bbe8176c6e32e7b6468fa2c4b788cb
         switch (prop){
        
           case 'precio': case 'year':

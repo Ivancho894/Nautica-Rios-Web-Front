@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import style from "./renderBarco.module.css";
 export default function RenderBarco({ barco }) {
   //Renderiza un solo barco
-  console.log(barco);
   return (
     <div className={style.container}>
       {/* //* la imagen es solo referencial, aun falta ver como traer las imgaes de la store de firebase  */}
