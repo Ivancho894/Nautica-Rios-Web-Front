@@ -43,9 +43,7 @@ function App() {
         <Route path="/contactar" element={<Contactar />} />
         <Route path="/quienessomos" element={<QuienesSomos />} />
         <Route path="/detalle/:id" element={<Detalle />} />
-        <Route
-          path="/todoslosbarcos"
-          element={<TodosLosBarcos/>}
+        <Route path="/todoslosbarcos"  element={<TodosLosBarcos/>}
         />
         <Route path="/accesorios" element={<Accesorios />} />
         {/* //*  mis rutas  */}
