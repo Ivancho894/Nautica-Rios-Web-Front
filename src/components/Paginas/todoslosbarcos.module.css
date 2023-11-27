@@ -1,8 +1,10 @@
+
+
 .cardscont{
     display: flex;
     grid-template-columns: repeat(5, 1fr);
     /* Cuatro columnas de igual tamaño */
-    gap: 10px;
+    gap: 30px;
     /* Espacio entre las tarjetas */
     justify-content: center;
     /* Alinear las columnas al espacio disponible */
@@ -23,16 +25,6 @@
     
 }
 
-.contfilters{
-    background-color:  #0f100f;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    width: 100%;
-}
 .contfilter{
     /* background-color:  #a28e8efa; */
     color: white;
@@ -43,72 +35,3 @@
     height: 50px;
     gap: 10px;
 }
-.contord{
-    /* background-color:  #6a2525; */
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    gap: 20px;
-}
-.ordrating{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    gap: 20px;
-}
-
-.ordalfab{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    gap: 20px;
-}
-.contorigin{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    gap: 20px;
-}
-
-.contgenres{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    gap: 20px;
-}
-.contpage{
-    /* background-color: rgb(112, 186, 186); */
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    gap: 20px;
-    width: 50%;
-    margin-left: 600px;
-}
-.contcards{
-    margin: 0 auto;
-    display: block;
-}
-.contpage button{
-    width: 50px;
-    height: 20px;
-    margin:10px;
-    background-color: #0f100f;
-    color: aliceblue;
-    cursor: pointer;
-}
-
-  
