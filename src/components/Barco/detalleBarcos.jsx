@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./detallebarcos.module.css";
+import { Link } from "react-router-dom";
 
 export default function Detalle() {
   const barcos = useSelector((state) => state.barcos);
@@ -31,6 +32,9 @@ export default function Detalle() {
             src={img}
           />)})}
           <h2>precio: ${barco.precio}</h2>
+          <Link to="/todoslosbarcos" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '4px 16px', borderRadius: '4px', marginLeft: '16px'}}>
+                Regresar
+            </Link>
         </div>
       </div>
     </div>
