@@ -1,0 +1,28 @@
+.container {
+  max-width: 100%;
+  margin: 20px;
+  padding: 20px;
+  background-color: #aaf0ff; /* Color celeste clarito */
+  text-align: center; /* Texto centrado */
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.detailItem {
+  /* display: flex;
+  flex-direction: column; */
+  border-bottom: rgb(130, 124, 114);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.container2 {
+  display: flex;
+  width: 100%;
+}
+.image {
+  width: 45rem;
+}

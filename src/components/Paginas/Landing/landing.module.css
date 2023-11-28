@@ -1,0 +1,8 @@
+.background {
+  
+    height: 100vh;
+    background-image: url("../..//imagenes/landing.jpg");
+    background-position: top center;
+    background-size: cover;
+ 
+}
