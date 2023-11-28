@@ -53,8 +53,9 @@ export default function reducer(state=initialState,action){
             const properties = ['tipo','marcaBarco','marcaMotor']
             properties.map(prop=>{
                 let values=[]
-                state.barcos.map(barco=>values.find(x=>x===barco[prop])?null:values.push(barco[prop]))
-                values.length>1?filtros.unshift({[prop]:[...values]}):null;
+
+                state.barcos.map(barco=>values.find(x=>x.toUpperCase()===barco[prop].toUpperCase())?null:values.push(barco[prop]))
+                values.length>1?filtros.unshift({[prop]:values.sort()}):null;
             })
 
 
@@ -65,7 +66,7 @@ export default function reducer(state=initialState,action){
                     values.find(x=>x===accesorio)?null:values.push(accesorio)
                 })
             })
-            values.length>1?filtros.unshift({accesorios:[...values]}):null;
+            values.length>1?filtros.push({accesorios: values.sort((a,b)=>{return a.min-b.min})}):null;
 
 
             //Para cargar los rangos de precios
@@ -73,7 +74,7 @@ export default function reducer(state=initialState,action){
             function newRange(precio){
                 //Funcion que recibe un precio y te devuelve un rango cargado con min y max
                 //del rango de ese precio
-                rangos.unshift(
+                rangos.push(
                     {min:10**(String(precio).length-1)*String(precio)[0]*1,
                         max: 10**(String(precio).length-1)*(1+(String(precio)[0]*1))
                     })
@@ -91,7 +92,8 @@ export default function reducer(state=initialState,action){
                 }).find(x=>x)?null:newRange(barco.precio);
             })
             //Si hay al menos dos rangos
-            rangos.length>1?filtros.push({precio : rangos}):null;
+            console.log()
+            rangos.length>1?filtros.push({precio : rangos.sort((a,b)=>{return a.min-b.min})}):null;
 
 
             //Year filter
@@ -107,7 +109,7 @@ export default function reducer(state=initialState,action){
                     min = year-String(year)[String(year).length-1]
                     max = year-String(year)[String(year).length-1]+5
                     }
-                rangos.find(x=>x.min===min)?null:rangos.unshift({min,max});
+                rangos.find(x=>x.min===min)?null:rangos.push({min,max});
                 
             }
 
@@ -124,7 +126,7 @@ export default function reducer(state=initialState,action){
                 })
             })
             //Chequeo que haya mas de un rango para filtrar si no directamente no existe el filtro years
-            rangos.length>1?filtros.unshift({year : [...rangos]}):null;
+            rangos.length>1?filtros.unshift({year : rangos.sort((a,b)=>{return a.min-b.min})}):null;
 
             return {...state,allFilters:filtros}
         default:

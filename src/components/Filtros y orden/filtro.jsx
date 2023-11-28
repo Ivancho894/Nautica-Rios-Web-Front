@@ -27,10 +27,6 @@ export default function Filtros(){
         
         let prop = Object.keys(filtro)[0]
 
-        console.log(prop);
-
-         
-
         switch (prop){
        
           case 'precio': case 'year':
