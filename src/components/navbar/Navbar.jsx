@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate("/registro");
     setIsLoggedIn(true);
   };
 
