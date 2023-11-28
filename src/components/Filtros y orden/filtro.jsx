@@ -26,9 +26,13 @@ export default function Filtros(){
       {allFilters?.map((filtro,i)=>{
         
         let prop = Object.keys(filtro)[0]
+
+        console.log(prop);
+
          
+
         switch (prop){
-        
+       
           case 'precio': case 'year':
             {
               return (

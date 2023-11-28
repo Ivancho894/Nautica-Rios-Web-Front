@@ -1,8 +1,10 @@
+
+
 .cardscont{
     display: flex;
     grid-template-columns: repeat(5, 1fr);
     /* Cuatro columnas de igual tamaño */
-    gap: 10px;
+    gap: 30px;
     /* Espacio entre las tarjetas */
     justify-content: center;
     /* Alinear las columnas al espacio disponible */
@@ -23,16 +25,6 @@
     
 }
 
-.contfilters{
-    background-color:  #0f100f;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 50px;
-    width: 100%;
-}
 .contfilter{
     /* background-color:  #a28e8efa; */
     color: white;
