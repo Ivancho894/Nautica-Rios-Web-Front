@@ -33,7 +33,7 @@ export default function LandingPage() {
     };
 
     return (
-        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '20px' }}>
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
           <h1 style={{ fontSize: '2rem' }}>Bienvenido a Nautica Ríos</h1>
           <h2 style={{ fontSize: '1.5rem' }}>Ventas y Accesorios</h2>
           <h3>Actualmente Tenemos {barcos.length} Embarcaciones Publicadas</h3>
