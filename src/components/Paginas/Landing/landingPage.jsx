@@ -33,25 +33,25 @@ export default function LandingPage() {
     };
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',paddingTop: '20px'}}>
-            <h1 style={{fontSize: '2rem'}}>Bienvenido a Nautica Ríos</h1>
-            <h2 style={{fontSize: '1.5rem'}}>Ventas y Accesorios</h2>
-            <h3>Hay {barcos.length} embarcaciones publicadas</h3>
-            <p style={{color: '#7e7e7e'}}>Navega por nuestra página y encuentra el producto perfecto para tu barco.</p>
-            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <div style={{position: 'relative', width: '100%', height: '50%'}}>
-                    <img style={{width: '100%', height: '100%', objectFit: 'cover'}} src={photos[index]} alt="Barco" />
-                    <button onClick={handlePrevious} style={{position: 'absolute', top: '50%', left: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px'}}>
-                        &larr;
-                    </button>
-                    <button onClick={handleNext} style={{position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px'}}>
-                        &rarr;
-                    </button>
-                </div>
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '20px' }}>
+          <h1 style={{ fontSize: '2rem' }}>Bienvenido a Nautica Ríos</h1>
+          <h2 style={{ fontSize: '1.5rem' }}>Ventas y Accesorios</h2>
+          <h3>Actualmente Tenemos {barcos.length} Embarcaciones Publicadas</h3>
+          <p style={{ color: '#7e7e7e' }}>Navega por nuestra página y encuentra el producto perfecto para tu barco.</p>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ position: 'relative', width: '100%', height: '50%' }}>
+              <img style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={photos[index]} alt="Barco" />
+              <button onClick={handlePrevious} style={{ position: 'absolute', top: '50%', left: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px' }}>
+                &larr;
+              </button>
+              <button onClick={handleNext} style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px' }}>
+                &rarr;
+              </button>
             </div>
-            <Link to="/home" style={{backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px'}}>
-                Home
-            </Link>
+          </div>
+          <Link to="/home" style={{ backgroundColor: '#7e7e7e', color: 'white', fontWeight: 'bold', padding: '8px 16px', borderRadius: '4px', marginLeft: '16px' }}>
+            Home
+          </Link>
         </div>
-    );
-}
+     );
+    };
