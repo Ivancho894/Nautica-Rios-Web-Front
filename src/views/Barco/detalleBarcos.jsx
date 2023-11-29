@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import styles from "./detallebarcos.module.css";
 import { Link } from "react-router-dom";
 
 export default function Detalle() {
