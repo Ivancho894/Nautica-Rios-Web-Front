@@ -29,7 +29,7 @@ function FormsFirebase() {
     auth.logout();
   };
   return (
-    <div>
+    <div className="border-4 border-amber-800 rounded-xl">
       {displayName && <h5>welcome : {displayName}</h5>}
       <form>
         <h3>Register</h3>
@@ -73,7 +73,7 @@ function FormsFirebase() {
         </button>
         <br />
         <button onClick={(e) => handleGoogle(e)} className="button">
-          Google
+          <img src={googleicon} alt="google" width={20} height={20} />
         </button>
       </form>
       <br />
