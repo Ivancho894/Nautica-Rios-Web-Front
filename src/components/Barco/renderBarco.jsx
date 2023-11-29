@@ -1,13 +1,13 @@
-//BARCO INDIVIDUAL
-import { Link } from "react-router-dom";
-import style from "./renderBarco.module.css";
-export default function RenderBarco({ barco }) {
-  //Renderiza un solo barco
-  return (
-    <div className={style.container}>
-      {/* //* la imagen es solo referencial, aun falta ver como traer las imgaes de la store de firebase  */}
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const RenderBarco = ({ barco }) => {
+ //Renderiza un solo barco
+ return (
+    <div className="border-6 border-gray-300 p-5 w-80 h-85 rounded-3xl bg-sky-400 flex flex-col items-center justify-center text-center mb-5">
+      {/* //* la imagen es solo referencial, aun falta ver como traer las imgaes de la store de firebase */}
       <img
-        className={style.image}
+        className="w-100 h-60 object-cover rounded-3xl"
         src={barco.imagenes[0]}
       />
       <h3>
@@ -22,5 +22,7 @@ export default function RenderBarco({ barco }) {
         <button>more info</button>
       </Link>
     </div>
-  );
-}
+ );
+};
+
+export default RenderBarco;

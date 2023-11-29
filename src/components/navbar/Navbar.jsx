@@ -86,7 +86,7 @@ const Navbar = () => {
               onClick={handleLogin}
               className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
             >
-              Acceso
+              Acceder
             </button>
           )}
         </div>
