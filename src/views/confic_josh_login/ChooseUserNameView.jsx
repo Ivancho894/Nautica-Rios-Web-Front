@@ -1,4 +1,4 @@
-import AuthProvider from "../AuthProvider";
+import AuthProvider from "../../components/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { existsUsername, updateUser } from "../../../firebase-config";

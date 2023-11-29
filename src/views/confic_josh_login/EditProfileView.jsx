@@ -1,5 +1,5 @@
-import AuthProvider from "../AuthProvider";
-import DashboardWrapper from "./DashboardWrapper";
+import AuthProvider from "../../components/AuthProvider";
+import DashboardWrapper from "../../components/Paginas/DashboardWrapper";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 

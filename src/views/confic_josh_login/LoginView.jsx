@@ -7,7 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { auth, userExist } from "../../../firebase-config";
 import { useNavigate } from "react-router-dom";
-import AuthProvider from "../AuthProvider";
+import AuthProvider from "../../components/AuthProvider";
 
 const LoginView = () => {
   const navigate = useNavigate();

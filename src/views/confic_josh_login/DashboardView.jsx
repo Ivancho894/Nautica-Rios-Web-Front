@@ -1,7 +1,7 @@
-import AuthProvider from "../AuthProvider";
+import AuthProvider from "../../components/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import DashboardWrapper from "./DashboardWrapper";
+import DashboardWrapper from "../../components/Paginas/DashboardWrapper";
 const DashboardView = () => {
   const navigate = useNavigate();
   const [curretUser, setCurrentUser] = useState({});
