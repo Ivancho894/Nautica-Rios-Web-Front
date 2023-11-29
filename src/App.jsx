@@ -19,7 +19,8 @@ import Navbar from "./components/navbar/Navbar";
 // import PublicProfileView from "./components/Paginas/PublicProfileView";
 // import ChooseUserNameView from "./components/Paginas/ChooseUserNameView";
 // import LoginView from "./components/Paginas/LoginView";
-import Accesorios from "./views/Accesorios";
+import Accesorios from "./components/accesorios/Accesorios";
+import DetalleAccesorios from "./components/accesorios/DetalleAccesorios"
 import PublicarBarco from "./views/Administrador/publicarBarco";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/detalle/:id" element={<Detalle />} />
           <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
           <Route path="/accesorios" element={<Accesorios />} />
+          <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
           {/* //*  mis rutas  */}
           {/* <Route path="/login" element={<LoginView />} /> */}
           {/* <Route path="/dashboard" element={<DashboardView />} /> */}

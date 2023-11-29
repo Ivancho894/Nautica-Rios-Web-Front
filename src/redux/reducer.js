@@ -2,7 +2,11 @@ const initialState = {
     allBarcos:[],
     barcos: [],
     allFilters:[],
-    filter: {}
+    filter: {},
+    accesorios: [],
+    allAccesorios: [],
+    allFiltersAcc: [],
+    filterAcc: {},
 }
 
 
@@ -129,6 +133,100 @@ export default function reducer(state=initialState,action){
             rangos.length>1?filtros.unshift({year : rangos.sort((a,b)=>{return a.min-b.min})}):null;
 
             return {...state,allFilters:filtros}
+
+
+        case 'GET_ACCESORIOS':
+            //console.log('GET_ACCESORIOS', state.accesorios);
+            return {accesorios: action.payload,allAccesorios:action.payload,filterAcc:{},allFiltersAcc:[]};
+    
+
+            case 'GET_FILTERS':
+
+            let filtrosAcc=[]
+
+            //LLENA EL OBJETO FILTROS CON LOS DISPONIBLES CON LOS BARCOS ACTUALES, SE EJECUTA 1 VEZ
+            const propertiesAcc = ['tipo','marca','material']
+            propertiesAcc.map(prop=>{
+                let values=[]
+
+                state.accesorios.map(accesorio=>values.find(x=>x.toUpperCase()===accesorio[prop].toUpperCase())?null:values.push(accesorio[prop]))
+                values.length>1?filtrosAcc.unshift({[prop]:values.sort()}):null;
+            })
+
+
+            //Para cargar los rangos de precios
+            let rangosAcc = []
+            function newRangeAcc(precio){
+                //Funcion que recibe un precio y te devuelve un rango cargado con min y max
+                //del rango de ese precio
+                rangosAcc.push(
+                    {min:10**(String(precio).length-1)*String(precio)[0]*1,
+                        max: 10**(String(precio).length-1)*(1+(String(precio)[0]*1))
+                    })
+            }
+            //Cargo el rango del accesorio 0
+            newRangeAcc(state.accesorios[0]?.precio)
+            //Lleno los rangos con todos los precios
+            state.accesorios.map(accesorio=>{
+                rangosAcc.map(rango=>{
+                        return rango.min<accesorio.precio?
+                            rango.max>=accesorio.precio?
+                            true
+                            :false
+                            :false
+                }).find(x=>x)?null:newRangeAcc(accesorio.precio);
+            })
+            //Si hay al menos dos rangos
+            console.log()
+            rangosAcc.length>1?filtrosAcc.push({precio : rangosAcc.sort((a,b)=>{return a.min-b.min})}):null;
+            console.log('Filtros accesorios',state.allFiltersAcc);
+            return {...state,allFiltersAcc:filtrosAcc}
+              
+
+        case 'ADD_FILTER_ACC':
+            action.payload.value = action.payload.value!='-' && (action.payload.name ==='precio' || action.payload.name ==='tipo')?JSON.parse(action.payload.value):action.payload.value
+            const newFilterAcc = {
+                ...state.filterAcc,
+                [action.payload.name]:action.payload.value
+            }
+            //Si el valor del filtro seleccionado es - elimina ese filtro
+            action.payload.value==='-'?delete newFilterAcc[action.payload.name]:null;
+
+            return {...state,filterAcc:newFilterAcc}
+
+        case 'SET_FILTER_ACC':
+            console.log('Antes de filtrar', state.accesorios);
+            console.log('Filtro Aplicado', state.filterAcc);
+            let newAccesorios = state.accesorios
+            Object.keys(state.filterAcc).map(prop=>{
+                switch(prop){
+                    case 'precio':
+                        newAccesorios = newAccesorios.filter(b => {
+                            //Filtro por precio o year
+                            return b[prop]>state.filterAcc[prop].min && b[prop]<state.filterAcc[prop].max})
+                        break
+                        case 'marca': case 'tipo': 
+                        //Filtro por marca o tipo
+                        newAccesorios = newAccesorios.filter(b => {return b[prop] === state.filterAcc[prop]})
+                        console.log('new',newAccesorios);
+                        break
+           
+            }})
+            console.log('Despues de filtrar', state.accesorios);
+            return {...state,accesorios:newAccesorios}
+
+
+        case 'GET_ACCESORIOS_SUCCESS':
+            return {
+                ...state,
+                accesorios: action.payload,
+                allAccesorios: action.payload,
+                filtrosAcc: {},
+                allFiltersAcc: [],
+            };
+
+
+
         default:
             return state
     }
