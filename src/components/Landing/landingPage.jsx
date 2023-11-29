@@ -56,7 +56,7 @@ export default function LandingPage() {
           alignItems: "center",
         }}
       >
-        <div style={{ position: "relative", width: "100%", height: "50%" }}>
+        <div style={{ position: "relative", width: "100%", height: "50%" }} >
           <img
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
             src={photos[index]}

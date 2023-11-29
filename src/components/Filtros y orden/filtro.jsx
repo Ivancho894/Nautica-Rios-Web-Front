@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { GET_BARCOS, ADD_FILTER, SET_FILTER, GET_FILTERS } from '../../redux/actions';
+import { GET_BARCOS, ADD_FILTER, SET_FILTER, GET_FILTERS, ORDENAR, RESET_FILTERS } from '../../redux/actions';
 import { useEffect, useState } from 'react';
 
 export default function Filtros(){
  const allFilters = useSelector(state => state.allFilters)
- const filtrosAplicados = useSelector(state => state.filter)
+ const initialValues = Object.fromEntries(allFilters?.map(x=>{return [Object.keys(x)[0],'-']}))
+ const [filterValues,setFilterValues] = useState(initialValues)
  const dispatch = useDispatch()
  useEffect(()=>{
 
@@ -15,7 +16,13 @@ export default function Filtros(){
  const handleChange= (event)=>{
     dispatch(ADD_FILTER({name:event.target.name,value:event.target.value}))
     dispatch(SET_FILTER())
+    dispatch(ORDENAR())
+    setFilterValues({...filterValues,[event.target.name]:event.target.value})
 
+ }
+ const handleResetChange = ()=>{
+  dispatch(RESET_FILTERS()) 
+  setFilterValues(initialValues)
  }
  return (
     <div className="bg-blue-200 text-black-200 p-5 h-32 w-full">
@@ -31,7 +38,7 @@ export default function Filtros(){
               return (
               <div key={i} className="flex-wrap justify-between items-center p-5 h-40 gap-5 w-3/4">
                 <label>{prop}:</label>
-                <select className="rounded-md" onChange={(event)=>handleChange(event)} name={prop}>
+                <select className="rounded-md" onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
                  <option value="-">-</option>
                   
                  {filtro[prop].map((rango,i) =>{     
@@ -46,7 +53,7 @@ export default function Filtros(){
             return (
             <div key={i} className="flex-wrap justify-between items-center p-5 h-40 gap-5 w-full">
               <label>{prop}:</label>
-              <select className="rounded-lg" onChange={(event)=>handleChange(event)} name={prop} >
+              <select className="rounded-lg" onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
                 <option value="-">-</option>
                 
                 {filtro[prop].map((value,i)=>{
@@ -60,6 +67,7 @@ export default function Filtros(){
           }
         }})}
           </div>
+          <button onClick={handleResetChange}>RESET</button>
           </div>
  
  )

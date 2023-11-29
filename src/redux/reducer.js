@@ -2,7 +2,11 @@ const initialState = {
     allBarcos:[],
     barcos: [],
     allFilters:[],
-    filter: {}
+    filter: {},
+    orden:{
+        name:'',
+        value:''
+    }
 }
 
 
@@ -10,7 +14,7 @@ export default function reducer(state=initialState,action){
     
     switch(action.type){
         case 'GET_BARCOS':            
-            return {barcos: action.payload,allBarcos:action.payload,filter:{},allFilters:[]}
+            return {...state,barcos: action.payload,allBarcos:action.payload}
 
         case 'ADD_FILTER':
             //AGREGA UN FILTRO AL OBJETO DE FILTROS
@@ -54,14 +58,14 @@ export default function reducer(state=initialState,action){
             properties.map(prop=>{
                 let values=[]
 
-                state.barcos.map(barco=>values.find(x=>x.toUpperCase()===barco[prop].toUpperCase())?null:values.push(barco[prop]))
+                state.allBarcos.map(barco=>values.find(x=>x.toUpperCase()===barco[prop].toUpperCase())?null:values.push(barco[prop]))
                 values.length>1?filtros.unshift({[prop]:values.sort()}):null;
             })
 
 
             //Para cargar Accesorios
             let values = []
-            state.barcos.map(barco=>{
+            state.allBarcos.map(barco=>{
                 barco.accesorios.split(/, |,/).map(accesorio=>{
                     values.find(x=>x===accesorio)?null:values.push(accesorio)
                 })
@@ -82,7 +86,7 @@ export default function reducer(state=initialState,action){
             //Cargo el rango del barco 0
             newRange(state.barcos[0]?.precio)
             //Lleno los rangos con todos los precios
-            state.barcos.map(barco=>{
+            state.allBarcos.map(barco=>{
                 rangos.map(rango=>{
                         return rango.min<barco.precio?
                             rango.max>=barco.precio?
@@ -116,7 +120,7 @@ export default function reducer(state=initialState,action){
             //Agrego por default el primer barco a los rangos de years
             newYearRange(state.barcos[0]?.year)
             //Agrego todos los rangos de los barcos que hay
-            state.barcos.map(barco=>{
+            state.allBarcos.map(barco=>{
                 rangos.map(rango=>{
                         rango.min<barco.year?
                             rango.max>=barco.year?
@@ -129,6 +133,22 @@ export default function reducer(state=initialState,action){
             rangos.length>1?filtros.unshift({year : rangos.sort((a,b)=>{return a.min-b.min})}):null;
 
             return {...state,allFilters:filtros}
+
+        
+        case 'RESET_FILTERS':
+            return {...state,filter:{},barcos:state.allBarcos}
+        case 'ORDENAR':
+            const name = state.orden.name
+            const value = state.orden.value
+            const ordenados = value===''?state.barcos:value ==='asc'?
+            [...state.barcos].sort((a,b)=>{return a[name]-b[name]}):
+            [...state.barcos].sort((a,b)=>{return b[name]-a[name]});
+            
+            return {...state,barcos:ordenados}
+        case 'CAMBIAR_ORDENAR':
+            const theValue = action.payload.value==='-'?'':action.payload.value
+            const theName = action.payload.name==='-'?'':action.payload.name
+            return {...state,orden:{name:theName,value:theValue}}
         default:
             return state
     }

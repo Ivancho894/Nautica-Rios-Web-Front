@@ -25,8 +25,8 @@ export default function Detalle() {
             }
         </div>
         <div className="flex-1">
-          {barco.imagenes.map(img=>{
-            return (<img
+          {barco.imagenes.map((img,i)=>{
+            return (<img key={i}
             className="w-4/5 mx-auto mb-2"
             src={img}
           />)})}

@@ -24,4 +24,14 @@ export function GET_FILTERS(){
 export function SET_FILTER() {
     return { type: 'SET_FILTER'};
 }
+export function RESET_FILTERS() {
+    return { type: 'RESET_FILTERS'};
+}
+export function ORDENAR() {
+    return { type: 'ORDENAR'}
+}
+export function CAMBIAR_ORDENAR(or) {
+    return { type: 'CAMBIAR_ORDENAR',payload:or}
+}
+
 
