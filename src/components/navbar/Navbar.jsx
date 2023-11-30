@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.ico";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import Button from "./Button";
 const Navbar = () => {
   const Links = [
@@ -27,13 +28,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const auth = useAuth();
+  const { displayName } = auth.user;
+  console.log(auth.user);
+
   const handleLogin = () => {
     navigate("/registro");
     setIsLoggedIn(true);
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    auth.logout();
   };
 
   return (
@@ -74,13 +80,16 @@ const Navbar = () => {
           </li>
         </ul>
         <div>
-          {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
-            >
-              Cerrar Sesión
-            </button>
+          {auth.user ? (
+            <div className="flex items-center">
+              <h3 className="mr-4">{displayName}</h3>
+              <button
+                onClick={handleLogout}
+                className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
+              >
+                Cerrar Sesión
+              </button>
+            </div>
           ) : (
             <button
               onClick={handleLogin}

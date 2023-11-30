@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-import { auth } from "../../firebase-config";
+import { auth , db} from "../../firebase-config";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,7 +7,10 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+
 
 export const authContext = createContext();
 
@@ -34,13 +37,22 @@ export function AuthProvider({ children }) {
     return () => subscribed();
   }, []);
 
-  const register = async (email, password) => {
-    const response = await createUserWithEmailAndPassword(
+  const register = async (email, password, displayName) => {
+    const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    console.log(response);
+
+    const newUser = userCredential.user;
+    console.log(newUser);
+
+    await updateProfile(newUser, { displayName });
+    await setDoc(doc(db, "users", newUser.uid), {
+      displayName,
+      email,
+    });
+    setUser(newUser)
   };
 
   const login = async (email, password) => {
