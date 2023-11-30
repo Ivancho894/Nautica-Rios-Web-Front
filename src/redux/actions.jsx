@@ -27,37 +27,47 @@ export function SET_FILTER() {
 
 
 
+export function getAccesorios() {
+  return async (dispatch) => {
+    try {
+      const accesoriosCollectionRef = collection(db, 'accesorios');
+      const data = await getDocs(accesoriosCollectionRef);
+      const accesorios = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-export function GET_ACCESORIOS() {
-    return async (dispatch) => {
-      try {
-        const accesoriosCollectionRef = collection(db, 'accesorios');
-        const data = await getDocs(accesoriosCollectionRef);
-        const accesorios = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-  
-        dispatch({
-          type: 'GET_ACCESORIOS_SUCCESS',
-          payload: accesorios,
-        });
-      } catch (error) {
-        console.error('Error al obtener accesorios:', error);
-        dispatch({
-          type: 'GET_ACCESORIOS_FAILURE',
-          payload: error.message,
-        });
-      }
-    };
-  }
-  
+      dispatch({
+        type: 'GET_ACCESORIOS',
+        payload: accesorios,
+      });
 
-export function ADD_FILTER_ACC(newFilter){
-    return {type:'ADD_FILTER_ACC',payload:newFilter}
+      dispatch(getFiltersAcc());
+    } catch (error) {
+      console.error('Error obteniendo accesorios:', error);
+    }
+  };
 }
 
-export function GET_FILTERS_ACC(){
-    return {type:'GET_FILTERS_ACC'}
+export function getFiltersAcc() {
+  return (dispatch, getState) => {
+    try {
+      const accesorios = getState().accesorios;
+
+      let filtrosAcc = [];
+
+      dispatch({
+        type: 'GET_FILTERS_ACC',
+        payload: filtrosAcc,
+      });
+    } catch (error) {
+      console.error('Error obteniendo filtros:', error);
+    }
+  };
 }
 
-export function SET_FILTER_ACC(newAccesorio) {
-    return { type: 'SET_FILTER_ACC', payload: newAccesorio}
+export function ADD_FILTER_ACC(newFilterAcc){
+    return {type:'ADD_FILTER_ACC', payload: newFilterAcc}
+}
+
+
+export function SET_FILTER_ACC() {
+    return { type: 'SET_FILTER_ACC'}
 }
