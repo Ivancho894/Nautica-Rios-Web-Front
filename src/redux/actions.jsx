@@ -67,7 +67,15 @@ export function ADD_FILTER_ACC(newFilterAcc){
     return {type:'ADD_FILTER_ACC', payload: newFilterAcc}
 }
 
-
 export function SET_FILTER_ACC() {
     return { type: 'SET_FILTER_ACC'}
 }
+
+
+
+
+export const SET_ORDER_ACC = (order) => ({
+    type: 'SET_ORDER_ACC',
+    payload: order,
+  });
+  

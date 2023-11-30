@@ -135,7 +135,6 @@ export default function reducer(state=initialState,action){
             return {...state,allFilters:filtros}
 
         case 'GET_ACCESORIOS':
-            console.log(state.accesorios);
             return {accesorios: action.payload,allAccesorios:action.payload,filterAcc:{},allFiltersAcc:[]}    
         
         case 'GET_FILTERS_ACC':
@@ -192,9 +191,8 @@ export default function reducer(state=initialState,action){
                 [action.payload.name]: parsedValue
             }
             // Si el valor del filtro seleccionado es '-' elimina ese filtro
-            if (parsedValue === '-') {
-                delete newFilterAcc[action.payload.name];
-            }
+            if (parsedValue === '-') {delete newFilterAcc[action.payload.name];}
+            //console.log('ADD_FILTER',newFilterAcc);
             return { ...state, filterAcc: newFilterAcc };
     
         case 'SET_FILTER_ACC':
@@ -211,6 +209,7 @@ export default function reducer(state=initialState,action){
                         break;
                     case 'marca':
                     case 'tipo':
+                    case 'material':
                         // Filtro por marca o tipo
                         newAccesorios = newAccesorios.filter(b => b[prop] === state.filterAcc[prop]);
                         break;
@@ -219,6 +218,50 @@ export default function reducer(state=initialState,action){
             console.log('Después de filtrar', state.allAccesorios);
             return { ...state, accesorios: newAccesorios };
 
+        case 'SET_ORDER_ACC':
+            let orderedAccesorios = [...state.allAccesorios];
+
+            // Aplicar otros filtros si existen
+            if (state.filterAcc) {
+                Object.keys(state.filterAcc).forEach((prop) => {
+                switch (prop) {
+                    case 'precio':
+                    orderedAccesorios = orderedAccesorios.filter(
+                        (accesorio) =>
+                        accesorio.precio > state.filterAcc.precio.min &&
+                        accesorio.precio < state.filterAcc.precio.max
+                    );
+                    break;
+                    case 'marca':
+                    case 'tipo':
+                    case 'material':
+                    orderedAccesorios = orderedAccesorios.filter(
+                        (accesorio) => accesorio[prop] === state.filterAcc[prop]
+                    );
+                    break;
+                    default:
+                    break;
+                }
+                });
+            }
+
+            if (action.payload === '-') {
+                return { ...state, accesorios: orderedAccesorios, order: action.payload };
+            }
+            // Aplicar ordenamiento
+            switch (action.payload) {
+                case 'precioAsc':
+                orderedAccesorios.sort((a, b) => a.precio - b.precio);
+                break;
+                case 'precioDesc':
+                orderedAccesorios.sort((a, b) => b.precio - a.precio);
+                break;
+                default:
+                break;
+            }
+
+            return { ...state, accesorios: orderedAccesorios, order: action.payload };
+        
         default:
             return state
     }

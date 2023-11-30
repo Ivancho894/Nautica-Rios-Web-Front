@@ -29,7 +29,7 @@ const RenderAccesorios = ({ accesorio }) => {
       </h4>
 
       <Link to={"/detalleaccesorio/" + accesorio.id}>
-        <button>more info</button>
+        <button>más</button>
       </Link>
     </div>
  );
