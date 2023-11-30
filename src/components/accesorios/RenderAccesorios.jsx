@@ -13,7 +13,7 @@ const RenderAccesorios = ({ accesorio }) => {
                 {variacion.imagenes && variacion.imagenes.length > 0 && (
                   <div>
                     {variacion.imagenes.map((imagen, imagenIndex) => (
-                      <img key={imagenIndex} src={imagen} alt={`Imagen ${imagenIndex + 1}`} style={{ maxWidth: '10%' }}/>
+                      <img key={imagenIndex} src={imagen} alt={`Imagen ${imagenIndex + 1}`} style={{ maxWidth: '100%' }}/>
                       ))}
                   </div>
                 )}
