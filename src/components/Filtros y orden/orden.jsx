@@ -9,13 +9,11 @@ export default function Orden(){
         capacidad:'-'
     }
     const orden = useSelector(state=>state.orden)
-    const [values,setValues] = useState(initialValues)
     const disptach = useDispatch()
     const ordenarPor = (e) =>{
         disptach({type:'CAMBIAR_ORDENAR',payload:{value:e.target.value,name:e.target.name}})
         disptach({type:'ORDENAR'})
-        setValues(() => ({ ...initialValues, [e.target.name]: e.target.value }));
-        console.log(values.precio,values.year,values.eslora,values.capacidad)
+
     }
     return(
         <div>
@@ -24,7 +22,7 @@ export default function Orden(){
             {return (
                 <div key={i} className="flex-wrap justify-between items-center p-5 w-3/4">
                     <label>{or}</label>
-                    <select name={or} onChange={ordenarPor} value={values[or]}>
+                    <select name={or} onChange={ordenarPor} value={orden.name===or?orden.value:'-'}>
                         <option value="-"></option>
                         <option value="asc">Menor a mayor</option>
                         <option value="des">Mayor a menor</option>

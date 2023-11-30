@@ -21,8 +21,9 @@ export default function Filtros(){
 
  }
  const handleResetChange = ()=>{
-  dispatch(RESET_FILTERS()) 
+  dispatch(RESET_FILTERS())
   setFilterValues(initialValues)
+  
  }
  return (
     <div className="bg-blue-200 text-black-200 p-5 h-32 w-full">
