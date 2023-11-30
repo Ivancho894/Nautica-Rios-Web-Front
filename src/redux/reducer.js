@@ -181,21 +181,20 @@ export default function reducer(state=initialState,action){
             return { ...state, allFiltersAcc: filtrosAcc };
 
         case 'ADD_FILTER_ACC':
+            let parsedValue;
+
+            try {
+                parsedValue = JSON.parse(action.payload.value);
+            } catch (error) {parsedValue = action.payload.value;}
+
             const newFilterAcc = {
                 ...state.filterAcc,
-                [action.payload.name]: action.payload.value
-            };
-            // Si el valor del filtro seleccionado es - elimina ese filtro
-            if (action.payload.value === '-') {
-                delete newFilterAcc[action.payload.name];
-            } else if (action.payload.name === 'precio' && typeof action.payload.value === 'object') {
-                // Si es un filtro de precio, compara el rango
-                newFilterAcc['precio'] = accesorio => {
-                    const precio = accesorio.precio;
-                    return precio >= action.payload.value.min && precio <= action.payload.value.max;
-                };
+                [action.payload.name]: parsedValue
             }
-
+            // Si el valor del filtro seleccionado es '-' elimina ese filtro
+            if (parsedValue === '-') {
+                delete newFilterAcc[action.payload.name];
+            }
             return { ...state, filterAcc: newFilterAcc };
     
         case 'SET_FILTER_ACC':
