@@ -136,7 +136,7 @@ export default function reducer(state=initialState,action){
 
         
         case 'RESET_FILTERS':
-            return {...state,filter:{},barcos:state.allBarcos}
+            return {...state,orden:{name:'',value:''},filter:{},barcos:state.allBarcos}
         case 'ORDENAR':
             const name = state.orden.name
             const value = state.orden.value
