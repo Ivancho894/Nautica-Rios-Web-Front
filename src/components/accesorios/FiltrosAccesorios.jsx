@@ -32,14 +32,14 @@ export default function FiltrosAcce(){
 
 
  return (
-    <div>
+    <div className="bg-blue-200 text-black-200 p-5 h-32 w-full">
 
-<label>Orden:</label>
-<select onChange={handleChangeOrder} name="orden">
-  <option value="-">-</option>
-  <option value="precioAsc">Ascendente</option>
-  <option value="precioDesc">Descendente</option>
-  {/* Añade más opciones según tus necesidades */}
+      <label>Orden:</label>
+      <select onChange={handleChangeOrder} name="orden">
+        <option value="-">-</option>
+        <option value="precioAsc">Ascendente</option>
+        <option value="precioDesc">Descendente</option>
+
 </select>
 
       <div className="flex justify-between items-center">
@@ -52,7 +52,7 @@ export default function FiltrosAcce(){
           case 'precio':
             {
               return (
-              <div key={i} className="flex-wrap justify-between items-center p-5 h-40 gap-5 w-3/4">
+              <div key={i} className="flex-wrap justify-between items-center p-5 h-40 gap-5 w-full">
                 <label>{prop}:</label>
                 <select onChange={(event)=>handleChange(event)} name={prop}>
                  <option value="-">-</option>

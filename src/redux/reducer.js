@@ -9,12 +9,19 @@ const initialState = {
     filterAcc: {},
 }
 
+const storedState = JSON.parse(localStorage.getItem('myAppState')) || initialState;
+const defaultState = { ...initialState, ...storedState };
 
 export default function reducer(state=initialState,action){
     
+    const saveState = (newState) => {
+        localStorage.setItem('myAppState', JSON.stringify(newState));
+        return newState;
+    };
+
     switch(action.type){
         case 'GET_BARCOS':            
-            return {barcos: action.payload,allBarcos:action.payload,filter:{},allFilters:[]}
+        return {barcos: action.payload,allBarcos:action.payload,filter:{},allFilters:[]}
 
         case 'ADD_FILTER':
             //AGREGA UN FILTRO AL OBJETO DE FILTROS
@@ -28,7 +35,7 @@ export default function reducer(state=initialState,action){
             //Si el valor del filtro seleccionado es - elimina ese filtro
             action.payload.value==='-'?delete newFilter[action.payload.name]:null;
 
-            return {...state,filter:newFilter}
+            return saveState({ ...state, filter: newFilter });
 
         case 'SET_FILTER':
 
@@ -47,7 +54,7 @@ export default function reducer(state=initialState,action){
                         break
            
             }})
-            return {...state,barcos:newBarcos}
+            return saveState({ ...state, barcos: newBarcos });
         
         case 'GET_FILTERS':
 
@@ -132,10 +139,10 @@ export default function reducer(state=initialState,action){
             //Chequeo que haya mas de un rango para filtrar si no directamente no existe el filtro years
             rangos.length>1?filtros.unshift({year : rangos.sort((a,b)=>{return a.min-b.min})}):null;
 
-            return {...state,allFilters:filtros}
+            return saveState({ ...state, allFilters: filtros });
 
         case 'GET_ACCESORIOS':
-            return {accesorios: action.payload,allAccesorios:action.payload,filterAcc:{},allFiltersAcc:[]}    
+            return saveState({ ...state, accesorios: action.payload, allAccesorios: action.payload, filterAcc: {}, allFiltersAcc: [] });    
         
         case 'GET_FILTERS_ACC':
             const propertiesAcc = ['tipo', 'marca', 'material'];
@@ -174,10 +181,7 @@ export default function reducer(state=initialState,action){
             // Si hay al menos dos rangos
             rangosAcc.length > 1 ? filtrosAcc.push({ precio: rangosAcc.sort((a, b) => a.min - b.min) }) : null;
 
-            console.log('Filtros accesorios', state.allFiltersAcc);
-            console.log('Filtros ACC', state.filterAcc);
-
-            return { ...state, allFiltersAcc: filtrosAcc };
+            return saveState({ ...state, allFiltersAcc: filtrosAcc });
 
         case 'ADD_FILTER_ACC':
             let parsedValue;
@@ -193,7 +197,7 @@ export default function reducer(state=initialState,action){
             // Si el valor del filtro seleccionado es '-' elimina ese filtro
             if (parsedValue === '-') {delete newFilterAcc[action.payload.name];}
             //console.log('ADD_FILTER',newFilterAcc);
-            return { ...state, filterAcc: newFilterAcc };
+            return saveState({ ...state, filterAcc: newFilterAcc });
     
         case 'SET_FILTER_ACC':
             console.log('Antes de filtrar', state.allAccesorios);
@@ -216,7 +220,7 @@ export default function reducer(state=initialState,action){
                     }
             });
             console.log('Después de filtrar', state.allAccesorios);
-            return { ...state, accesorios: newAccesorios };
+            return saveState({ ...state, accesorios: newAccesorios });
 
         case 'SET_ORDER_ACC':
             let orderedAccesorios = [...state.allAccesorios];
@@ -260,9 +264,10 @@ export default function reducer(state=initialState,action){
                 break;
             }
 
-            return { ...state, accesorios: orderedAccesorios, order: action.payload };
+            return saveState({ ...state, accesorios: orderedAccesorios, order: action.payload });
         
         default:
             return state
+            
     }
 }

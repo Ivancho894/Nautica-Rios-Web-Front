@@ -13,6 +13,7 @@ export default function TodosLosAccesorios() {
   useEffect(() => {
     dispatch(getAccesorios());
     dispatch(getFiltersAcc());
+    console.log('Get filters acc');
   }, []);
   
   return (
