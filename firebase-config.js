@@ -21,6 +21,7 @@ import {
   getDownloadURL,
   getBytes,
 } from "firebase/storage";
+import { getMessaging } from "firebase/messaging";
 //Informacion de nuestra base de datos
 const firebaseConfig = {
   apiKey: "AIzaSyDUnM_LwWCxq7lgSXvNjEM6nYTjt4Ol2p8",
@@ -38,6 +39,7 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const storage = getStorage(app);
 export const db = getFirestore(app);
+export const messaging = getMessaging(app);
 export async function userExist(uid) {
   const docRef = doc(db, "users", uid);
   const res = await getDoc(docRef);
