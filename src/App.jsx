@@ -19,8 +19,7 @@ import Navbar from "./components/navbar/Navbar";
 // import PublicProfileView from "./components/Paginas/PublicProfileView";
 // import ChooseUserNameView from "./components/Paginas/ChooseUserNameView";
 // import LoginView from "./components/Paginas/LoginView";
-import TodosLosAccesorios from "./components/accesorios/TodosLosAccesorios";
-import DetalleAccesorios from "./components/accesorios/DetalleAccesorios"
+import Accesorios from "./views/Accesorios";
 import PublicarBarco from "./views/Administrador/publicarBarco";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -59,8 +58,8 @@ function App() {
     <AuthProvider>
       <div>
         <ToastContainer />
-        <Navbar />
-        <button onClick={activarMensages}>Recibir noticaciones</button>
+        <Navbar activarMensages={activarMensages} />
+
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
@@ -70,8 +69,7 @@ function App() {
           <Route path="/quienessomos" element={<QuienesSomos />} />
           <Route path="/detalle/:id" element={<Detalle />} />
           <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
-          <Route path="/accesorios" element={<TodosLosAccesorios />} />
-          <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
+          <Route path="/accesorios" element={<Accesorios />} />
           {/* //*  mis rutas  */}
           {/* <Route path="/login" element={<LoginView />} /> */}
           {/* <Route path="/dashboard" element={<DashboardView />} /> */}
