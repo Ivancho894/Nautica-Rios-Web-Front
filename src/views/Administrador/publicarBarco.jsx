@@ -280,7 +280,7 @@ const PublicarBarco = () => {
       required
     />
   </div>
-  <div className="flex items-center mb-4 col-span-2">
+  <div className="flex items-center mb-4 ">
 
   <button
     type="submit"
