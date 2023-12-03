@@ -16,7 +16,7 @@ const LandingPage = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % photos.length);
-    }, 4000);
+    }, 3000);
 
     // Descomenta la siguiente línea si deseas obtener los barcos al cargar la página
     // dispatch(GET_BARCOS());

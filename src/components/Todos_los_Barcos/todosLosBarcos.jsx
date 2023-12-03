@@ -25,29 +25,30 @@ export default function TodosLosBarcos() {
     dispatch(ORDENAR())
   }, []);
   return (
-    <div className={styles.scrollContainer} id="infinireScroll">
-       <div className={styles.scrollContainer} id="infinireScroll">
+    <div className="flex">
+      
+          <div className=" bg-slate-300 w-[400px] ">
     
-        <div>
-          <Filtros />
-        </div>
+                   <div className="bg-slate-300 mt-16 h-[300px] w-full">
+                      <Filtros />
+                   </div>
 
-        <div className="bg-slate-300 mt-16 ">
-          <Orden />
-        </div>
-      </div>
+                  <div className="bg-slate-300 h-full mt-16 ">
+                       <Orden />
+                   </div>
+          </div>
 
      
      
      
-      <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
-        {barcos.map((barco) => {
-          return <RenderBarco key={barco.id} barco={barco} />;
-        })}
-        </div>
-      </div> */}
+                  <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
+                         {barcos.map((barco) => {
+                         return <RenderBarco key={barco.id} barco={barco} />;
+                        })}
+                   </div>
+      
    
-    </div>
-    </div>
+     </div>
+
   );
 }
