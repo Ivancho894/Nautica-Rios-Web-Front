@@ -21,6 +21,7 @@ import Navbar from "./components/navbar/Navbar";
 // import LoginView from "./components/Paginas/LoginView";
 import TodosLosAccesorios from "./components/accesorios/TodosLosAccesorios";
 import DetalleAccesorios from "./components/accesorios/DetalleAccesorios";
+
 import PublicarBarco from "./views/Administrador/publicarBarco";
 import { Login } from "./components/acceso/login";
 import { Registro } from "./components/acceso/registro";
@@ -65,7 +66,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          
+
           <Route path="/home" element={<Home />} />
           <Route path="/contactar" element={<Contactar />} />
 
@@ -75,7 +76,8 @@ function App() {
           <Route path="/quienessomos" element={<QuienesSomos />} />
           <Route path="/detalle/:id" element={<Detalle />} />
           <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
-          <Route path="/accesorios" element={<Accesorios />} />
+          <Route path="/accesorios" element={<TodosLosAccesorios />} />
+          <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
           {/* //*  mis rutas  */}
           {/* <Route path="/login" element={<LoginView />} /> */}
           {/* <Route path="/dashboard" element={<DashboardView />} /> */}
