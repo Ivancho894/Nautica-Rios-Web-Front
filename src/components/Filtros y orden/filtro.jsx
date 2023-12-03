@@ -26,20 +26,23 @@ export default function Filtros(){
   
  }
  return (
-    <div className="bg-blue-200 text-black-200 p-5 h-32 w-full">
-      <div className="flex justify-between items-center">
+    <div className="text-black-200  flex-cols ">
+       <button className="bg-[#3b82f6] text-white mt-8" onClick={handleResetChange}>RESET</button>
+     
+       <h1 className="bg-slate-200 w-full text-2xl font-bold mb-5 mt-4">FILTRAR</h1>
+     
       {allFilters?.map((filtro,i)=>{
         
         let prop = Object.keys(filtro)[0]
 
         switch (prop){
        
-          case 'precio': case 'year':
+          case 'precio': case 'year': 
             {
               return (
-              <div key={i} className="flex-wrap justify-between items-center p-5 h-40 gap-5 w-3/4">
-                <label>{prop}:</label>
-                <select className="rounded-md" onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
+              <div key={i} className=" flex flex-row justify-between mt-4 ml-2 " >
+                <label className="ml-4 ">{prop}:</label>
+                <select className=" ml-4 h-[20px] w-[100px] mr-2 " onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
                  <option value="-">-</option>
                   
                  {filtro[prop].map((rango,i) =>{     
@@ -52,9 +55,9 @@ export default function Filtros(){
         case 'marcaBarco': case 'tipo':
           { 
             return (
-            <div key={i} className="flex-wrap justify-between items-center p-5 h-40 gap-5 w-full">
-              <label>{prop}:</label>
-              <select className="rounded-lg" onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
+            <div key={i} className="flex flex-row justify-between mt-4 ml-2">
+              <label className="ml-4 ">{prop}:</label>
+              <select className="  ml-4 h-[20px] w-[100px] mr-2" onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
                 <option value="-">-</option>
                 
                 {filtro[prop].map((value,i)=>{
@@ -67,8 +70,8 @@ export default function Filtros(){
             
           }
         }})}
-          </div>
-          <button onClick={handleResetChange}>RESET</button>
+          
+         
           </div>
  
  )

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { GET_FILTERS, GET_BARCOS, SET_FILTER, ORDENAR } from "../../redux/actions";
 import styles from "./todoslosbarcos.module.css";
 import { useState } from "react";
+import baner from "../../assets/homeBaner.png"
 
 
 
@@ -24,27 +25,32 @@ export default function TodosLosBarcos() {
     dispatch(ORDENAR())
   }, []);
   return (
-    <div className={styles.scrollContainer} id="infinireScroll">
-       <div className={styles.scrollContainer} id="infinireScroll">
-    
-        <div>
+    <div className=" flex ">
+
+
+
+      <div className="bg-slate-300 mt-16 w-[350px] ">
+       
+        <div className="  ">
           <Filtros />
-          <Orden/>
         </div>
-        <div className="flex flex-wrap items-center space-x-4 ... ">
-          {barcos.map((barco) => {
-            return <RenderBarco key={barco.id} barco={barco} />;
-          })}
+
+        <div className="bg-slate-300 mt-16 ">
+          <Orden />
         </div>
-        {/* <div className={styles.conthome}>
-        <div className={styles.cardscont}>
+      </div>
+
+     
+     
+     
+      <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
         {barcos.map((barco) => {
           return <RenderBarco key={barco.id} barco={barco} />;
         })}
-        </div>
-      </div> */}
-   
-    </div>
+      </div>
+
+
+
     </div>
   );
 }

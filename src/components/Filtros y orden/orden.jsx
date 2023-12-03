@@ -17,12 +17,12 @@ export default function Orden(){
     }
     return(
         <div>
-            <h1>Orden</h1>
+            <h1 className="bg-slate-200 text-2xl font-bold mb-5">ORDEN</h1>
             {fOrdenar.map((or,i)=>
             {return (
-                <div key={i} className="flex-wrap justify-between items-center p-5 w-3/4">
-                    <label>{or}</label>
-                    <select name={or} onChange={ordenarPor} value={orden.name===or?orden.value:'-'}>
+                <div key={i} className="flex justify-between items-center p-2 ">
+                    <label className="ml-4 ">{or}</label>
+                    <select className='h-[20px] w-[100px] ml-8 ' name={or} onChange={ordenarPor} value={orden.name===or?orden.value:'-'}>
                         <option value="-"></option>
                         <option value="asc">Menor a mayor</option>
                         <option value="des">Mayor a menor</option>
