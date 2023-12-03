@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Button from "./Button";
-const Navbar = () => {
+const Navbar = ({ activarMensages }) => {
   const Links = [
     {
       name: "Barcos",
@@ -47,7 +47,12 @@ const Navbar = () => {
         <NavLink to="/" className="">
           <img src={Logo} alt="Logo" className="h-6" />
         </NavLink>
-
+        <button
+          className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
+          onClick={activarMensages}
+        >
+          Recibir notificaciones
+        </button>
         <ul className="flex">
           <li className="mr-6">
             <Link
