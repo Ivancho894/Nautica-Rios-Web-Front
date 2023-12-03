@@ -20,8 +20,10 @@ import Navbar from "./components/navbar/Navbar";
 // import ChooseUserNameView from "./components/Paginas/ChooseUserNameView";
 // import LoginView from "./components/Paginas/LoginView";
 import TodosLosAccesorios from "./components/accesorios/TodosLosAccesorios";
-import DetalleAccesorios from "./components/accesorios/DetalleAccesorios"
+import DetalleAccesorios from "./components/accesorios/DetalleAccesorios";
 import PublicarBarco from "./views/Administrador/publicarBarco";
+import { Login } from "./components/acceso/login";
+import { Registro } from "./components/acceso/registro";
 
 import { AuthProvider } from "./context/AuthContext";
 import FormsFirebase from "./components/acceso/Acceso";
@@ -46,7 +48,9 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/contactar" element={<Contactar />} />
 
-          <Route path="/registro" element={<FormsFirebase />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registro />} />
+
           <Route path="/quienessomos" element={<QuienesSomos />} />
           <Route path="/detalle/:id" element={<Detalle />} />
           <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />

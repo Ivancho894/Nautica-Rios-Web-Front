@@ -30,10 +30,9 @@ const Navbar = () => {
 
   const auth = useAuth();
   const { displayName } = auth.user;
-  console.log(auth.user);
 
   const handleLogin = () => {
-    navigate("/registro");
+    navigate("/login");
     setIsLoggedIn(true);
   };
 
