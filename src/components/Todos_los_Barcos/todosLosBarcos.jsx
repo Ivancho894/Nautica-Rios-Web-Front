@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import InfiniteScroll from "react-infinite-scroll-component";
 import RenderBarco from "../Barco/renderBarco";
 import Filtros from "../Filtros y orden/filtro";
 import Orden from "../Filtros y orden/orden";
@@ -25,13 +25,10 @@ export default function TodosLosBarcos() {
     dispatch(ORDENAR())
   }, []);
   return (
-    <div className=" flex ">
-
-
-
-      <div className="bg-slate-300 mt-16 w-[350px] ">
-       
-        <div className="  ">
+    <div className={styles.scrollContainer} id="infinireScroll">
+       <div className={styles.scrollContainer} id="infinireScroll">
+    
+        <div>
           <Filtros />
         </div>
 
@@ -47,10 +44,10 @@ export default function TodosLosBarcos() {
         {barcos.map((barco) => {
           return <RenderBarco key={barco.id} barco={barco} />;
         })}
-      </div>
-
-
-
+        </div>
+      </div> */}
+   
+    </div>
     </div>
   );
 }

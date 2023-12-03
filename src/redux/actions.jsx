@@ -35,3 +35,52 @@ export function CAMBIAR_ORDENAR(or) {
 }
 
 
+export function getAccesorios() {
+    return async (dispatch) => {
+      try {
+        const accesoriosCollectionRef = collection(db, 'accesorios');
+        const data = await getDocs(accesoriosCollectionRef);
+        const accesorios = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  
+        dispatch({
+          type: 'GET_ACCESORIOS',
+          payload: accesorios,
+        });
+  
+        dispatch(getFiltersAcc());
+      } catch (error) {
+        console.error('Error obteniendo accesorios:', error);
+      }
+    };
+  }
+  
+  export function getFiltersAcc() {
+    return (dispatch, getState) => {
+      try {
+        const accesorios = getState().accesorios;
+  
+        let filtrosAcc = [];
+  
+        dispatch({
+          type: 'GET_FILTERS_ACC',
+          payload: filtrosAcc,
+        });
+      } catch (error) {
+        console.error('Error obteniendo filtros:', error);
+      }
+    };
+  }
+  
+  export function ADD_FILTER_ACC(newFilterAcc){
+      return {type:'ADD_FILTER_ACC', payload: newFilterAcc}
+  }
+  
+  export function SET_FILTER_ACC() {
+      return { type: 'SET_FILTER_ACC'}
+  }
+  
+  export const SET_ORDER_ACC = (order) => ({
+      type: 'SET_ORDER_ACC',
+      payload: order,
+    });
+    

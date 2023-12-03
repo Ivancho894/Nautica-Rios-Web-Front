@@ -6,11 +6,22 @@ const initialState = {
     orden:{
         name:'',
         value:''
-    }
+    },
+    accesorios: [],
+    allAccesorios: [],
+    allFiltersAcc: [],
+    filterAcc: {},
 }
 
+const storedState = JSON.parse(localStorage.getItem('myAppState')) || initialState;
+const defaultState = { ...initialState, ...storedState };
 
 export default function reducer(state=initialState,action){
+
+    const saveState = (newState) => {
+        localStorage.setItem('myAppState', JSON.stringify(newState));
+        return newState;
+    };
     
     switch(action.type){
         case 'GET_BARCOS':            
@@ -149,6 +160,133 @@ export default function reducer(state=initialState,action){
             const theValue = action.payload.value==='-'?'':action.payload.value
             const theName = action.payload.name==='-'?'':action.payload.name
             return {...state,orden:{name:theName,value:theValue}}
+
+
+
+        case 'GET_ACCESORIOS':
+                return saveState({ ...state, accesorios: action.payload, allAccesorios: action.payload, filterAcc: {}, allFiltersAcc: [] });    
+            
+        case 'GET_FILTERS_ACC':
+                const propertiesAcc = ['tipo', 'marca', 'material'];
+    
+                const accesorios = state.accesorios || [];
+    
+                // Lógica para obtener filtros basados en los accesorios
+                let filtrosAcc = propertiesAcc.reduce((acc, prop) => {
+                    let values = [...new Set(accesorios.map(accesorio => accesorio[prop]))].filter(Boolean);
+    
+                    if (values.length > 1) {
+                        acc.unshift({ [prop]: values.sort() });
+                    }
+                    return acc;
+                }, []);
+    
+                let rangosAcc = [];
+                function newRangeAcc(precio) {
+                    rangosAcc.push({
+                        min: 10 ** (String(precio).length - 1) * String(precio)[0] * 1,
+                        max: 10 ** (String(precio).length - 1) * (1 + (String(precio)[0] * 1))
+                    });
+                }
+    
+                newRangeAcc(state.accesorios[0]?.precio);
+                // Lleno los rangos con todos los precios
+                state.accesorios.map(accesorio => {
+                    rangosAcc.map(rango => {
+                        return rango.min < accesorio.precio ?
+                            rango.max >= accesorio.precio ?
+                                true
+                                : false
+                            : false;
+                    }).find(x => x) ? null : newRangeAcc(accesorio.precio);
+                });
+                // Si hay al menos dos rangos
+                rangosAcc.length > 1 ? filtrosAcc.push({ precio: rangosAcc.sort((a, b) => a.min - b.min) }) : null;
+    
+                return saveState({ ...state, allFiltersAcc: filtrosAcc });
+    
+        case 'ADD_FILTER_ACC':
+                let parsedValue;
+    
+                try {
+                    parsedValue = JSON.parse(action.payload.value);
+                } catch (error) {parsedValue = action.payload.value;}
+    
+                const newFilterAcc = {
+                    ...state.filterAcc,
+                    [action.payload.name]: parsedValue
+                }
+                // Si el valor del filtro seleccionado es '-' elimina ese filtro
+                if (parsedValue === '-') {delete newFilterAcc[action.payload.name];}
+                //console.log('ADD_FILTER',newFilterAcc);
+                return saveState({ ...state, filterAcc: newFilterAcc });
+        
+        case 'SET_FILTER_ACC':
+                console.log('Antes de filtrar', state.allAccesorios);
+                console.log('Filtro Aplicado', state.filterAcc);
+                let newAccesorios = state.allAccesorios;
+                Object.keys(state.filterAcc).map(prop => {
+                    switch (prop) {
+                        case 'precio':
+                            newAccesorios = newAccesorios.filter(b => {
+                            // Filtro por precio
+                            return b[prop] > state.filterAcc[prop].min && b[prop] < state.filterAcc[prop].max;
+                        });
+                            break;
+                        case 'marca':
+                        case 'tipo':
+                        case 'material':
+                            // Filtro por marca o tipo
+                            newAccesorios = newAccesorios.filter(b => b[prop] === state.filterAcc[prop]);
+                            break;
+                        }
+                });
+                console.log('Después de filtrar', state.allAccesorios);
+                return saveState({ ...state, accesorios: newAccesorios });
+    
+        case 'SET_ORDER_ACC':
+                let orderedAccesorios = [...state.allAccesorios];
+    
+                // Aplicar otros filtros si existen
+                if (state.filterAcc) {
+                    Object.keys(state.filterAcc).forEach((prop) => {
+                    switch (prop) {
+                        case 'precio':
+                        orderedAccesorios = orderedAccesorios.filter(
+                            (accesorio) =>
+                            accesorio.precio > state.filterAcc.precio.min &&
+                            accesorio.precio < state.filterAcc.precio.max
+                        );
+                        break;
+                        case 'marca':
+                        case 'tipo':
+                        case 'material':
+                        orderedAccesorios = orderedAccesorios.filter(
+                            (accesorio) => accesorio[prop] === state.filterAcc[prop]
+                        );
+                        break;
+                        default:
+                        break;
+                    }
+                    });
+                }
+                if (action.payload === '-') {
+                    return { ...state, accesorios: orderedAccesorios, order: action.payload };
+                }
+                // Aplicar ordenamiento
+                switch (action.payload) {
+                    case 'precioAsc':
+                    orderedAccesorios.sort((a, b) => a.precio - b.precio);
+                    break;
+                    case 'precioDesc':
+                    orderedAccesorios.sort((a, b) => b.precio - a.precio);
+                    break;
+                    default:
+                    break;
+                }
+    
+                return saveState({ ...state, accesorios: orderedAccesorios, order: action.payload });
+
         default:
             return state
     }

@@ -25,6 +25,11 @@ import PublicarBarco from "./views/Administrador/publicarBarco";
 import { AuthProvider } from "./context/AuthContext";
 import FormsFirebase from "./components/acceso/Acceso";
 
+import { getToken, onMessage } from "firebase/messaging";
+import { messaging } from "../firebase-config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
@@ -33,13 +38,28 @@ function App() {
   useEffect(() => {
     dispatch(GET_BARCOS());
     dispatch(GET_FILTERS());
+    onMessage(messaging, (message) => {
+      console.log("tu mensaje: ", message);
+      toast(message.notification.title);
+    });
     // navigate('/home')
   }, []);
+
+  const activarMensages = async () => {
+    const token = await getToken(messaging, {
+      vapidKey:
+        "BMxA7zOyu_6lvgEZsRM_b-_k6YBXr50M7o6W-1hqTodVf4Kl0y5pCSUC7xRu4nqp-xbmVpm-qF0nEQ4DRKor_KE",
+    }).catch((error) => console.log("tuviste un error al generar el token"));
+    if (token) console.log("tu token: ", token);
+    if (!token) console.log("no tienes token");
+  };
 
   return (
     <AuthProvider>
       <div>
-        <Navbar />
+        <ToastContainer />
+        <Navbar activarMensages={activarMensages} />
+
         <Routes>
           <Route path="/" element={<LandingPage />} />
           
