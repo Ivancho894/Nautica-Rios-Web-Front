@@ -82,6 +82,11 @@ const Navbar = ({ activarMensages }) => {
               Nosotros
             </Link>
           </li>
+          <li>
+            <Link to="/publicarBarco" className="cursor-pointer text-white">
+                 Publicar
+            </Link>
+          </li>
         </ul>
         <div>
           {auth.user ? (
