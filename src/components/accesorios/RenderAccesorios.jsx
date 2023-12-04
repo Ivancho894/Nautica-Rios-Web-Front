@@ -1,45 +1,3 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-
-// const RenderAccesorios = ({ accesorio }) => {
-//  //Renderiza un solo barco
-//  return (
-//     <div className="border-6 border-gray-300 p-5 w-80 h-85 rounded-3xl bg-sky-400 flex flex-col items-center justify-center text-center mb-5">
-//       {/* //* la imagen es solo referencial, aun falta ver como traer las imgaes de la store de firebase */}
-//       {accesorio.variaciones && accesorio.variaciones.length > 0 && (
-//             <div>
-//             {accesorio.variaciones.map((variacion, variacionIndex) => (
-//               <div key={variacionIndex}>
-//                 {variacion.imagenes && variacion.imagenes.length > 0 && (
-//                   <div>
-//                     {variacion.imagenes.map((imagen, imagenIndex) => (
-//                       <img key={imagenIndex} src={imagen} alt={`Imagen ${imagenIndex + 1}`} style={{ maxWidth: '100%' }}/>
-//                       ))}
-//                   </div>
-//                 )}
-//               </div>
-//             ))}
-//           </div>
-//           )}
-//       <h3>
-//         {accesorio.nombre} {accesorio.marca}
-//       </h3>
-//       <h4>
-//         Material de {accesorio.material}
-//       </h4>
-
-//       <Link to={"/detalleaccesorio/" + accesorio.id}>
-//         <button>más</button>
-//       </Link>
-//     </div>
-//  );
-// };
-
-// export default RenderAccesorios;
-
-
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
@@ -62,11 +20,11 @@ const RenderAccesorios = ({ accesorio }) => {
           {accesorio.variaciones.map((variacion, variacionIndex) => (
             variacion.imagenes && variacion.imagenes.length > 0 && (
               variacion.imagenes.map((imagen, imagenIndex) => (
-                <div key={imagenIndex} className="w-80 h-85">
+                <div key={imagenIndex} className="w-full h-64 flex items-center justify-center">
                   <img
                     src={imagen}
                     alt={`Imagen ${imagenIndex + 1}`}
-                    className="max-w-full h-auto rounded-3xl"
+                    className="object-contain w-full h-full"
                     style={{ maxWidth: '100%', maxHeight: '100%' }}
                   />
                 </div>
@@ -76,11 +34,19 @@ const RenderAccesorios = ({ accesorio }) => {
         </Slider>
       )}
       <br/>
-        <h3>{accesorio.nombre} {accesorio.marca}</h3>
+        <h3 className="text-2xl font-bold mb-5">{accesorio.nombre}</h3>
+        <h3>{accesorio.marca}</h3>
         <h4>Material de {accesorio.material}</h4>
+
+        <div className='flex items-end gap-16'>     
+        <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="hover:text-[#3b82f6] cursor-pointer ml-[20px]  w-[40px] h-[40px]">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+        </svg>       
+
         <Link to={"/detalleaccesorio/" + accesorio.id}>
           <button className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>+ info</button>
         </Link>
+        </div>
       
     </div>
   );
