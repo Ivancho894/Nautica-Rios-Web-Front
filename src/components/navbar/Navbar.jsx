@@ -8,13 +8,12 @@ import { Toaster, toast } from "sonner";
 
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
-
-  const location = useLocation(); 
-  const isLandingPage = location.pathname === '/';
+  const location = useLocation();
+  const isLandingPage = location.pathname === "/";
 
   if (isLandingPage) {
-      return null;
-  };
+    return null;
+  }
 
   const Links = [
     {
@@ -67,6 +66,11 @@ const Navbar = ({ activarMensages }) => {
 
         <ul className="flex">
           <li className="mr-6">
+            <Link to="/home" className="cursor-pointier text-white">
+              Home
+            </Link>
+          </li>
+          <li className="mr-6">
             <Link
               to="/todoslosbarcos"
               className="cursor-pointier text-white"
@@ -96,7 +100,7 @@ const Navbar = ({ activarMensages }) => {
           </li>
           <li>
             <Link to="/publicarBarco" className="cursor-pointer text-white">
-                 Publicar
+              Publicar
             </Link>
           </li>
         </ul>
