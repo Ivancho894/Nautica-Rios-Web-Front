@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_BARCOS } from "../../redux/actions";
+import { GET_BARCOS, NOTIFICACIONES } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import photo1 from "../../assets/photo1.jpg";
 import photo2 from "../../assets/photo2.jpg";
 import photo3 from "../../assets/photo3.jpg";
-
+import { Toaster, toast } from "sonner";
 const photos = [photo2, photo1, photo3];
 
-const LandingPage = () => {
+const LandingPage = ({ activarMensages }) => {
   const [index, setIndex] = useState(0);
   const barcos = useSelector((state) => state.barcos);
+  const not = useSelector((state) => state.notificaciones);
   const dispatch = useDispatch();
-
+  // console.log(not);
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % photos.length);
     }, 3000);
 
+    toast("¿Quieres aceptar notificaciones?", {
+      position: "top-center",
+      action: {
+        label: "Aceptar",
+        onClick: (e) => {
+          activarMensages();
+          dispatch(NOTIFICACIONES(true));
+          console.log(true);
+        },
+      },
+      cancel: {
+        label: "denegar",
+        onClick: () => {
+          dispatch(NOTIFICACIONES(false));
+          console.log(false);
+        },
+      },
+    });
     // Descomenta la siguiente línea si deseas obtener los barcos al cargar la página
     // dispatch(GET_BARCOS());
 
@@ -44,6 +63,7 @@ const LandingPage = () => {
           overflow: "hidden",
         }}
       >
+        <Toaster />
         {photos.map((photo, i) => (
           <img
             key={i}
@@ -93,7 +113,8 @@ const LandingPage = () => {
             Actualmente Tenemos {barcos.length} Embarcaciones Publicadas
           </h3>
           <p className="text-white text-2xl font-bold mb-2">
-            Navega por nuestra página y encuentra el producto perfecto para tu barco.
+            Navega por nuestra página y encuentra el producto perfecto para tu
+            barco.
           </p>
         </div>
         <div
