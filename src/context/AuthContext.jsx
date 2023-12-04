@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
-import { auth , db} from "../../firebase-config";
+import { auth, db } from "../../firebase-config";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-
+import { useNavigate } from "react-router-dom";
 
 export const authContext = createContext();
 
@@ -23,6 +23,7 @@ export const useAuth = () => {
 };
 
 export function AuthProvider({ children }) {
+  const navigate = useNavigate();
   const [user, setUser] = useState("");
 
   useEffect(() => {
@@ -38,21 +39,25 @@ export function AuthProvider({ children }) {
   }, []);
 
   const register = async (email, password, displayName) => {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    const newUser = userCredential.user;
-    console.log(newUser);
+      const newUser = userCredential.user;
 
-    await updateProfile(newUser, { displayName });
-    await setDoc(doc(db, "users", newUser.uid), {
-      displayName,
-      email,
-    });
-    setUser(newUser)
+      await updateProfile(newUser, { displayName });
+      await setDoc(doc(db, "users", newUser.uid), {
+        displayName,
+        email,
+      });
+      setUser(newUser);
+      navigate("/home")
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const login = async (email, password) => {
@@ -62,12 +67,19 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     const responseGoogle = new GoogleAuthProvider();
-    return await signInWithPopup(auth, responseGoogle);
+
+    await signInWithPopup(auth, responseGoogle);
+    navigate("/home");
+    return;
   };
 
   const logout = async () => {
-    const response = await signOut(auth);
-    console.log(response);
+    try {
+      await signOut(auth);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <authContext.Provider

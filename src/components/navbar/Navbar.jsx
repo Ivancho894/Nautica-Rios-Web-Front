@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.ico";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Toaster, toast } from "sonner";
 
 import Button from "./Button";
-const Navbar = () => {
+const Navbar = ({ activarMensages }) => {
+
+  const location = useLocation(); 
+  const isLandingPage = location.pathname === '/';
+
+  if (isLandingPage) {
+      return null;
+  };
+
   const Links = [
     {
       name: "Barcos",
@@ -32,10 +40,9 @@ const Navbar = () => {
 
   const auth = useAuth();
   const { displayName } = auth.user;
-  console.log(auth.user);
 
   const handleLogin = () => {
-    navigate("/registro");
+    navigate("/login");
     setIsLoggedIn(true);
   };
 
@@ -85,6 +92,11 @@ const Navbar = () => {
           <li>
             <Link to="/quienessomos" className="cursor-pointer text-white">
               Nosotros
+            </Link>
+          </li>
+          <li>
+            <Link to="/publicarBarco" className="cursor-pointer text-white">
+                 Publicar
             </Link>
           </li>
         </ul>

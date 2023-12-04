@@ -19,8 +19,12 @@ import Navbar from "./components/navbar/Navbar";
 // import PublicProfileView from "./components/Paginas/PublicProfileView";
 // import ChooseUserNameView from "./components/Paginas/ChooseUserNameView";
 // import LoginView from "./components/Paginas/LoginView";
-import Accesorios from "./views/Accesorios";
+import TodosLosAccesorios from "./components/accesorios/TodosLosAccesorios";
+import DetalleAccesorios from "./components/accesorios/DetalleAccesorios";
+
 import PublicarBarco from "./views/Administrador/publicarBarco";
+import { Login } from "./components/acceso/login";
+import { Registro } from "./components/acceso/registro";
 
 import { AuthProvider } from "./context/AuthContext";
 import FormsFirebase from "./components/acceso/Acceso";
@@ -90,11 +94,14 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/contactar" element={<Contactar />} />
 
-          <Route path="/registro" element={<FormsFirebase />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registro />} />
+
           <Route path="/quienessomos" element={<QuienesSomos />} />
           <Route path="/detalle/:id" element={<Detalle />} />
           <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
-          <Route path="/accesorios" element={<Accesorios />} />
+          <Route path="/accesorios" element={<TodosLosAccesorios />} />
+          <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
           {/* //*  mis rutas  */}
           {/* <Route path="/login" element={<LoginView />} /> */}
           {/* <Route path="/dashboard" element={<DashboardView />} /> */}
