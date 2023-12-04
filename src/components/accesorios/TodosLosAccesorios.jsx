@@ -17,11 +17,15 @@ export default function TodosLosAccesorios() {
   }, []);
   
   return (
-    <div>
-        <div style={{ marginTop: '80px' }}>
+    <div className="flex">
+
+      <div className=" bg-slate-300 w-[400px] ">
+        <div className="bg-slate-300 mt-16 h-[300px] w-full">
           <FiltrosAccesorios />
         </div>
-        <div>
+        </div>
+
+        <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
           {accesorios && accesorios.map((accesorio) => {
             return <RenderAccesorios key={accesorio.id} accesorio={accesorio} />;
           })}
