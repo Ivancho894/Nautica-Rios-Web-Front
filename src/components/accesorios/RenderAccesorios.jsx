@@ -56,9 +56,9 @@ const RenderAccesorios = ({ accesorio }) => {
   };
 
   return (
-    <div className="mb-5">
+    <div className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
       {accesorio.variaciones && accesorio.variaciones.length > 0 && (
-        <Slider {...settings} className="w-80 mx-auto">
+        <Slider {...settings} className="w-60 mx-auto">
           {accesorio.variaciones.map((variacion, variacionIndex) => (
             variacion.imagenes && variacion.imagenes.length > 0 && (
               variacion.imagenes.map((imagen, imagenIndex) => (
@@ -79,7 +79,7 @@ const RenderAccesorios = ({ accesorio }) => {
         <h3>{accesorio.nombre} {accesorio.marca}</h3>
         <h4>Material de {accesorio.material}</h4>
         <Link to={"/detalleaccesorio/" + accesorio.id}>
-          <button>más</button>
+          <button className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>+ info</button>
         </Link>
       
     </div>
