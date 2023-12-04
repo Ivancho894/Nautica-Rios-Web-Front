@@ -25,6 +25,7 @@ import DetalleAccesorios from "./components/accesorios/DetalleAccesorios";
 import PublicarBarco from "./views/Administrador/publicarBarco";
 import { Login } from "./components/acceso/login";
 import { Registro } from "./components/acceso/registro";
+import { useAuth } from "./context/AuthContext";
 
 import { AuthProvider } from "./context/AuthContext";
 import FormsFirebase from "./components/acceso/Acceso";
@@ -33,10 +34,12 @@ import { getToken, onMessage } from "firebase/messaging";
 import { messaging } from "../firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ProtectedRoutes } from "./components/ProtectedRoutes";
 // import { Toaster,toast } from "sonner";
 
 function App() {
   const { pathname } = useLocation();
+  const auth = useAuth()
 
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
@@ -94,8 +97,10 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/contactar" element={<Contactar />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registro />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registro />} />
+          </Route>
 
           <Route path="/quienessomos" element={<QuienesSomos />} />
           <Route path="/detalle/:id" element={<Detalle />} />

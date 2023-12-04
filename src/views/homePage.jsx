@@ -130,7 +130,7 @@ export default function Home() {
       </div>
 
       <button
-        className="mt-16"
+        className="mt-16 text-white"
         onClick={() => {
           navigate("/todoslosbarcos");
         }}
