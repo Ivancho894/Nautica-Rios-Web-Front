@@ -4,7 +4,7 @@ import "./App.css";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Route, Routes } from "react-router-dom";
+import { useNavigate, Route, Routes, useLocation } from "react-router-dom";
 import { GET_BARCOS, GET_FILTERS } from "./redux/actions";
 import Home from "./views/homePage";
 import LandingPage from "./components/Landing/landingPage";
@@ -33,18 +33,34 @@ import { getToken, onMessage } from "firebase/messaging";
 import { messaging } from "../firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { Toaster,toast } from "sonner";
 
 function App() {
+  const { pathname } = useLocation();
+
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(GET_BARCOS());
     dispatch(GET_FILTERS());
     onMessage(messaging, (message) => {
       console.log("tu mensaje: ", message);
-      toast(message.notification.title);
+      console.log(message.data);
+      toast(
+        <div>
+          <span>{message.notification.title}</span>
+          <br />
+          <span>{message.notification.body}</span>
+          <br />
+          <a href="/accesorios">ir</a>
+          {/* <button onClick={() => navigate("/accesorios")}>ir</button> */}
+        </div>
+        //   message.notification.title, {
+        //   description: message.notification.body,
+        // }
+      );
     });
     // navigate('/home')
   }, []);
@@ -62,10 +78,18 @@ function App() {
     <AuthProvider>
       <div>
         <ToastContainer />
-        <Navbar activarMensages={activarMensages} />
+
+        {pathname !== "/" ? (
+          <Navbar />
+        ) : (
+          <div className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10"></div>
+        )}
 
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/"
+            element={<LandingPage activarMensages={activarMensages} />}
+          />
 
           <Route path="/home" element={<Home />} />
           <Route path="/contactar" element={<Contactar />} />
