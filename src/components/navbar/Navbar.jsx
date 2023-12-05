@@ -60,16 +60,11 @@ const Navbar = ({ activarMensages }) => {
     <nav className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10">
       <Toaster />
       <div className="flex justify-between items-center">
-        <NavLink to="/" className="">
+        <NavLink to="/home" className="">
           <img src={Logo} alt="Logo" className="h-6" />
         </NavLink>
 
         <ul className="flex">
-          <li className="mr-6">
-            <Link to="/home" className="cursor-pointier text-white">
-              Home
-            </Link>
-          </li>
           <li className="mr-6">
             <Link
               to="/todoslosbarcos"
@@ -99,7 +94,10 @@ const Navbar = ({ activarMensages }) => {
             </Link>
           </li>
           <li>
-            <Link to="/publicarBarco" className="cursor-pointer text-white">
+            <Link
+              to="/publicarBarco"
+              className="cursor-pointer text-white ml-4"
+            >
               Publicar
             </Link>
           </li>
@@ -107,7 +105,7 @@ const Navbar = ({ activarMensages }) => {
         <div>
           {auth.user ? (
             <div className="flex items-center">
-              <h3 className="mr-4">{displayName}</h3>
+              <h3 className="mr-4 text-white">{displayName}</h3>
               <button
                 onClick={handleLogout}
                 className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
