@@ -66,6 +66,9 @@ const Navbar = ({ activarMensages }) => {
 
         <ul className="flex">
           <li className="mr-6">
+            <Link to="/correo">correo</Link>
+          </li>
+          <li className="mr-6">
             <Link
               to="/todoslosbarcos"
               className="cursor-pointier text-white"
@@ -94,7 +97,10 @@ const Navbar = ({ activarMensages }) => {
             </Link>
           </li>
           <li>
-            <Link to="/publicarBarco" className="cursor-pointer text-white ml-4">
+            <Link
+              to="/publicarBarco"
+              className="cursor-pointer text-white ml-4"
+            >
               Publicar
             </Link>
           </li>

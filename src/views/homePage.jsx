@@ -20,6 +20,7 @@ import insta from "../assets/insta.png";
 import { Toaster, toast } from "sonner";
 import { AiFillChrome } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
+import Correo from "../components/Correo";
 
 export default function Home() {
   const auth = useAuth();
@@ -53,6 +54,13 @@ export default function Home() {
       }
     }
   }, []);
+  function ok(e) {
+    if (e) {
+      toast.success("Se envio correctamente");
+    } else {
+      toast("No se envio");
+    }
+  }
   return (
     <div>
       <Toaster />
@@ -314,7 +322,8 @@ export default function Home() {
             </h1>
           </div>
         </div>
-        <div className="text-white mt-16 p-8 w-[500px] ml-16 text-xl mb-8  border-2 rounded-md">
+        <Correo ok={ok} />
+        {/* <div className="text-white mt-16 p-8 w-[500px] ml-16 text-xl mb-8  border-2 rounded-md">
           <div className="flex gap-4 mt-4">
             <label htmlFor="Nombre">Nombre</label>
             <input type="text" className="ml-[-3px] w-[312px]" />
@@ -335,7 +344,7 @@ export default function Home() {
             <label htmlFor="Mensaje">Mensaje</label>
             <textarea className="h-[150px] w-[312px]"></textarea>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
