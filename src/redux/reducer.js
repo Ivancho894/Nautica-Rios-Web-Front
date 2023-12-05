@@ -186,6 +186,8 @@ export default function reducer(state = initialState, action) {
         orden: { name: "", value: "" },
         filter: {},
         barcos: state.allBarcos,
+        filterAcc: {},
+        accesorios: state.allAccesorios
       };
     case "ORDENAR":
       const name = state.orden.name;
