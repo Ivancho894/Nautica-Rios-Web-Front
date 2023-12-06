@@ -7,6 +7,7 @@ import { async } from "@firebase/util";
 
 
 const PublicarBarco = () => {
+  const number =Math.floor(Math.random() * 10000)
   const navigate = useNavigate();
   const [nuevoBarco, setNuevoBarco] = useState({
     accesorios: "",
@@ -34,7 +35,7 @@ const PublicarBarco = () => {
   const handleImagenChange = async (e) => {
     const storage = getStorage();
     //Referencia de la img a cargar
-    const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}/${nuevoBarco.marcaBarco}${nuevoBarco.imagenes.length}`);
+    const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}-${number}/${nuevoBarco.marcaBarco}${nuevoBarco.imagenes.length}`);
     //Agrego la imagen a la base de datos
     const data = await uploadBytes(mountainsRef, e.target.files[0])
     //Busco el link de la imagen
@@ -84,6 +85,7 @@ const PublicarBarco = () => {
           tiempos: "",
           tipo: "",
           year: "",
+          imagenes: []
         });
 
         //navigate(`/detalle/${nuevoBarco.docRef.id}`);
