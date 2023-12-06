@@ -13,7 +13,7 @@ export default function paginacion({paginaActual, totalPaginas, cambioPag }){
 
     return(
         <div className="list-none flex justify-center items-center p-0 bg-gray-500">
-            <ul>
+            <ul className="flex flex-row">
                 <li onClick={()=>cambioPag(paginaActual-1)}
                  className="m-0 mx-5 cursor-pointer text-base transition duration-300 ease-in-out py-2 px-5 rounded-lg"
                  >&#9665;</li>
