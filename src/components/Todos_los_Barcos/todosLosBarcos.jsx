@@ -8,6 +8,8 @@ import { GET_FILTERS, GET_BARCOS, SET_FILTER, ORDENAR } from "../../redux/action
 import styles from "./todoslosbarcos.module.css";
 import { useState } from "react";
 import baner from "../../assets/homeBaner.png"
+import MostrarBarcos from "../Barco/mostrarBarcos";
+import Paginacion from "./Paginacion";
 
 
 
@@ -24,31 +26,35 @@ export default function TodosLosBarcos() {
     dispatch(SET_FILTER());
     dispatch(ORDENAR())
   }, []);
+
+
+  //PAGINADO
+  const [pagina, setPagina] = useState(1);
+  const barcosPorPagina = 9;
+  const totalPaginas = Math.ceil(barcos.length / barcosPorPagina);
+  
+  const handleNextPage = (nuevaPag) => {
+    nuevaPag<=totalPaginas &&  nuevaPag>0?setPagina(nuevaPag):alert("No hay mas paginas");
+  }
+
+
+
+
   return (
-    <div className="flex">
-      
-          <div className=" bg-slate-300 w-[400px] ">
-    
-                   <div className="bg-slate-300 mt-16 h-[300px] w-full">
-                      <Filtros />
-                   </div>
-
-                  <div className="bg-slate-300 h-full mt-16 ">
-                       <Orden />
-                   </div>
+        <>
+          <div className="flex">
+            <div className=" bg-slate-300 w-[400px] ">
+              <div className="bg-slate-300 mt-16 h-[300px] w-full">
+                <Filtros />
+              </div>
+              <div className="bg-slate-300 h-full mt-16 ">
+                  <Orden />
+              </div>
           </div>
-
-     
-     
-     
-                  <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
-                         {barcos.map((barco) => {
-                         return <RenderBarco key={barco.id} barco={barco} />;
-                        })}
-                   </div>
-      
-   
+          
+          <MostrarBarcos barcos={barcos} paginaActual={pagina}/>
      </div>
-
+          <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} cambioPag={handleNextPage} />
+</>
   );
 }

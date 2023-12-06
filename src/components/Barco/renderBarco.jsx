@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 const RenderBarco = ({ barco }) => {
   //Renderiza un solo barco
   return (
-    <div className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
-      {/* //* la imagen es solo referencial, aun falta ver como traer las imgaes de la store de firebase */}
+    <div className="border-2 mb-4 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
       <img
         className="w-[350px] h-60 object-cover "
         src={barco.imagenes[0]}
