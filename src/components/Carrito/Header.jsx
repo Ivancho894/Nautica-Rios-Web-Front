@@ -1,27 +1,38 @@
 import { useEffect, useState } from "react";
 import "./header.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AGREGAR_CARRITO, BORRAR_PRODUCTO, BORRAR_UNIDAD, VACIAR_CARRITO } from "../../redux/actions";
-
-
+import {
+  AGREGAR_CARRITO,
+  BORRAR_PRODUCTO,
+  BORRAR_UNIDAD,
+  VACIAR_CARRITO,
+} from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 export default function Header() {
-  const carrito = useSelector(state=>state.carrito)
-  const [allProducts,setAllProducts] = useState([])
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const carrito = useSelector((state) => state.carrito);
+  const [allProducts, setAllProducts] = useState([]);
+  const dispatch = useDispatch();
 
   const [totalPagar, setTotal] = useState(0);
   const [active, setActive] = useState(false);
-  
-  useEffect(() => {
-    carrito.length!=0?carrito.map(prod => 
-      allProducts.find(x=>x.id===prod.id)?null:setAllProducts([...allProducts,prod]
-        )):
-        setAllProducts([])
-    setTotal(carrito.reduce((sum,prod)=>{return sum+prod.precio},0))
-    // setAllProducts([...new Set(carrito)])
-  },[carrito])
 
-  
+  useEffect(() => {
+    carrito.length != 0
+      ? carrito.map((prod) =>
+          allProducts.find((x) => x.id === prod.id)
+            ? null
+            : setAllProducts([...allProducts, prod])
+        )
+      : setAllProducts([]);
+    setTotal(
+      carrito.reduce((sum, prod) => {
+        return sum + prod.precio;
+      }, 0)
+    );
+    // setAllProducts([...new Set(carrito)])
+  }, [carrito]);
+
   const contarProducto = (prod) => {
     let count = 0;
     carrito.forEach((product) => {
@@ -30,16 +41,18 @@ export default function Header() {
       }
     });
     return count;
-  
-  }
-
+  };
 
   const onDeleteProduct = (product) => {
-    dispatch(BORRAR_UNIDAD(product))
+    dispatch(BORRAR_UNIDAD(product));
   };
 
   const onCleanCart = () => {
-    dispatch(VACIAR_CARRITO())
+    dispatch(VACIAR_CARRITO());
+  };
+
+  const pagar = () => {
+    navigate("/detalleCompra");
   };
 
   return (
@@ -71,7 +84,7 @@ export default function Header() {
           {allProducts.length ? (
             <>
               <div className="row-product">
-                {allProducts.map((product,i) => (
+                {allProducts.map((product, i) => (
                   <div className="cart-product" key={i}>
                     <div className="info-cart-product">
                       <span className="cantidad-producto-carrito">
@@ -111,6 +124,9 @@ export default function Header() {
               <button className="btn-clear-all" onClick={onCleanCart}>
                 Vaciar Carrito
               </button>
+              <button className="btn-clear-all" onClick={pagar}>
+                Pagar
+              </button>
             </>
           ) : (
             <span className="cart-empty">El carrito está vacío</span>
@@ -119,4 +135,4 @@ export default function Header() {
       </div>
     </header>
   );
-};
+}
