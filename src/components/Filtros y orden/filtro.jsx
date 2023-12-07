@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_BARCOS, ADD_FILTER, SET_FILTER, GET_FILTERS, ORDENAR, RESET_FILTERS } from '../../redux/actions';
 import { useEffect, useState } from 'react';
+import tituloFyO from './TituloFiltros';
 
 export default function Filtros(){
  const allFilters = useSelector(state => state.allFilters)
@@ -41,7 +42,7 @@ export default function Filtros(){
             {
               return (
               <div key={i} className=" flex flex-row justify-between mt-4 ml-2 " >
-                <label className="ml-4 ">{prop}:</label>
+                <label className="ml-4 ">{tituloFyO(prop)}:</label>
                 <select className=" ml-4 h-[20px] w-[100px] mr-2 " onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
                  <option value="-">-</option>
                   
@@ -56,7 +57,7 @@ export default function Filtros(){
           { 
             return (
             <div key={i} className="flex flex-row justify-between mt-4 ml-2">
-              <label className="ml-4 ">{prop}:</label>
+              <label className="ml-4 ">{tituloFyO(prop)}:</label>
               <select className="  ml-4 h-[20px] w-[100px] mr-2" onChange={(event)=>handleChange(event)} name={prop} value={filterValues[prop]}>
                 <option value="-">-</option>
                 

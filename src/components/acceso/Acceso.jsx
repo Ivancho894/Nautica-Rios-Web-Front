@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import googleicon from "../../assets/google-icon.svg";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function FormsFirebase() {
+  const nav = useNavigate();
   const auth = useAuth();
   const { displayName } = auth.user;
   // console.log(displayName);
+  console.log(auth.user);
+  useEffect(() => {
+    if (auth.user) {
+      setTimeout(() => nav("/home"), 2000);
+    }
+  }, [auth.user]);
   /* A hook that allows you to use state in (formsRegister). */
   const [register, setRegister] = useState({
     registerEmail: "",
@@ -45,9 +53,6 @@ function FormsFirebase() {
 
   return (
     <div className="border-4 border-amber-800 rounded-xl">
-      {
-        //console.log(auth.user)
-      }
       {displayName && <h5>welcome : {displayName}</h5>}
       <form>
         <h3>Register</h3>

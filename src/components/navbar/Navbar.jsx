@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.ico";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { Toaster, toast } from "sonner";
+
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
+  const location = useLocation();
+  const isLandingPage = location.pathname === "/";
+
+  if (isLandingPage) {
+    return null;
+  }
+
   const Links = [
     {
       name: "Barcos",
@@ -30,30 +39,31 @@ const Navbar = ({ activarMensages }) => {
 
   const auth = useAuth();
   const { displayName } = auth.user;
-  console.log(auth.user);
 
   const handleLogin = () => {
-    navigate("/registro");
+    navigate("/login");
     setIsLoggedIn(true);
   };
 
   const handleLogout = (e) => {
     e.preventDefault();
+
     auth.logout();
+    toast.success(
+      <span className="text-green-700 text-base">
+        hasta pronto {displayName} 😢
+      </span>
+    );
   };
 
   return (
     <nav className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10">
+      <Toaster />
       <div className="flex justify-between items-center">
-        <NavLink to="/" className="">
+        <NavLink to="/home" className="">
           <img src={Logo} alt="Logo" className="h-6" />
         </NavLink>
-        <button
-          className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
-          onClick={activarMensages}
-        >
-          Recibir notificaciones
-        </button>
+
         <ul className="flex">
           <li className="mr-6">
             <Link
@@ -83,11 +93,19 @@ const Navbar = ({ activarMensages }) => {
               Nosotros
             </Link>
           </li>
+          <li>
+            <Link
+              to="/publicarBarco"
+              className="cursor-pointer text-white ml-4"
+            >
+              Publicar
+            </Link>
+          </li>
         </ul>
         <div>
           {auth.user ? (
             <div className="flex items-center">
-              <h3 className="mr-4">{displayName}</h3>
+              <h3 className="mr-4 text-white">{displayName}</h3>
               <button
                 onClick={handleLogout}
                 className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
