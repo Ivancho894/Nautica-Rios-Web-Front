@@ -1,6 +1,6 @@
 //Importo la base de datos
 import { db } from "../../firebase-config";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 export function NOTIFICACIONES(not) {
@@ -9,17 +9,19 @@ export function NOTIFICACIONES(not) {
     payload: not,
   };
 }
-export function GET_BARCOS() {
-  return async (dispatch) => {
-    const barcosCollectionRef = collection(db, "barcos");
-    const data = await getDocs(barcosCollectionRef);
+export const GET_BARCOS = () => async (dispatch) => {
+  try {
+    const q = query(collection(db, "barcos"), where('eliminado', '==', false));
+    const data = await getDocs(q);
     const barcos = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    return dispatch({
+    dispatch({
       type: "GET_BARCOS",
       payload: barcos,
     });
-  };
-}
+  } catch (error) {
+    console.error("Error obteniendo barcos:", error);
+  }
+};
 export function ADD_FILTER(newFilter) {
   return { type: "ADD_FILTER", payload: newFilter };
 }
@@ -40,27 +42,22 @@ export function CAMBIAR_ORDENAR(or) {
   return { type: "CAMBIAR_ORDENAR", payload: or };
 }
 
-export function getAccesorios() {
-  return async (dispatch) => {
-    try {
-      const accesoriosCollectionRef = collection(db, "accesorios");
-      const data = await getDocs(accesoriosCollectionRef);
-      const accesorios = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+export const getAccesorios = () => async (dispatch) => {
+  try {
+    const q = query(collection(db, 'accesorios'), where('eliminado', '==', false));
+    const data = await getDocs(q);
 
-      dispatch({
-        type: "GET_ACCESORIOS",
-        payload: accesorios,
-      });
+    const accesorios = data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-      dispatch(getFiltersAcc());
-    } catch (error) {
-      console.error("Error obteniendo accesorios:", error);
-    }
-  };
-}
+    dispatch({
+      type: "GET_ACCESORIOS",
+      payload: accesorios,
+    });
+    dispatch(getFiltersAcc());
+  } catch (error) {
+    console.error("Error obteniendo accesorios:", error);
+  }
+};
 
 export function getFiltersAcc() {
   return (dispatch, getState) => {
