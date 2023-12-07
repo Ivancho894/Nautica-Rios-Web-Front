@@ -80,7 +80,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div>
+      <div className="r">
         <ToastContainer />
 
         {pathname !== "/" ? (

@@ -84,14 +84,14 @@ const Navbar = ({ activarMensages }) => {
             </Link>
           </li>
           <li className="mr-6">
-            <Link to="/contactar" className="cursor-pointer text-white">
+            <a href="/home#contacto" className="cursor-pointer text-white">
               Contacto
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="/quienessomos" className="cursor-pointer text-white">
+            <a href="/home#nosotros" className="cursor-pointer text-white">
               Nosotros
-            </Link>
+            </a>
           </li>
           <li>
             <Link
