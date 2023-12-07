@@ -8,11 +8,9 @@ import { AGREGAR_CARRITO, BORRAR_UNIDAD, BORRAR_PRODUCTO } from '../../redux/act
 
 const RenderAccesorios = ({ accesorio }) => {
   const dispatch = useDispatch();
-  const carrito = useSelector((state) => state.carrito);
   
   const agregarAlCarrito = () => {
     dispatch(AGREGAR_CARRITO(accesorio));
-    console.log('jola')
   }
 
   const settings = {
@@ -22,7 +20,6 @@ const RenderAccesorios = ({ accesorio }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  console.log(carrito)
   return (
     <div className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
       {accesorio.variaciones && accesorio.variaciones.length > 0 && (

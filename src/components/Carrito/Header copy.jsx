@@ -1,39 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./header.css";
-import { useDispatch, useSelector } from "react-redux";
-import { AGREGAR_CARRITO, BORRAR_PRODUCTO, BORRAR_UNIDAD, VACIAR_CARRITO } from "../../redux/actions";
-
-
-export default function Header(p) {
-  const allProducts = useSelector(state=>state.carrito)
-  const dispatch = useDispatch()
-
-  const [totalPagar, setTotal] = useState(0);
+export const Header = ({
+  allProducts,
+  setAllProducts,
+  total,
+  countProducts,
+  setCountProducts,
+  setTotal,
+}) => {
   const [active, setActive] = useState(false);
-  
-  useEffect(() => {
-    setTotal(allProducts.reduce((sum,prod)=>{return sum+prod.precio},0))
-  },[allProducts])
-
-  
-  const contarProducto = (prod) => {
-    let count = 0;
-    allProducts.forEach((product) => {
-      if (product.id === prod.id) {
-        count = product.quantity;
-      }
-    });
-    return count;
-  
-  }
-
 
   const onDeleteProduct = (product) => {
-    dispatch(BORRAR_UNIDAD(product))
+    const results = allProducts.filter((item) => item.id !== product.id);
+
+    setTotal(total - product.price * product.quantity);
+    setCountProducts(countProducts - product.quantity);
+    setAllProducts(results);
   };
 
   const onCleanCart = () => {
-    dispatch(VACIAR_CARRITO())
+    setAllProducts([]);
+    setTotal(0);
+    setCountProducts(0);
   };
 
   return (
@@ -55,7 +43,7 @@ export default function Header(p) {
             />
           </svg>
           <div className="count-products">
-            <span id="contador-productos">{allProducts.length}</span>
+            <span id="contador-productos">{countProducts}</span>
           </div>
         </div>
 
@@ -65,17 +53,17 @@ export default function Header(p) {
           {allProducts.length ? (
             <>
               <div className="row-product">
-                {allProducts.map((product,i) => (
-                  <div className="cart-product" key={i}>
+                {allProducts.map((product) => (
+                  <div className="cart-product" key={product.id}>
                     <div className="info-cart-product">
                       <span className="cantidad-producto-carrito">
-                        {contarProducto(product)}
+                        {product.quantity}
                       </span>
                       <p className="titulo-producto-carrito">
-                        {product.nombre}
+                        {product.nameProduct}
                       </p>
                       <span className="precio-producto-carrito">
-                        ${product.precio}
+                        ${product.price}
                       </span>
                     </div>
                     <svg
@@ -99,7 +87,7 @@ export default function Header(p) {
 
               <div className="cart-total">
                 <h3>Total:</h3>
-                <h2 className="total-pagar">${totalPagar}</h2>
+                <span className="total-pagar">${total}</span>
               </div>
 
               <button className="btn-clear-all" onClick={onCleanCart}>

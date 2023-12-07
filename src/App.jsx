@@ -14,7 +14,7 @@ import Detalle from "./views/Barco/detalleBarcos";
 import TodosLosBarcos from "./components/Todos_los_Barcos/todosLosBarcos";
 import Navbar from "./components/navbar/Navbar";
 // import { ProductList } from "./components/Carrito/ProducList";
-import { Header } from "./components/Carrito/Header";
+// import  Header  from "./components/Carrito/Headers";
 // import DashboardView from "./components/Paginas/DashboardView";
 // import EditProfileView from "./components/Paginas/EditProfileView";
 // import SignOutView from "./components/Paginas/SignOutView";

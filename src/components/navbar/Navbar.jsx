@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Toaster, toast } from "sonner";
-import { Header } from "../Carrito/Header";
+import  Header  from "../Carrito/Header";
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
   const [allProducts, setAllProducts] = useState([]);
