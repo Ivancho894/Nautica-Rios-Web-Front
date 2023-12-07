@@ -91,3 +91,10 @@ export const SET_ORDER_ACC = (order) => ({
   type: "SET_ORDER_ACC",
   payload: order,
 });
+
+export function AGREGAR_CARRITO(acc){
+    return {type: "AGREGAR_CARRITO", payload: acc}
+}
+export function BORRAR_UNIDAD(acc){
+  return {type: "BORRAR_UNIDAD", payload: acc}
+}

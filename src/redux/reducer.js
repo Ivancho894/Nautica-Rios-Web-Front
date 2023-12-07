@@ -12,6 +12,7 @@ const initialState = {
   allAccesorios: [],
   allFiltersAcc: [],
   filterAcc: {},
+  carrito:[]
 };
 
 const storedState =
@@ -368,7 +369,37 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
       };
+    
+    
+    case "AGREGAR_CARRITO":
+      return {
+        ...state,
+        carrito: [...state.carrito, action.payload]
+      }
+      
+    case "BORRAR_UNIDAD":
+      let borrado = false
+      const carrito = state.carrito.filter(x =>{
+        if(borrado){
+          borrado=true
+          return true
+        }
+        if (x.id !== action.payload.id) {
+          return true
+        }
+        borrado=true        
+        return false
+        })
+      return {
+        ...state,
+        carrito
+      }
+    
+    
+    
     default:
       return state;
+
+
   }
 }
