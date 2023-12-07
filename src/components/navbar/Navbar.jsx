@@ -5,11 +5,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Toaster, toast } from "sonner";
-
+import  Header  from "../Carrito/Header";
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
+  const { pathname } = useLocation();
 
   if (isLandingPage) {
     return null;
@@ -101,7 +102,11 @@ const Navbar = ({ activarMensages }) => {
               Publicar
             </Link>
           </li>
+
         </ul>
+          <div className="w-11 h-11s end-0">
+            {pathname==='/accesorios'?(<Header/>):(<></>)}
+          </div>
         <div>
           {auth.user ? (
             <div className="flex items-center">
