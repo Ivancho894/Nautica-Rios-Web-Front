@@ -5,9 +5,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Toaster, toast } from "sonner";
-
+import { Header } from "../Carrito/Header";
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
+  const [allProducts, setAllProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
 
@@ -100,6 +103,17 @@ const Navbar = ({ activarMensages }) => {
             >
               Publicar
             </Link>
+          </li>
+
+          <li className="w-11 h-11">
+            <Header
+              allProducts={allProducts}
+              setAllProducts={setAllProducts}
+              total={total}
+              setTotal={setTotal}
+              countProducts={countProducts}
+              setCountProducts={setCountProducts}
+            />
           </li>
         </ul>
         <div>
