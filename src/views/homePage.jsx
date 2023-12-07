@@ -26,6 +26,12 @@ export default function Home() {
     // dispatch(GET_FILTERS())
     // dispatch(GET_BARCOS())
   }, []);
+ 
+ 
+
+ 
+ 
+ 
   return (
     <div >
       <div className=" w-full m-0px">
@@ -166,7 +172,7 @@ export default function Home() {
 
       <h1 className="mt-16 font-bold mb-5">INSTAGRAM</h1>
 
-
+      
 
 
 
@@ -174,27 +180,32 @@ export default function Home() {
 
 
         <div>
-          <img src={destacado3} alt="barco3" className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]" />
+        <iframe width="440" height="440"
+      src="http://instagram.com/p/C0esTeDJapT/embed" ></iframe>
 
         </div>
         <div>
-          <img src={destacado4} alt="barco4" className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]" />
+        <iframe width="440" height="440"
+      src="http://instagram.com/p/C0UrID9pzem/embed" ></iframe>
+        </div>
+        <div>
+        <iframe width="440" height="440"
+      src="http://instagram.com/p/C0UY13op_Bg/embed" ></iframe>
 
         </div>
         <div>
-          <img src={destacado5} alt="barco5" className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]" />
+        <iframe width="440" height="440"
+      src="http://instagram.com/p/C0UQBXEOwvL/embed" ></iframe>
 
         </div>
         <div>
-          <img src={destacado6} alt="barco6" className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]" />
+        <iframe width="440" height="440"
+      src="http://instagram.com/p/C0P5wKwJPQj/embed" ></iframe>
 
         </div>
         <div>
-          <img src={destacado7} alt="barco7" className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]" />
-
-        </div>
-        <div>
-          <img src={destacado8} alt="barco8" className="W-80 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]" />
+        <iframe width="440" height="440"
+      src="http://instagram.com/p/C0LElZvNGNl/embed" ></iframe>
 
         </div>
 
