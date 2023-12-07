@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { AGREGAR_CARRITO, BORRAR_UNIDAD } from '../../redux/actions';
+import { AGREGAR_CARRITO, BORRAR_UNIDAD, BORRAR_PRODUCTO } from '../../redux/actions';
 
 const RenderAccesorios = ({ accesorio }) => {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const RenderAccesorios = ({ accesorio }) => {
           <button className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>+ info</button>
         </Link>
         </div>
-        <button onClick={()=>dispatch(BORRAR_UNIDAD(accesorio))}>f</button>
+        <button onClick={()=>dispatch(BORRAR_PRODUCTO(accesorio))}>f</button>
       
     </div>
   );

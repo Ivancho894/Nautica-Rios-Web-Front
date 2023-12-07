@@ -394,8 +394,18 @@ export default function reducer(state = initialState, action) {
         ...state,
         carrito
       }
+    case "BORRAR_PRODUCTO":
+      const carrito2 = state.carrito.filter(x =>x.id != action.payload.id)
+      return {
+        ...state,
+        carrito: carrito2
+      }
     
-    
+    case "VACIAR_CARRITO":
+      return {
+        ...state,
+        carrito: []
+      }
     
     default:
       return state;

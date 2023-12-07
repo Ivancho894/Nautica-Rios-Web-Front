@@ -98,3 +98,10 @@ export function AGREGAR_CARRITO(acc){
 export function BORRAR_UNIDAD(acc){
   return {type: "BORRAR_UNIDAD", payload: acc}
 }
+
+export function BORRAR_PRODUCTO(acc){
+  return {type: "BORRAR_PRODUCTO", payload: acc}
+}
+export function VACIAR_CARRITO(){
+  return {type: "VACIAR_CARRITO"}
+}
