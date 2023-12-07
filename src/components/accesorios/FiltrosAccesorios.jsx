@@ -101,10 +101,7 @@ export default function FiltrosAcce() {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getAccesorios());
-      console.log('Estado después de GET_ACCESORIOS:');
-
       await dispatch(getFiltersAcc());
-      console.log('Estado después de GET_FILTERS_ACC:');
     };
 
     fetchData();
@@ -135,7 +132,6 @@ export default function FiltrosAcce() {
 
         {allFilters?.map((filtro, i) => {
           let prop = Object.keys(filtro)[0];
-          console.log(filtrosAplicados,allFilters,filtrosAplicados.hasOwnProperty(prop),filtro)
           switch (prop) {
             case 'precio':
               {

@@ -54,7 +54,6 @@ const RenderAccesorios = ({ accesorio }) => {
           <button className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>+ info</button>
         </Link>
         </div>
-        <button onClick={()=>dispatch(BORRAR_PRODUCTO(accesorio))}>f</button>
       
     </div>
   );

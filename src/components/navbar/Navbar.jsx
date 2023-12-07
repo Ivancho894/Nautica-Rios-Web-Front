@@ -8,11 +8,9 @@ import { Toaster, toast } from "sonner";
 import  Header  from "../Carrito/Header";
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
-  const [allProducts, setAllProducts] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [countProducts, setCountProducts] = useState(0);
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
+  const { pathname } = useLocation();
 
   if (isLandingPage) {
     return null;
@@ -105,17 +103,10 @@ const Navbar = ({ activarMensages }) => {
             </Link>
           </li>
 
-          <li className="w-11 h-11">
-            <Header
-              allProducts={allProducts}
-              setAllProducts={setAllProducts}
-              total={total}
-              setTotal={setTotal}
-              countProducts={countProducts}
-              setCountProducts={setCountProducts}
-            />
-          </li>
         </ul>
+          <div className="w-11 h-11s end-0">
+            {pathname==='/accesorios'?(<Header/>):(<></>)}
+          </div>
         <div>
           {auth.user ? (
             <div className="flex items-center">

@@ -4,23 +4,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { AGREGAR_CARRITO, BORRAR_PRODUCTO, BORRAR_UNIDAD, VACIAR_CARRITO } from "../../redux/actions";
 
 
-export default function Header(p) {
-  const allProducts = useSelector(state=>state.carrito)
+export default function Header() {
+  const carrito = useSelector(state=>state.carrito)
+  const [allProducts,setAllProducts] = useState([])
   const dispatch = useDispatch()
 
   const [totalPagar, setTotal] = useState(0);
   const [active, setActive] = useState(false);
   
   useEffect(() => {
-    setTotal(allProducts.reduce((sum,prod)=>{return sum+prod.precio},0))
-  },[allProducts])
+    carrito.length!=0?carrito.map(prod => 
+      allProducts.find(x=>x.id===prod.id)?null:setAllProducts([...allProducts,prod]
+        )):
+        setAllProducts([])
+    setTotal(carrito.reduce((sum,prod)=>{return sum+prod.precio},0))
+    // setAllProducts([...new Set(carrito)])
+  },[carrito])
 
   
   const contarProducto = (prod) => {
     let count = 0;
-    allProducts.forEach((product) => {
+    carrito.forEach((product) => {
       if (product.id === prod.id) {
-        count = product.quantity;
+        count++;
       }
     });
     return count;
@@ -55,7 +61,7 @@ export default function Header(p) {
             />
           </svg>
           <div className="count-products">
-            <span id="contador-productos">{allProducts.length}</span>
+            <span id="contador-productos">{carrito.length}</span>
           </div>
         </div>
 
@@ -69,7 +75,7 @@ export default function Header(p) {
                   <div className="cart-product" key={i}>
                     <div className="info-cart-product">
                       <span className="cantidad-producto-carrito">
-                        {contarProducto(product)}
+                        x{contarProducto(product)}
                       </span>
                       <p className="titulo-producto-carrito">
                         {product.nombre}
