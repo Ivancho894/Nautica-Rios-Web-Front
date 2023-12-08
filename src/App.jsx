@@ -27,6 +27,7 @@ import PublicarBarco from "./views/Administrador/publicarBarco";
 import { Login } from "./components/acceso/login";
 import { Registro } from "./components/acceso/registro";
 import { useAuth } from "./context/AuthContext";
+import ListaDeDeseos from "./components/Usuario/ListaDeDeseos";
 
 import { AuthProvider } from "./context/AuthContext";
 import FormsFirebase from "./components/acceso/Acceso";
@@ -117,6 +118,7 @@ function App() {
           {/* <Route path="/user/:username" element={<PublicProfileView />} /> */}
           {/* <Route path="/choose-username" element={<ChooseUserNameView />} /> */}
           <Route path="/publicarBarco" element={<PublicarBarco />} />
+          <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
         </Routes>
       </div>
     </AuthProvider>

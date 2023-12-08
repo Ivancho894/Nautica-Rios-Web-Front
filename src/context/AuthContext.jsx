@@ -8,6 +8,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  sendEmailVerification
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -46,12 +47,17 @@ export function AuthProvider({ children }) {
         password
       );
 
+      const listaDeDeseos = []
+
+      await sendEmailVerification(auth.currentUser);
+
       const newUser = userCredential.user;
 
       await updateProfile(newUser, { displayName });
       await setDoc(doc(db, "users", newUser.uid), {
         displayName,
         email,
+        listaDeDeseos
       });
       setUser(newUser);
       navigate("/home")

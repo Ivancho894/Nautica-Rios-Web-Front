@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Toaster, toast } from "sonner";
+import MenuUsuario from "./MenuUsuario";
 
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
@@ -104,15 +105,16 @@ const Navbar = ({ activarMensages }) => {
         </ul>
         <div>
           {auth.user ? (
-            <div className="flex items-center">
-              <h3 className="mr-4 text-white">{displayName}</h3>
-              <button
-                onClick={handleLogout}
-                className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
-              >
-                Cerrar Sesión
-              </button>
-            </div>
+            // <div className="flex items-center">
+            //   <h3 className="mr-4 text-white">{displayName}</h3>
+            //   <button
+            //     onClick={handleLogout}
+            //     className="bg-blue-600 px-4 py-2 text-white hover:bg-blue-500 transition-colors"
+            //   >
+            //     Cerrar Sesión
+            //   </button>
+            // </div>
+            <MenuUsuario handleLogout={handleLogout} displayName={displayName} />
           ) : (
             <button
               onClick={handleLogin}
