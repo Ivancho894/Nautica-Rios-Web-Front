@@ -5,7 +5,7 @@ import Filtros from "../Filtros y orden/filtro";
 import Orden from "../Filtros y orden/orden";
 import { useEffect } from "react";
 import { GET_FILTERS, GET_BARCOS, SET_FILTER, ORDENAR } from "../../redux/actions";
-import styles from "./todoslosbarcos.module.css";
+
 import { useState } from "react";
 import baner from "../../assets/homeBaner.png"
 import MostrarBarcos from "../Barco/mostrarBarcos";

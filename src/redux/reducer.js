@@ -12,8 +12,8 @@ const initialState = {
   allAccesorios: [],
   allFiltersAcc: [],
   filterAcc: {},
+  carrito: [],
 };
-
 const storedState =
   JSON.parse(localStorage.getItem("myAppState")) || initialState;
 const defaultState = { ...initialState, ...storedState };
@@ -187,7 +187,7 @@ export default function reducer(state = initialState, action) {
         filter: {},
         barcos: state.allBarcos,
         filterAcc: {},
-        accesorios: state.allAccesorios
+        accesorios: state.allAccesorios,
       };
     case "ORDENAR":
       const name = state.orden.name;
@@ -367,6 +367,42 @@ export default function reducer(state = initialState, action) {
       state.notificaciones = action.payload;
       return {
         ...state,
+      };
+
+    case "AGREGAR_CARRITO":
+      return {
+        ...state,
+        carrito: [...state.carrito, action.payload],
+      };
+
+    case "BORRAR_UNIDAD":
+      let borrado = false;
+      const carrito = state.carrito.filter((x) => {
+        if (borrado) {
+          borrado = true;
+          return true;
+        }
+        if (x.id !== action.payload.id) {
+          return true;
+        }
+        borrado = true;
+        return false;
+      });
+      return {
+        ...state,
+        carrito,
+      };
+    case "BORRAR_PRODUCTO":
+      const carrito2 = state.carrito.filter((x) => x.id != action.payload.id);
+      return {
+        ...state,
+        carrito: carrito2,
+      };
+
+    case "VACIAR_CARRITO":
+      return {
+        ...state,
+        carrito: [],
       };
     default:
       return state;

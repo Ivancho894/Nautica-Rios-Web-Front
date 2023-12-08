@@ -13,7 +13,8 @@ import QuienesSomos from "./views/Nosotros/quienesSomos";
 import Detalle from "./views/Barco/detalleBarcos";
 import TodosLosBarcos from "./components/Todos_los_Barcos/todosLosBarcos";
 import Navbar from "./components/navbar/Navbar";
-
+// import { ProductList } from "./components/Carrito/ProducList";
+// import  Header  from "./components/Carrito/Headers";
 // import DashboardView from "./components/Paginas/DashboardView";
 // import EditProfileView from "./components/Paginas/EditProfileView";
 // import SignOutView from "./components/Paginas/SignOutView";
@@ -37,9 +38,13 @@ import { messaging } from "../firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
+import DetalleCompra from "./views/Detalle_Compra/DetalleCompra";
 // import { Toaster,toast } from "sonner";
 
 function App() {
+  // const [allProducts, setAllProducts] = useState([]);
+  // const [total, setTotal] = useState(0);
+  // const [countProducts, setCountProducts] = useState(0);
   const { pathname } = useLocation();
   const auth = useAuth();
 
@@ -81,7 +86,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div>
+      <div className="r">
         <ToastContainer />
 
         {pathname !== "/" ? (
@@ -89,7 +94,6 @@ function App() {
         ) : (
           <div className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10"></div>
         )}
-
         <Routes>
           <Route
             path="/"
@@ -118,6 +122,8 @@ function App() {
           {/* <Route path="/user/:username" element={<PublicProfileView />} /> */}
           {/* <Route path="/choose-username" element={<ChooseUserNameView />} /> */}
           <Route path="/publicarBarco" element={<PublicarBarco />} />
+          <Route path="/detalleCompra" element={<DetalleCompra />} />
+          {/* <Route path="/list" element={<ProductList />} /> */}
           <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
         </Routes>
       </div>

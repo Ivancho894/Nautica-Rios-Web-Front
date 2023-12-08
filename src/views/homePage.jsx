@@ -21,6 +21,7 @@ import { Toaster, toast } from "sonner";
 import { AiFillChrome } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 import Correo from "../components/Correo";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const auth = useAuth();
@@ -65,7 +66,7 @@ export default function Home() {
     <div>
       <Toaster />
 
-      <div className=" w-full m-0px">
+      <div id="inicio" className=" w-full m-0px">
         <img src={baner} alt="baner" className="w-full" />
       </div>
 
@@ -149,7 +150,7 @@ export default function Home() {
         <div></div>
         <br />
         <br />
-        <div className="bg-gray-200 py-5">
+        <div id="nosotros" className="bg-gray-200 py-5">
           <div className="container mx-auto">
             <div className="flex items-center justify-center">
               <div className="text-center px-4">
@@ -181,6 +182,7 @@ export default function Home() {
           </div>
         </div>
       </>
+      <a href="home#inicio">🛥</a>
       <h1 className="mt-16 font-bold mb-5">SERVICIOS</h1>
 
       <div
@@ -245,54 +247,54 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+      <a href="home#inicio">🛥</a>
       <h1 className="mt-16 font-bold mb-5">INSTAGRAM</h1>
 
       <div className=" ml-8 mt-8 p-32 grid grid-cols-3 gap-16">
         <div>
-          <img
-            src={destacado3}
-            alt="barco3"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0esTeDJapT/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado4}
-            alt="barco4"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0UrID9pzem/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado5}
-            alt="barco5"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0UY13op_Bg/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado6}
-            alt="barco6"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0UQBXEOwvL/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado7}
-            alt="barco7"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0P5wKwJPQj/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado8}
-            alt="barco8"
-            className="W-80 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0LElZvNGNl/embed"
+          ></iframe>
         </div>
       </div>
-
+      <a href="home#inicio">🛥</a>
       <div className=" flex items-end gap-4">
         <img src={insta} alt="barco3" className="w-16 ml-44" />
         <h1 className="text-5xl font-bold ">nauticarios</h1>
@@ -301,7 +303,9 @@ export default function Home() {
       <div className="bg-black w-full h-[600px] mt-16 p-4 grid grid-cols-2">
         <div className=" text-white w-96 ml-[200px]  mt-16">
           <div className="">
-            <h1 className="  text-3xl font-bold mb-5">CONTACTO</h1>
+            <h1 id="contacto" className="  text-3xl font-bold mb-5">
+              CONTACTO
+            </h1>
           </div>
 
           <div>
@@ -323,6 +327,7 @@ export default function Home() {
           </div>
         </div>
         <Correo ok={ok} />
+        <a href="home#inicio">🛥</a>
         {/* <div className="text-white mt-16 p-8 w-[500px] ml-16 text-xl mb-8  border-2 rounded-md">
           <div className="flex gap-4 mt-4">
             <label htmlFor="Nombre">Nombre</label>
