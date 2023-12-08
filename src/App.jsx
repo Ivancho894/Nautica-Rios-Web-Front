@@ -23,6 +23,8 @@ import Navbar from "./components/navbar/Navbar";
 // import LoginView from "./components/Paginas/LoginView";
 import TodosLosAccesorios from "./components/accesorios/TodosLosAccesorios";
 import DetalleAccesorios from "./components/accesorios/DetalleAccesorios";
+import ListaAccesorios from "./components/Borrado Logico/ListaAccesorios";
+import ListaBarcos from "./components/Borrado Logico/ListaBarcos";
 
 import PublicarBarco from "./views/Administrador/publicarBarco";
 import { Login } from "./components/acceso/login";
@@ -125,6 +127,9 @@ function App() {
           <Route path="/detalleCompra" element={<DetalleCompra />} />
           {/* <Route path="/list" element={<ProductList />} /> */}
           <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
+          <Route path="/gestionaccesorios" element={<ListaAccesorios/>}/>
+          <Route path="/gestionbarcos" element={<ListaBarcos/>}/>
+
         </Routes>
       </div>
     </AuthProvider>
