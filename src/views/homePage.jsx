@@ -156,21 +156,24 @@ export default function Home() {
               <div className="text-center px-4">
                 <h1 className="text-3xl font-bold mb-5">Sobre Nosotros</h1>
                 <h2 className="text-2xl mb-8">
-                  Somos una empresa apasionada por brindar soluciones náuticas.
-                  Desde el 2001 nos dedicamos a la comercialización de
-                  embarcaciones nuevas y usadas, representando a los astilleros
-                  Génesis y Segue.
+                Bienvenido a Náutica Ríos, tu socio confiable en el mundo marítimo. En Náutica Ríos, nos apasiona conectar a las personas con la experiencia única de navegar en el rio. Como especialistas en la industria naval, ofrecemos una gama completa de servicios para satisfacer todas tus necesidades en el mundo de los barcos.
+
+
+
                 </h2>
                 <h3 className="text-xl mb-8">
-                  Contamos con experiencia internacional en el rubro. Nuestro
-                  conocimiento comercial y técnico sobre la construcción de
-                  barcos, nos posiciona como un socio ideal para concretar tu
-                  operación de la forma más segura posible.
+                ¿Buscas la embarcación perfecta para tus travesías? Nuestro equipo experto de Náutica Ríos está aquí para asesorarte en cada paso del camino. Desde la selección de la embarcación ideal hasta los detalles más técnicos, te brindamos orientación personalizada para garantizar que encuentres el barco que se adapte perfectamente a tus deseos y requisitos.
+
+Además de facilitar la adquisición de barcos, en Náutica Ríos nos enorgullecemos de ofrecer servicios integrales de mantenimiento y reparación. Nuestros técnicos altamente calificados y equipados con las últimas tecnologías trabajan diligentemente para asegurar que tu embarcación esté siempre en condiciones óptimas. Desde inspecciones regulares hasta reparaciones especializadas, estamos comprometidos a mantener tu barco en excelente estado.
+
+¿Necesitas servicios personalizados para tu embarcación? Náutica Ríos se especializa en adaptarse a tus necesidades específicas. Ofrecemos servicios a medida, desde personalizaciones hasta mejoras de rendimiento, para garantizar que tu experiencia en el mar sea excepcional en todos los aspectos.
+
+
                 </h3>
                 <h4 className="text-xl mb-8">
                   {" "}
-                  Nuestros valores son la seriedad, el compromiso y la
-                  confidencialidad.
+                  En Náutica Ríos, nos apasiona el rio y queremos compartir esa pasión contigo. Sea cual sea tu visión, estamos aquí para convertirla en realidad. Confía en Náutica Ríos para brindarte un servicio de primer nivel, ya sea para comprar, mantener o mejorar tu embarcación. Únete a nosotros en esta emocionante aventura en el agua.
+
                 </h4>
               </div>
               <img
@@ -310,19 +313,21 @@ export default function Home() {
 
           <div>
             <h1 className="text-xl mb-8">
-              Buenos Aires - Uruguay - Paraguay:<br></br>
+              Operamos en toda la Argentina y alrededores:<br></br>
               <br />
               Ivan Serralta - Cel. y WhatsApp: <br />
+              
               <br />
-              (+549) 11-5601-0255 <br />
+              (+549) 3541-566295 <br />
+
               <br />
-              info@nauticarios.com <br />
+              somosnauticarios@gmail.com <br />
               <br />
-              Aristóbulo Del Valle 3580. Benavidez. (B1621DXH) Tigre. Pcia. de
-              Bs. As. Santa Fé y Paraná: Victor Buyatti -<br />
-              <br /> Cel. y WhatsApp: <br />
+              Ventas: 
               <br />
-              +549-3425-225971
+              <Link to='https://api.whatsapp.com/message/L6R75S3FBG45D1?autoload=1&app_absent=0'>
+              +549-1173632760
+              </Link>
             </h1>
           </div>
         </div>
