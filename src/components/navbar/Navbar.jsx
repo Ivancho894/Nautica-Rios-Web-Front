@@ -104,11 +104,11 @@ const Navbar = ({ activarMensages }) => {
               Publicar
             </Link>
           </li>
-
         </ul>
-          <div className="w-11 h-11s end-0">
-            {pathname==='/accesorios'?(<Header/>):(<></>)}
-          </div>
+        <div className="w-11 h-11s end-0">
+          {/* <Header /> */}
+          {pathname === "/accesorios" ? <Header /> : <></>}
+        </div>
         <div>
           {auth.user ? (
             // <div className="flex items-center">
@@ -120,7 +120,10 @@ const Navbar = ({ activarMensages }) => {
             //     Cerrar Sesión
             //   </button>
             // </div>
-            <MenuUsuario handleLogout={handleLogout} displayName={displayName} />
+            <MenuUsuario
+              handleLogout={handleLogout}
+              displayName={displayName}
+            />
           ) : (
             <button
               onClick={handleLogin}

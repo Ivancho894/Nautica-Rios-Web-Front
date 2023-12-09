@@ -1,4 +1,5 @@
 const initialState = {
+  // totalPagar: 0,
   notificaciones: false,
   allBarcos: [],
   barcos: [],
@@ -404,6 +405,13 @@ export default function reducer(state = initialState, action) {
         ...state,
         carrito: [],
       };
+    // case "TOTAL_PAGAR":
+    //   state.totalPagar = action.payload;
+    //   let totalPagar = state.totalPagar;
+    //   return {
+    //     ...state,
+    //     totalPagar,
+    //   };
     default:
       return state;
   }

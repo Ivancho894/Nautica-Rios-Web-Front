@@ -6,6 +6,7 @@ import {
   BORRAR_PRODUCTO,
   BORRAR_UNIDAD,
   VACIAR_CARRITO,
+  TOTAL_PAGAR,
 } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 export default function Header() {
@@ -16,6 +17,7 @@ export default function Header() {
 
   const [totalPagar, setTotal] = useState(0);
   const [active, setActive] = useState(false);
+  let sum;
 
   useEffect(() => {
     carrito.length != 0
@@ -27,7 +29,9 @@ export default function Header() {
       : setAllProducts([]);
     setTotal(
       carrito.reduce((sum, prod) => {
-        return sum + prod.precio;
+        sum = sum + prod.precio;
+        // dispatch(TOTAL_PAGAR(sum));
+        return sum;
       }, 0)
     );
     // setAllProducts([...new Set(carrito)])
