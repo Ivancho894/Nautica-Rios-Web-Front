@@ -41,6 +41,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import DetalleCompra from "./views/Detalle_Compra/DetalleCompra";
+import PublicarAccesorio from "./views/Administrador/publicarAccesorio";
 // import { Toaster,toast } from "sonner";
 
 function App() {
@@ -129,6 +130,7 @@ function App() {
           <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
           <Route path="/gestionaccesorios" element={<ListaAccesorios/>}/>
           <Route path="/gestionbarcos" element={<ListaBarcos/>}/>
+          <Route path="/publicaraccesorio" element={<PublicarAccesorio/>}/>
 
         </Routes>
       </div>
