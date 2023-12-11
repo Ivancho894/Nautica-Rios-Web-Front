@@ -9,7 +9,10 @@ const ListaDeDeseos = () => {
   const [listaDeDeseos, setListaDeDeseos] = useState(null);
 
   const auth = useAuth();
+  const {userStore} = auth
   const { uid } = auth.user;
+
+  console.log(userStore);
 
   const recibirListaDeDeseos = async (id) => {
     try {

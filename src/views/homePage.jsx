@@ -26,11 +26,9 @@ import { Link } from "react-router-dom";
 export default function Home() {
   const auth = useAuth();
   const { displayName } = auth.user;
-  console.log(auth.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const not = useSelector((state) => state.notificaciones);
-  console.log(not);
   useEffect(() => {
     // dispatch(GET_FILTERS())
     // dispatch(GET_BARCOS())

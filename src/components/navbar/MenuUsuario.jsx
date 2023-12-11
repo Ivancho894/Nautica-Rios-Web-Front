@@ -3,7 +3,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -13,8 +12,8 @@ const MenuUsuario = ({ handleLogout, displayName }) => {
 
   const irListaDeDeseos = (e) => {
     e.preventDefault();
-    navigate("/listaDeDeseos")
-  }
+    navigate("/listaDeDeseos");
+  };
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -39,19 +38,7 @@ const MenuUsuario = ({ handleLogout, displayName }) => {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href=""
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Account settings
-                </a>
-              )}
-            </Menu.Item>
+            
             <Menu.Item>
               {({ active }) => (
                 <a

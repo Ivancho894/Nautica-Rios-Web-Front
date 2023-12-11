@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.ico";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,12 +7,43 @@ import { useAuth } from "../../context/AuthContext";
 import { Toaster, toast } from "sonner";
 import Header from "../Carrito/Header";
 import MenuUsuario from "./MenuUsuario";
+import MenuAdmin from "./MenuAdmin";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../../firebase-config";
 
 import Button from "./Button";
 const Navbar = ({ activarMensages }) => {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const { pathname } = useLocation();
+
+  const auth = useAuth();
+  const { displayName, uid } = auth.user;
+
+  const [permisos, setPermisos] = useState(null);
+
+  const obtenerPermisos = async (uid) => {
+    try {
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const datosUsuario = userSnap.data();
+        const { permisosAdmin } = datosUsuario;
+        setPermisos(permisosAdmin);
+      } else {
+        console.log("No sirve");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    obtenerPermisos(uid);
+  }, [uid]);
+
+  console.log(permisos);
 
   if (isLandingPage) {
     return null;
@@ -39,9 +70,6 @@ const Navbar = ({ activarMensages }) => {
   let [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const auth = useAuth();
-  const { displayName } = auth.user;
 
   const handleLogin = () => {
     navigate("/login");
@@ -104,11 +132,10 @@ const Navbar = ({ activarMensages }) => {
               Publicar
             </Link>
           </li>
-
         </ul>
-          <div className="w-11 h-11s end-0">
-            {pathname==='/accesorios'?(<Header/>):(<></>)}
-          </div>
+        <div className="w-11 h-11s end-0">
+          {pathname === "/accesorios" ? <Header /> : <></>}
+        </div>
         <div>
           {auth.user ? (
             // <div className="flex items-center">
@@ -120,7 +147,19 @@ const Navbar = ({ activarMensages }) => {
             //     Cerrar Sesión
             //   </button>
             // </div>
-            <MenuUsuario handleLogout={handleLogout} displayName={displayName} />
+            <div>
+              {!permisos ? (
+                <MenuUsuario
+                  handleLogout={handleLogout}
+                  displayName={displayName}
+                />
+              ) : (
+                <MenuAdmin
+                  handleLogout={handleLogout}
+                  displayName={displayName}
+                />
+              )}
+            </div>
           ) : (
             <button
               onClick={handleLogin}

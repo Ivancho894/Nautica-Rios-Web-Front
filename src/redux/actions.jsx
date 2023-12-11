@@ -1,7 +1,8 @@
 //Importo la base de datos
 import { db } from "../../firebase-config";
-import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
+import { collection, getDocs, addDoc, where, query, doc, getDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { getAuth } from "firebase/auth";
 
 export function NOTIFICACIONES(not) {
   return {
@@ -9,6 +10,29 @@ export function NOTIFICACIONES(not) {
     payload: not,
   };
 }
+
+export const GET_USUARIO_FIRESTORE = (user) => async (dispatch) => {
+  try {
+    const uid = user.uid
+    const userRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const usuario = userSnap.data();
+      console.log("usuario obtenido");
+      console.log(usuario);
+      dispatch({
+        type: "GET_USUARIO_FIRESTORE",
+        payload: usuario
+      })
+    } else {
+      console.log("No sirve");
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 export const GET_BARCOS = () => async (dispatch) => {
   try {
     const q = query(collection(db, "barcos"), where('eliminado', '==', false));
@@ -22,6 +46,7 @@ export const GET_BARCOS = () => async (dispatch) => {
     console.error("Error obteniendo barcos:", error);
   }
 };
+
 export function ADD_FILTER(newFilter) {
   return { type: "ADD_FILTER", payload: newFilter };
 }

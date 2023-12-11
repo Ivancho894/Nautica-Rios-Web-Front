@@ -1,4 +1,5 @@
 const initialState = {
+  usuario: {},
   notificaciones: false,
   allBarcos: [],
   barcos: [],
@@ -25,6 +26,10 @@ export default function reducer(state = initialState, action) {
   };
 
   switch (action.type) {
+
+    case "GET_USUARIO_FIRESTORE":
+      return {...state, usuario: action.payload}
+
     case "GET_BARCOS":
       return { ...state, barcos: action.payload, allBarcos: action.payload };
 
