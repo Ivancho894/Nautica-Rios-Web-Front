@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./header.css";
 import { useDispatch, useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
   AGREGAR_CARRITO,
   BORRAR_PRODUCTO,
@@ -17,7 +18,6 @@ export default function Header() {
 
   const [totalPagar, setTotal] = useState(0);
   const [active, setActive] = useState(false);
-  let sum;
 
   useEffect(() => {
     carrito.length != 0
