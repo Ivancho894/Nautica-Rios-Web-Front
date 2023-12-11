@@ -129,11 +129,20 @@ const Navbar = ({ activarMensages }) => {
               to="/publicarBarco"
               className="cursor-pointer text-white ml-4"
             >
-              Publicar
+              PublicarB
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/publicarAccesorio"
+              className="cursor-pointer text-white ml-4"
+            >
+              PublicarA 
             </Link>
           </li>
         </ul>
         <div className="w-11 h-11s end-0">
+          {/* <Header /> */}
           {pathname === "/accesorios" ? <Header /> : <></>}
         </div>
         <div>

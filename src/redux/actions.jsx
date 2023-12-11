@@ -1,8 +1,6 @@
 //Importo la base de datos
 import { db } from "../../firebase-config";
 import { collection, getDocs, addDoc, where, query, doc, getDoc } from "firebase/firestore";
-import { async } from "@firebase/util";
-import { getAuth } from "firebase/auth";
 
 export function NOTIFICACIONES(not) {
   return {
@@ -11,31 +9,9 @@ export function NOTIFICACIONES(not) {
   };
 }
 
-export const GET_USUARIO_FIRESTORE = (user) => async (dispatch) => {
-  try {
-    const uid = user.uid
-    const userRef = doc(db, "users", uid);
-    const userSnap = await getDoc(userRef);
-
-    if (userSnap.exists()) {
-      const usuario = userSnap.data();
-      console.log("usuario obtenido");
-      console.log(usuario);
-      dispatch({
-        type: "GET_USUARIO_FIRESTORE",
-        payload: usuario
-      })
-    } else {
-      console.log("No sirve");
-    }
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
 export const GET_BARCOS = () => async (dispatch) => {
   try {
-    const q = query(collection(db, "barcos"), where('eliminado', '==', false));
+    const q = query(collection(db, "barcos"), where("eliminado", "==", false));
     const data = await getDocs(q);
     const barcos = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     dispatch({
@@ -69,10 +45,13 @@ export function CAMBIAR_ORDENAR(or) {
 
 export const getAccesorios = () => async (dispatch) => {
   try {
-    const q = query(collection(db, 'accesorios'), where('eliminado', '==', false));
+    const q = query(
+      collection(db, "accesorios"),
+      where("eliminado", "==", false)
+    );
     const data = await getDocs(q);
 
-    const accesorios = data.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const accesorios = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
     dispatch({
       type: "GET_ACCESORIOS",
@@ -114,16 +93,23 @@ export const SET_ORDER_ACC = (order) => ({
   payload: order,
 });
 
-export function AGREGAR_CARRITO(acc){
-    return {type: "AGREGAR_CARRITO", payload: acc}
+export function AGREGAR_CARRITO(acc) {
+  return { type: "AGREGAR_CARRITO", payload: acc };
 }
-export function BORRAR_UNIDAD(acc){
-  return {type: "BORRAR_UNIDAD", payload: acc}
+export function BORRAR_UNIDAD(acc) {
+  return { type: "BORRAR_UNIDAD", payload: acc };
 }
 
-export function BORRAR_PRODUCTO(acc){
-  return {type: "BORRAR_PRODUCTO", payload: acc}
+export function BORRAR_PRODUCTO(acc) {
+  return { type: "BORRAR_PRODUCTO", payload: acc };
 }
-export function VACIAR_CARRITO(){
-  return {type: "VACIAR_CARRITO"}
+export function VACIAR_CARRITO() {
+  return { type: "VACIAR_CARRITO" };
+}
+
+export function TOTAL_PAGAR(p) {
+  return {
+    type: "TOTAL_PAGAR",
+    payload: p,
+  };
 }

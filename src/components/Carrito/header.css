@@ -13,6 +13,13 @@ body {
 	font-family: 'Lato';
 	color: #333;
 } */
+.scroll {
+  margin: auto;
+  margin-top: 1em;
+  height: 20em;
+  width: 20em;
+  overflow: auto;
+}
 
 .icon-cart {
   width: 40px;

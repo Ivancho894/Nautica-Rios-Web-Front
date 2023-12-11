@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import "./header.css";
 import { useDispatch, useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
   AGREGAR_CARRITO,
   BORRAR_PRODUCTO,
   BORRAR_UNIDAD,
   VACIAR_CARRITO,
+  TOTAL_PAGAR,
 } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 export default function Header() {
@@ -27,7 +29,9 @@ export default function Header() {
       : setAllProducts([]);
     setTotal(
       carrito.reduce((sum, prod) => {
-        return sum + prod.precio;
+        sum = sum + prod.precio;
+        // dispatch(TOTAL_PAGAR(sum));
+        return sum;
       }, 0)
     );
     // setAllProducts([...new Set(carrito)])
@@ -83,7 +87,8 @@ export default function Header() {
         >
           {allProducts.length ? (
             <>
-              <div className="row-product">
+              {/* row-product */}
+              <div className="scroll">
                 {allProducts.map((product, i) => (
                   <div className="cart-product" key={i}>
                     <div className="info-cart-product">
@@ -115,12 +120,10 @@ export default function Header() {
                   </div>
                 ))}
               </div>
-
               <div className="cart-total">
                 <h3>Total:</h3>
                 <h2 className="total-pagar">${totalPagar}</h2>
               </div>
-
               <button className="btn-clear-all" onClick={onCleanCart}>
                 Vaciar Carrito
               </button>

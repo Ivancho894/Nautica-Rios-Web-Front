@@ -41,6 +41,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import DetalleCompra from "./views/Detalle_Compra/DetalleCompra";
+import PublicarAccesorio from "./views/Administrador/publicarAccesorio";
 // import { Toaster,toast } from "sonner";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
