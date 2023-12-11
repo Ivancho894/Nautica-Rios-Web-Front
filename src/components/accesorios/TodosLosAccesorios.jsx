@@ -5,34 +5,36 @@ import { useEffect } from "react";
 import { getFiltersAcc, getAccesorios } from "../../redux/actions";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
+import ReviewStars from "../Reviews/Reviews";
+
 
 export default function TodosLosAccesorios() {
   
-  const accesorios = useSelector((state) => state.accesorios);
+ const accesorios = useSelector((state) => state.accesorios);
   
-  const dispatch = useDispatch();
-  useEffect(() => {
+ const dispatch = useDispatch();
+ useEffect(() => {
     dispatch(getAccesorios());
     dispatch(getFiltersAcc());
     console.log('Get filters acc');
-  }, []);
+ }, []);
   
-  //PAGINADO
-  const [pagina, setPagina] = useState(1);
-  const accesoriosPorPagina = 6;
-  const inicio = (pagina - 1) * accesoriosPorPagina;
-  const fin = inicio + accesoriosPorPagina;
-  const totalPaginas = Math.ceil(accesorios.length / accesoriosPorPagina);
+ //PAGINADO
+ const [pagina, setPagina] = useState(1);
+ const accesoriosPorPagina = 6;
+ const inicio = (pagina - 1) * accesoriosPorPagina;
+ const fin = inicio + accesoriosPorPagina;
+ const totalPaginas = Math.ceil(accesorios.length / accesoriosPorPagina);
   
-  const handleNextPage = (nuevaPag) => {
-    nuevaPag<=totalPaginas &&  nuevaPag>0?setPagina(nuevaPag):alert("No hay mas paginas");
-  }
+ const handleNextPage = (nuevaPag) => {
+    nuevaPag<=totalPaginas && nuevaPag>0?setPagina(nuevaPag):alert("No hay mas paginas");
+ }
 
 
 
-  const accesoriosPagina = accesorios.slice(inicio, fin);
+ const accesoriosPagina = accesorios.slice(inicio, fin);
   
-  return (<>
+ return (<>
     <div className="flex">
 
       <div className=" bg-slate-300 w-[400px] ">
@@ -43,12 +45,18 @@ export default function TodosLosAccesorios() {
 
         <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
           {accesoriosPagina && accesoriosPagina.map((accesorio) => {
-            return <RenderAccesorios key={accesorio.id} accesorio={accesorio} />;
+            return (
+              <div key={accesorio.id}>
+                <RenderAccesorios accesorio={accesorio} />
+                <ReviewStars productId={accesorio.id} />
+              </div>
+            );
+            
           })}
 
         </div>
     </div>
         <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} cambioPag={handleNextPage} />
     </>
-  );
+ );
 }
