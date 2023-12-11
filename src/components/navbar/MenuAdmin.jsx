@@ -31,6 +31,11 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
     navigate("/publicarBarco");
   };
 
+  const irPublicarAccesorio = (e) => {
+    e.preventDefault();
+    navigate("/publicarAccesorio");
+  };
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -98,7 +103,23 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
                     "block w-full px-4 py-2 text-left text-sm"
                   )}
                 >
-                  Publicar barco
+                  Publicar un barco
+                </a>
+              )}
+            </Menu.Item>
+
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href=""
+                  type="submit"
+                  onClick={irPublicarAccesorio}
+                  className={classNames(
+                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    "block w-full px-4 py-2 text-left text-sm"
+                  )}
+                >
+                  Publicar un accesorio
                 </a>
               )}
             </Menu.Item>

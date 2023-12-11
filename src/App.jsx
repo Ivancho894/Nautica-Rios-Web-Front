@@ -54,10 +54,9 @@ function App() {
   // const [countProducts, setCountProducts] = useState(0);
   const { pathname } = useLocation();
   const auth = getAuth();
-  const currentUser = auth.currentUser
+  const currentUser = auth.currentUser;
 
   console.log(currentUser);
-
 
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
@@ -68,7 +67,7 @@ function App() {
       if (currentUser) {
         const userRef = doc(db, "users", uid);
         const userSnap = await getDoc(userRef);
-  
+
         if (userSnap.exists()) {
           const permiso = userSnap.data().permisosAdmin;
           console.log("Permisos:", permiso);
@@ -77,15 +76,13 @@ function App() {
           console.log("No sirve");
         }
       }
-      
     } catch (error) {
       console.log("error");
     }
   };
 
-
   useEffect(() => {
-    const auth = getAuth()
+    const auth = getAuth();
     dispatch(GET_BARCOS());
     dispatch(GET_FILTERS());
     onMessage(messaging, (message) => {
@@ -127,9 +124,8 @@ function App() {
       }
     };
 
-
     // navigate('/home')
-    return 
+    return;
   }, []);
 
   const activarMensages = async () => {
@@ -168,10 +164,11 @@ function App() {
           <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
         </Route>
 
-        <Route element={<ProtectedRoutes authorizedUser="admin"  />}>
+        <Route element={<ProtectedRoutes authorizedUser="admin" />}>
           <Route path="/gestionaccesorios" element={<ListaAccesorios />} />
           <Route path="/gestionbarcos" element={<ListaBarcos />} />
           <Route path="/publicarBarco" element={<PublicarBarco />} />
+          <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
