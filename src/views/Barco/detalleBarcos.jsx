@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import { db } from "../../../firebase-config";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import Slider from "react-slick";
 
 export default function Detalle() {
   const barcos = useSelector((state) => state.barcos);
@@ -15,6 +16,15 @@ export default function Detalle() {
   const { uid } = auth.user;
   let keyId = 0;
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  
+  
   const recibirListaDeDeseos = async (id) => {
     try {
       const usuarioRef = doc(db, "users", id);
@@ -70,55 +80,81 @@ export default function Detalle() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-blue-200">
-      <h2 className="text-xl font-bold mb-2" style={{ marginTop: "28px" }}>
-        {barco.marcaBarco}
-      </h2>
-      <div className="flex">
-        <div className="flex-1">
-          {barco &&
-            Object.keys(barco)?.map((key) => {
-              if (key != "imagenes") {
-                return (
-                  <h3 key={keyId++} className="mb-2">
-                    <b>{key}</b>: <span>{barco[key]}</span>
-                  </h3>
-                );
-              }
-            })}
-        </div>
-        {auth.user ? (
-          <>
-            {listaDeDeseos?.some((deseo) => deseo.id === barco.id) ? (
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={handleDeleteWish}
-              >
-                Eliminar de lista de deseos
-              </button>
-            ) : (
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={handleWish}
-              >
-                agregar a lista de deseos
-              </button>
-            )}
-          </>
-        ) : null}
-        <div className="flex-1">
-          {barco.imagenes.map((img, i) => {
-            return <img key={i} className="w-4/5 mx-auto mb-2" src={img} />;
-          })}
-          <h2 className="text-2xl font-bold mb-4">precio: ${barco.precio}</h2>
-          <Link
-            to="/todoslosbarcos"
-            className="bg-gray-800 text-white font-bold py-2 px-4 rounded"
+    <div className="flex justify-center p-16">
+      <div className="border-2 mb-4 border-slate-200 p-16 w-[1500px] h-[1000px] rounded-3xlflex mt-16 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
+       
+        <h2 className="text-6xl font-bold mb-16 mt-16">
+          {barco.marcaBarco}
+        </h2>
+       
+        <div className="flex">
+          <div className="flex-1">
+            {barco &&
+              Object.keys(barco)?.map((key) => {
+                if (key !== "imagenes") {
+                  return (
+                    <h3 key={keyId++} className="mb-2">
+                      <b>{key}</b>: <span>{barco[key]}</span>
+                    </h3>
+                  );
+                }
+              })}
+          </div>
+          
+         
+          {auth.user ? (
+            <>
+              {listaDeDeseos?.some((deseo) => deseo.id === barco.id) ? (
+                <button
+                className="ml-[200px] p-2 bg-[#3b82f6] text-center text-white mt-[620px] h-[60px] w-[180px]"
+                  onClick={handleDeleteWish}
+                >
+                  Eliminar de lista de deseos
+                </button>
+              ) : (
+                <button
+                  className="ml-[200px] p-2 bg-[#3b82f6] text-center text-white mt-[620px] h-[60px] w-[180px]"
+                  onClick={handleWish}
+                >
+                  agregar a lista de deseos
+                </button>
+              )}
+            </>
+          ) : null}
+          
+         
+          <div className="flex-1">
+            <Slider {...settings} className="w-[500px] h-[500px] mx-auto">
+              {barco.imagenes.map((img, i) => (
+                <img
+                  key={i}
+                  className="object-contain w-[500px] h-[500px]   mb-2"
+                  src={img}
+                  alt={`Imagen ${i}`}
+                
+                />
+              ))}
+            </Slider>
+            
+            <h2 className="text-4xl font-bold mt-16 mb-4">Precio: ${barco.precio}</h2>
+            <button
+            onClick={() => {
+              // Lógica adicional si es necesaria antes de la navegación
+              // Puedes agregar más lógica aquí si es necesario
+            }}
+            className="p-2 bg-[#3b82f6] text-white h-[60px] w-[190px] mb-4"
           >
-            Regresar
-          </Link>
+            <Link to="/todoslosbarcos" className="text-white no-underline">
+              Regresar
+            </Link>
+          </button>
+          </div>
         </div>
       </div>
     </div>
   );
+  
 }
+
+
+
