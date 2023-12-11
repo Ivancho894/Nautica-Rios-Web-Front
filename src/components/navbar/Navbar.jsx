@@ -101,7 +101,15 @@ const Navbar = ({ activarMensages }) => {
               to="/publicarBarco"
               className="cursor-pointer text-white ml-4"
             >
-              Publicar
+              PublicarB
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/publicarAccesorio"
+              className="cursor-pointer text-white ml-4"
+            >
+              PublicarA 
             </Link>
           </li>
         </ul>
