@@ -87,7 +87,8 @@ export default function Header() {
         >
           {allProducts.length ? (
             <>
-              <div className="row-product">
+              {/* row-product */}
+              <div className="scroll">
                 {allProducts.map((product, i) => (
                   <div className="cart-product" key={i}>
                     <div className="info-cart-product">
@@ -119,12 +120,10 @@ export default function Header() {
                   </div>
                 ))}
               </div>
-
               <div className="cart-total">
                 <h3>Total:</h3>
                 <h2 className="total-pagar">${totalPagar}</h2>
               </div>
-
               <button className="btn-clear-all" onClick={onCleanCart}>
                 Vaciar Carrito
               </button>
