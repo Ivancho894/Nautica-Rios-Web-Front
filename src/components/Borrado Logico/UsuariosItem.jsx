@@ -7,7 +7,7 @@ const UsuariosItem = ({ user, obtenerUsers }) => {
     try {
       const userRef = doc(db, 'users', user.id);
 
-      // Invierte el valor de 'eliminado'
+      // Invierte el valor de 'permisosAdmin'
       await updateDoc(userRef, {
         permisosAdmin: !user.permisosAdmin,
       });
@@ -22,7 +22,7 @@ const UsuariosItem = ({ user, obtenerUsers }) => {
     <div>
       <p>{user.displayName} {user.email}</p>
       <button onClick={handleToggleEstado} className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>
-        {user.eliminado ? 'Habilitar' : 'Deshabilitar'}
+        {user.permisosAdmin ? 'Deshabilitar' : 'Habilitar'}
       </button>
     </div>
   );

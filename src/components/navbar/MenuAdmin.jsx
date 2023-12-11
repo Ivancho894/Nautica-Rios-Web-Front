@@ -26,6 +26,11 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
     navigate("/gestionAccesorios");
   };
 
+  const irGestionUsuarios = (e) => {
+    e.preventDefault();
+    navigate("/gestionUsuarios");
+  };
+
   const irPublicarBarcos = (e) => {
     e.preventDefault();
     navigate("/publicarBarco");
@@ -152,6 +157,22 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
                   )}
                 >
                   Gestion de accesorios
+                </a>
+              )}
+            </Menu.Item>
+
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href=""
+                  type="submit"
+                  onClick={irGestionUsuarios}
+                  className={classNames(
+                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    "block w-full px-4 py-2 text-left text-sm"
+                  )}
+                >
+                  Gestion de usuarios
                 </a>
               )}
             </Menu.Item>

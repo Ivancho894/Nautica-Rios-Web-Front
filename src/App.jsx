@@ -166,11 +166,11 @@ function App() {
         </Route>
 
         <Route element={<ProtectedRoutes authorizedUser="admin" />}>
-          <Route path="/gestionaccesorios" element={<ListaAccesorios />} />
-          <Route path="/gestionbarcos" element={<ListaBarcos />} />
+          <Route path="/gestionAccesorios" element={<ListaAccesorios />} />
+          <Route path="/gestionBarcos" element={<ListaBarcos />} />
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
-          <Route path="/gestionusuarios" element={<ListaUsuarios/>}/>
+          <Route path="/gestionUsuarios" element={<ListaUsuarios/>}/>
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
