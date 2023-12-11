@@ -47,6 +47,7 @@ import PublicarAccesorio from "./views/Administrador/publicarAccesorio";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
+import ListaUsuarios from "./components/Borrado Logico/ListaUsuarios";
 
 function App() {
   // const [allProducts, setAllProducts] = useState([]);
@@ -169,6 +170,7 @@ function App() {
           <Route path="/gestionbarcos" element={<ListaBarcos />} />
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
+          <Route path="/gestionusuarios" element={<ListaUsuarios/>}/>
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
