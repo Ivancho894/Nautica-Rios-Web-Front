@@ -13,7 +13,7 @@ const PublicarAccesorio = () => {
     nombre: "",
     marca:"",
     peso: "",
-    precio: "",
+    precio: 0,
     tipo: "",
     variaciones:[
       {
@@ -66,7 +66,7 @@ const PublicarAccesorio = () => {
           nombre: "",
           marca:"",
           peso: "",
-          precio: "",
+          precio: 0,
           tipo: "",
           variaciones:[
             {
