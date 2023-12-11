@@ -1,14 +1,38 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BORRAR_UNIDAD } from "../../redux/actions";
+import Slider from "react-slick";
+import img_pago from "../../assets/mercado-pago.webp";
+
 const DetalleCompra = () => {
   const dispatch = useDispatch();
   // const tpagar = useSelector((state) => state.totalPagar);
   const carr = useSelector((state) => state.carrito);
+  const [allProducts, setAllProducts] = useState([]);
+  const [totalPagar, setTotal] = useState(0);
   console.log(carr);
+  useEffect(() => {
+    carr.length != 0
+      ? carr.map((prod) =>
+          allProducts.find((x) => x.id === prod.id)
+            ? null
+            : setAllProducts([...allProducts, prod])
+        )
+      : setAllProducts([]);
+    setTotal(
+      carr.reduce((sum, prod) => {
+        sum = sum + prod.precio;
+        // dispatch(TOTAL_PAGAR(sum));
+        return sum;
+      }, 0)
+    );
+    // setAllProducts([...new Set(carr)])
+  }, [carr]);
   const onDeleteProduct = (product) => {
     dispatch(BORRAR_UNIDAD(product));
   };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -28,7 +52,7 @@ const DetalleCompra = () => {
             <br />
 
             <span>
-              Total {carr.length} productos <strong>$</strong>
+              Total {carr.length} productos <strong>{totalPagar}</strong>
             </span>
             <br />
             <p>
@@ -43,39 +67,45 @@ const DetalleCompra = () => {
                   className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
                   key={index}
                 >
-                  <button
-                    className="flex"
-                    onClick={() => onDeleteProduct(producto)}
-                  >
-                    x
-                  </button>
+                  <div className=" flex justify-end">
+                    <button onClick={() => onDeleteProduct(producto)}>X</button>
+                  </div>
                   <br />
-                  {/* {producto.variaciones && producto.variaciones.length > 0 && (
-              <Slider {...settings} className="w-60 mx-auto">
-                {producto.variaciones.map(
-                  (variacion, variacionIndex) =>
-                    variacion.imagenes &&
-                    variacion.imagenes.length > 0 &&
-                    variacion.imagenes.map((imagen, imagenIndex) => (
-                      <div
-                        key={imagenIndex}
-                        className="w-full h-64 flex items-center justify-center"
-                      >
-                        <img
-                          src={imagen}
-                          alt={`Imagen ${imagenIndex + 1}`}
-                          className="object-contain w-full h-full"
-                          style={{ maxWidth: "100%", maxHeight: "100%" }}
-                        />
-                      </div>
-                    ))
-                )}
-              </Slider>
-            )} */}
-
-                  <h3 className="text-2xl font-bold mb-5">{producto.nombre}</h3>
-                  <h3>{producto.marca}</h3>
-                  <h4>Material de {producto.material}</h4>
+                  <div>
+                    {producto.variaciones &&
+                      producto.variaciones.length > 0 && (
+                        <Slider {...settings} className="w-60 mx-auto">
+                          {producto.variaciones.map(
+                            (variacion, variacionIndex) =>
+                              variacion.imagenes &&
+                              variacion.imagenes.length > 0 &&
+                              variacion.imagenes.map((imagen, imagenIndex) => (
+                                <div
+                                  key={imagenIndex}
+                                  className="w-full h-64 flex items-center justify-center "
+                                >
+                                  <img
+                                    src={imagen}
+                                    alt={`Imagen ${imagenIndex + 1}`}
+                                    className="object-contain w-full h-full "
+                                    style={{
+                                      maxWidth: "100%",
+                                      maxHeight: "100%",
+                                    }}
+                                  />
+                                </div>
+                              ))
+                          )}
+                        </Slider>
+                      )}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-5">
+                      {producto.nombre}
+                    </h3>
+                    <h3>{producto.marca}</h3>
+                    <h4>Material de {producto.material}</h4>
+                  </div>
                 </div>
               ))}
             </div>
@@ -92,15 +122,16 @@ const DetalleCompra = () => {
                 </h2>
                 <div className="flex justify-between">
                   <p>{carr.length} productos</p>
-                  <p>$</p>
+                  <p>{totalPagar}</p>
                 </div>
                 <div className="flex justify-between">
                   <p> total</p>
-                  <p>$</p>
+                  <p>{totalPagar}</p>
                 </div>
                 <div>
                   <p>opciones de pago</p>
-                  <span> algunas imagenes</span>
+
+                  <img src={img_pago} alt="metodos de pago" width={250} />
                 </div>
               </div>
             </div>

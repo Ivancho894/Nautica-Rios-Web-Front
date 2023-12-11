@@ -52,6 +52,7 @@ const RenderAccesorios = ({ accesorio }) => {
       <h3 className="text-2xl font-bold mb-5">{accesorio.nombre}</h3>
       <h3>{accesorio.marca}</h3>
       <h4>Material de {accesorio.material}</h4>
+      <p>precio: ${accesorio.precio}</p>
 
       <div className="flex items-end gap-16">
         <svg
