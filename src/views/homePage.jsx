@@ -297,8 +297,10 @@ Además de facilitar la adquisición de barcos, en Náutica Ríos nos enorgullec
       </div>
       <a href="home#inicio">🛥</a>
       <div className=" flex items-end gap-4">
+        <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
         <img src={insta} alt="barco3" className="w-16 ml-44" />
-        <h1 className="text-5xl font-bold ">nauticarios</h1>
+        </a>
+        <h1 className="text-5xl font-bold ">nauticarios_embarcaciones</h1>
       </div>
 
       <div className="bg-black w-full h-[600px] mt-16 p-4 grid grid-cols-2">
