@@ -92,7 +92,7 @@ const Navbar = ({ activarMensages }) => {
       <Toaster />
       <div className="flex justify-between items-center">
         <NavLink to="/home" className="">
-          <img src={Logo} alt="Logo" className="h-6" />
+          <img src={Logo} alt="Logo" className=" ml-4 h-[50px]" />
         </NavLink>
 
         <ul className="flex">
