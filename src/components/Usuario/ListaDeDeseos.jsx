@@ -36,8 +36,8 @@ const ListaDeDeseos = () => {
 
   console.log(listaDeDeseos);
   return listaDeDeseos ? (
-    <div className="mt-20 ">
-      <h1>Lista de deseos</h1>
+    <div className="bg-slate-300">
+      <h1 className="mt-20 ">Lista de deseos</h1>
       <div className=" ml-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-16 mt-16">
         {listaDeDeseos.map((deseo, index) => {
           return (
