@@ -29,6 +29,15 @@ const DetalleCompra = () => {
     );
     // setAllProducts([...new Set(carr)])
   }, [carr]);
+  const contarProducto = (prod) => {
+    let count = 0;
+    carr.forEach((product) => {
+      if (product.id === prod.id) {
+        count++;
+      }
+    });
+    return count;
+  };
   const onDeleteProduct = (product) => {
     dispatch(BORRAR_UNIDAD(product));
   };
@@ -67,44 +76,64 @@ const DetalleCompra = () => {
                   className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
                   key={index}
                 >
-                  <div className=" flex justify-end">
+                  {/* <div className=" flex justify-end">
                     <button onClick={() => onDeleteProduct(producto)}>X</button>
-                  </div>
-                  <br />
+                  </div> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="icon-close"
+                    onClick={() => onDeleteProduct(producto)}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+
                   <div>
-                    {producto.variaciones &&
-                      producto.variaciones.length > 0 && (
-                        <Slider {...settings} className="w-60 mx-auto">
-                          {producto.variaciones.map(
-                            (variacion, variacionIndex) =>
-                              variacion.imagenes &&
-                              variacion.imagenes.length > 0 &&
-                              variacion.imagenes.map((imagen, imagenIndex) => (
-                                <div
-                                  key={imagenIndex}
-                                  className="w-full h-64 flex items-center justify-center "
-                                >
-                                  <img
-                                    src={imagen}
-                                    alt={`Imagen ${imagenIndex + 1}`}
-                                    className="object-contain w-full h-full "
-                                    style={{
-                                      maxWidth: "100%",
-                                      maxHeight: "100%",
-                                    }}
-                                  />
-                                </div>
-                              ))
-                          )}
-                        </Slider>
-                      )}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-5">
-                      {producto.nombre}
-                    </h3>
-                    <h3>{producto.marca}</h3>
-                    <h4>Material de {producto.material}</h4>
+                    <div>
+                      {producto.variaciones &&
+                        producto.variaciones.length > 0 && (
+                          <Slider {...settings} className="w-60 mx-auto">
+                            {producto.variaciones.map(
+                              (variacion, variacionIndex) =>
+                                variacion.imagenes &&
+                                variacion.imagenes.length > 0 &&
+                                variacion.imagenes.map(
+                                  (imagen, imagenIndex) => (
+                                    <div
+                                      key={imagenIndex}
+                                      className="w-full h-64 flex items-center justify-center "
+                                    >
+                                      <img
+                                        src={imagen}
+                                        alt={`Imagen ${imagenIndex + 1}`}
+                                        className="object-contain w-full h-full "
+                                        style={{
+                                          maxWidth: "100%",
+                                          maxHeight: "100%",
+                                        }}
+                                      />
+                                    </div>
+                                  )
+                                )
+                            )}
+                          </Slider>
+                        )}
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-5">
+                        {producto.nombre}
+                      </h3>
+                      <h3>{producto.marca}</h3>
+                      <h4>Material de {producto.material}</h4>
+                      <p className="">cantidad: {contarProducto(producto)}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -148,7 +177,7 @@ const DetalleCompra = () => {
             empezar?
           </p>
           <br />
-          <Link to="/home">
+          <Link to="/accesorios">
             <button>comenzar ➡</button>
           </Link>
         </div>
