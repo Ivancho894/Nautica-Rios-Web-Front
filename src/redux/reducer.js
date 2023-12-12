@@ -224,6 +224,7 @@ export default function reducer(state = initialState, action) {
         filterAcc: {},
         allFiltersAcc: [],
       });
+      
 
     case "GET_FILTERS_ACC":
       const propertiesAcc = ["tipo", "marca", "material"];
