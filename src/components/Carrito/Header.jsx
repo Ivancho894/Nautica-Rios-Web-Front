@@ -8,9 +8,10 @@ import {
   BORRAR_UNIDAD,
   VACIAR_CARRITO,
   TOTAL_PAGAR,
+  SET_UID,
 } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-export default function Header() {
+export default function Header({uid}) {
   const navigate = useNavigate();
   const carrito = useSelector((state) => state.carrito);
   const [allProducts, setAllProducts] = useState([]);
@@ -55,7 +56,8 @@ export default function Header() {
     dispatch(VACIAR_CARRITO());
   };
 
-  const pagar = () => {
+  const pagar = (uid) => {
+    dispatch(SET_UID(uid))
     navigate("/detalleCompra");
   };
 
@@ -127,7 +129,7 @@ export default function Header() {
               <button className="p-2 bg-[#7183a2] m-4 text-white h-[50px] w-[190px] mb-4" onClick={onCleanCart}>
                 Vaciar Carrito
               </button>
-              <button className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4" onClick={pagar}>
+              <button className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4" onClick={()=>pagar(uid)}>
                 Pagar
               </button>
             </>

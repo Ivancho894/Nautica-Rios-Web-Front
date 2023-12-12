@@ -112,6 +112,10 @@ export function BORRAR_PRODUCTO(acc) {
 export function VACIAR_CARRITO() {
   return { type: "VACIAR_CARRITO" };
 }
+export function SET_UID(id){
+  return {type: "SET_UID",payload:id}
+
+}
 
 export function TOTAL_PAGAR(p) {
   return {

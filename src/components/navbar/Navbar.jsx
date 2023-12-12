@@ -127,7 +127,7 @@ const Navbar = ({ activarMensages }) => {
         </ul>
         <div className="w-11 h-11s end-0">
           {/* <Header /> */}
-          {pathname === "/accesorios" ? <Header /> : <></>}
+          {pathname === "/accesorios" ? <Header uid={uid}/> : <></>}
         </div>
         <div>
           {auth.user ? (

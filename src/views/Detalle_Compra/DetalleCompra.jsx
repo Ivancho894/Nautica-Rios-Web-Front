@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import { BORRAR_UNIDAD } from "../../redux/actions";
 import Slider from "react-slick";
 import img_pago from "../../assets/mercado-pago.webp";
+import handlePay from "./handlePay";
 
 const DetalleCompra = () => {
   const dispatch = useDispatch();
   // const tpagar = useSelector((state) => state.totalPagar);
   const carr = useSelector((state) => state.carrito);
+  const uid = useSelector(state=>state.uid)
+
   const [allProducts, setAllProducts] = useState([]);
   const [totalPagar, setTotal] = useState(0);
   console.log(carr);
@@ -155,9 +158,9 @@ const DetalleCompra = () => {
            
            
             <div>
-              <Link>
-                <button>Ir a pagar</button>
-              </Link>
+              
+                <button onClick={()=>handlePay(uid,carr)}>Ir a pagar</button>
+                
               <br />
               <br />
 

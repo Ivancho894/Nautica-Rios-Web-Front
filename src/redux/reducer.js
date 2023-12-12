@@ -15,6 +15,7 @@ const initialState = {
   filterAcc: {},
   ordenAcc: "",
   carrito: [],
+  uid:""
 };
 const storedState =
   JSON.parse(localStorage.getItem("myAppState")) || initialState;
@@ -224,7 +225,7 @@ export default function reducer(state = initialState, action) {
         filterAcc: {},
         allFiltersAcc: [],
       });
-      
+
 
     case "GET_FILTERS_ACC":
       const propertiesAcc = ["tipo", "marca", "material"];
@@ -384,6 +385,11 @@ export default function reducer(state = initialState, action) {
     //     ...state,
     //     totalPagar,
     //   };
+    case "SET_UID":
+      return{
+        ...state,
+        uid:action.payload
+      }
     default:
       return state;
   }
