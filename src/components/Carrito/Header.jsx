@@ -61,7 +61,7 @@ export default function Header() {
 
   return (
     <header>
-      <div className="container-icon">
+      <div className="container-icon  bg-white">
         <div className="container-cart-icon" onClick={() => setActive(!active)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="icon-cart"
+            className="icon-cart "
           >
             <path
               strokeLinecap="round"
@@ -77,18 +77,18 @@ export default function Header() {
               d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
             />
           </svg>
-          <div className="count-products">
+          <div className="count-products h-8 w-8 text-black bg-slate-300 mt-4">
             <span id="contador-productos">{carrito.length}</span>
           </div>
         </div>
 
         <div
-          className={`container-cart-products ${active ? "" : "hidden-cart"}`}
+          className={`bg-slate-300 container-cart-products ${active ? "" : "hidden-cart"}`}
         >
           {allProducts.length ? (
             <>
               {/* row-product */}
-              <div className="scroll">
+              <div className="scroll ">
                 {allProducts.map((product, i) => (
                   <div className="cart-product" key={i}>
                     <div className="info-cart-product">
@@ -124,10 +124,10 @@ export default function Header() {
                 <h3>Total:</h3>
                 <h2 className="total-pagar">${totalPagar}</h2>
               </div>
-              <button className="btn-clear-all" onClick={onCleanCart}>
+              <button className="p-2 bg-[#7183a2] m-4 text-white h-[50px] w-[190px] mb-4" onClick={onCleanCart}>
                 Vaciar Carrito
               </button>
-              <button className="btn-clear-all" onClick={pagar}>
+              <button className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4" onClick={pagar}>
                 Pagar
               </button>
             </>

@@ -50,27 +50,36 @@ const DetalleCompra = () => {
     slidesToScroll: 1,
   };
   return (
-    <div className="flex-col my-16">
+    <div className="mt-16 p-16 flex-col my-16">
       <br />
       {carr.length !== 0 ? (
         <div>
-          <div className="flex-col">
+          <div className="">
             <h2>
-              <strong>TU CARRITO</strong>
+             <h1 className="font-bold">TU CARRITO</h1>
             </h2>
             <br />
 
-            <span>
+            <span className="text-3xl">
               Total {carr.length} productos <strong>{totalPagar}</strong>
             </span>
             <br />
-            <p>
+            <p className="text-2xl">
               Los artículos en tu carrito no están reservados. Termina el
               proceso de compra ahora para hacerte con ellos.
             </p>
           </div>
-          <div className="flex justify-around my-6 ">
-            <div className="flex-wrap ">
+        
+        <div>
+
+          
+        </div>
+        
+          <div className="flex justify-around my-6  ">
+          
+          
+           <div className=" flex flex-rows h-[1600px] w-[1500px]  p-16 ">
+           <div className="">
               {carr?.map((producto, index) => (
                 <div
                   className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
@@ -95,7 +104,7 @@ const DetalleCompra = () => {
                     />
                   </svg>
 
-                  <div>
+                  <div >
                     <div>
                       {producto.variaciones &&
                         producto.variaciones.length > 0 && (
@@ -138,6 +147,13 @@ const DetalleCompra = () => {
                 </div>
               ))}
             </div>
+
+
+           </div>
+           
+           
+           
+           
             <div>
               <Link>
                 <button>Ir a pagar</button>

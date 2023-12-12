@@ -40,7 +40,9 @@ export default function DetalleAccesorio() {
   };
 
   return (
-    <div className="mb-5 mx-auto max-w-screen-lg">
+   <div className="flex-center">
+
+<div className="mb-5 mx-auto max-w-screen-lg  border-slate-200 p-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
       {accesorio.variaciones && accesorio.variaciones.length > 0 && (
         <div className="mb-8">
           <br />
@@ -74,16 +76,21 @@ export default function DetalleAccesorio() {
       <p className="text-lg text-gray-600">{accesorio.marca}</p>
       <p className="text-lg">{accesorio.descripcion}</p>
       <br />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center bg-">
         <h4 className="text-xl font-semibold">
           {accesorio.material} - {accesorio.color}
         </h4>
-        <p className="text-xl font-semibold">${accesorio.precio}</p>
+        <p className="text-4xl font-bold mt-16 mb-4">${accesorio.precio}</p>
       </div>
       <p className="text-gray-600">{accesorio.peso}</p>
       <NavLink to="/accesorios">
-        <button>Regresar</button>
+        <button  className="ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]">Regresar</button>
       </NavLink>
     </div>
+   </div>
+
+   
+   
+  
   );
 }
