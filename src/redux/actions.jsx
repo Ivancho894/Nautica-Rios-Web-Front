@@ -87,6 +87,12 @@ export function ADD_FILTER_ACC(newFilterAcc) {
 export function SET_FILTER_ACC() {
   return { type: "SET_FILTER_ACC" };
 }
+export function ORDENAR_ACC() {
+  return { type: "ORDENAR_ACC" };
+}
+export function CAMBIAR_ORDENAR_ACC(or) {
+  return { type: "CAMBIAR_ORDENAR_ACC", payload: or };
+}
 
 export const SET_ORDER_ACC = (order) => ({
   type: "SET_ORDER_ACC",

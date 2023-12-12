@@ -6,6 +6,7 @@ import { getFiltersAcc, getAccesorios } from "../../redux/actions";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
 import ReviewStars from "../Reviews/Reviews";
+import Orden from "./ordenAcc";
 
 
 export default function TodosLosAccesorios() {
@@ -40,6 +41,7 @@ export default function TodosLosAccesorios() {
       <div className=" bg-slate-300 w-[400px] ">
         <div className="bg-slate-300 mt-16 h-[300px] w-full">
           <FiltrosAccesorios />
+          <Orden/>
         </div>
         </div>
 

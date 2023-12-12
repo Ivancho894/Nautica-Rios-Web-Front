@@ -77,15 +77,6 @@ export default function FiltrosAcce() {
         })}
       </div>
 
-      <div >
-      <h1 className="bg-slate-200 w-full text-2xl font-bold mb-5 mt-4">ORDEN</h1>
-        <label className="ml-4 " >Orden:</label>
-        <select className="ml-4 h-[20px] w-[100px] mr-2" onChange={handleChangeOrder} name="orden">
-          <option className="text-black" value="-">-</option>
-          <option className="text-black" value="precioAsc">Ascendente</option>
-          <option className="text-black" value="precioDesc">Descendente</option>
-        </select>
-        </div>
 
 
     </div>
