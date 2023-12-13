@@ -3,9 +3,11 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { Link, useNavigate } from "react-router-dom";
 import { getStorage, ref ,uploadBytes,getDownloadURL} from "firebase/storage";
+import { async } from "@firebase/util";
 
 
 const PublicarBarco = () => {
+  const number =Math.floor(Math.random() * 10000)
   const navigate = useNavigate();
   const [nuevoBarco, setNuevoBarco] = useState({
     accesorios: "",
@@ -23,15 +25,23 @@ const PublicarBarco = () => {
     tiempos: "",
     tipo: "",
     year: "",
-  });
-  const [imagen,setImagen] = useState([])
+    imagenes:[],
+    });
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setNuevoBarco((prev) => ({ ...prev, [id]: value }));
   };
-  const handleImagenChange = (e) => {
-    setImagen((prev) => ([ ...prev, e.target.files[0] ]));
+  const handleImagenChange = async (e) => {
+    const storage = getStorage();
+    //Referencia de la img a cargar
+    const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}-${number}/${nuevoBarco.marcaBarco}${nuevoBarco.imagenes.length}`);
+    //Agrego la imagen a la base de datos
+    const data = await uploadBytes(mountainsRef, e.target.files[0])
+    //Busco el link de la imagen
+    const link = await getDownloadURL(data.ref)
+
+    setNuevoBarco((prev) => ({ ...prev, imagenes: [...nuevoBarco.imagenes, link]}));
   }
 
   const handleSubmit = async (e) => {
@@ -52,19 +62,12 @@ const PublicarBarco = () => {
       nuevoBarco.modelo &&
       nuevoBarco.modeloMotor &&
       nuevoBarco.puntal &&
-      nuevoBarco.tiempos
+      nuevoBarco.tiempos &&
+      nuevoBarco.imagenes.length > 0
     ) {
-      const storage = getStorage();
-      //Referencia de la img a cargar
-      const mountainsRef = ref(storage, `Fotos de barcos/${nuevoBarco.marcaBarco}-${nuevoBarco.modelo}/${nuevoBarco.marcaBarco}`);
-      //Agrego la imagen a la base de datos
-      const data = await uploadBytes(mountainsRef, imagen[0])
-      //Busco el link de la imagen
-      const link = await getDownloadURL(data.ref)
 
       try {
-        await addDoc(collection(db, "barcos"), {...nuevoBarco,imagenes:[link]});
-        console.log("Barco agregado correctamente a Firestore");
+        await addDoc(collection(db, "barcos"), nuevoBarco);
         alert("¡Barco agregado correctamente!");
         setNuevoBarco({
           accesorios: "",
@@ -82,6 +85,7 @@ const PublicarBarco = () => {
           tiempos: "",
           tipo: "",
           year: "",
+          imagenes: []
         });
 
         //navigate(`/detalle/${nuevoBarco.docRef.id}`);
@@ -263,6 +267,46 @@ const PublicarBarco = () => {
       id="year"
       className="bg-gray-50 w-80 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       value={nuevoBarco.year}
+      onChange={handleInputChange}
+      required
+    />
+  </div>  
+  <div className="mb-4">
+    <label htmlFor="puntal" className="block text-sm font-medium text-gray-900 dark:text-white">
+      Puntal
+    </label>
+    <input
+      type="number"
+      id="puntal"
+      className="bg-gray-50 w-80 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value={nuevoBarco.puntal}
+      onChange={handleInputChange}
+      required
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="manga" className="block text-sm font-medium text-gray-900 dark:text-white">
+      Manga
+    </label>
+    <input
+      type="number"
+      id="manga"
+      className="bg-gray-50 w-80 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value={nuevoBarco.manga}
+      onChange={handleInputChange}
+      required
+    />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="eslora" className="block text-sm font-medium text-gray-900 dark:text-white">
+      Eslora
+    </label>
+    <input
+      type="number"
+      id="eslora"
+      className="bg-gray-50 w-80 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      value={nuevoBarco.eslora}
       onChange={handleInputChange}
       required
     />

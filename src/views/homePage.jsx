@@ -20,15 +20,15 @@ import insta from "../assets/insta.png";
 import { Toaster, toast } from "sonner";
 import { AiFillChrome } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
+import Correo from "../components/Correo";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const auth = useAuth();
   const { displayName } = auth.user;
-  console.log(auth.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const not = useSelector((state) => state.notificaciones);
-  console.log(not);
   useEffect(() => {
     // dispatch(GET_FILTERS())
     // dispatch(GET_BARCOS())
@@ -53,11 +53,18 @@ export default function Home() {
       }
     }
   }, []);
+  function ok(e) {
+    if (e) {
+      toast.success("Se envio correctamente");
+    } else {
+      toast("No se envio");
+    }
+  }
   return (
     <div>
       <Toaster />
 
-      <div className=" w-full m-0px">
+      <div id="inicio" className=" w-full m-0px">
         <img src={baner} alt="baner" className="w-full" />
       </div>
 
@@ -130,7 +137,7 @@ export default function Home() {
       </div>
 
       <button
-        className="mt-16"
+        className="mt-16 text-white"
         onClick={() => {
           navigate("/todoslosbarcos");
         }}
@@ -141,27 +148,30 @@ export default function Home() {
         <div></div>
         <br />
         <br />
-        <div className="bg-gray-200 py-5">
+        <div id="nosotros" className="bg-gray-200 py-5">
           <div className="container mx-auto">
             <div className="flex items-center justify-center">
               <div className="text-center px-4">
                 <h1 className="text-3xl font-bold mb-5">Sobre Nosotros</h1>
                 <h2 className="text-2xl mb-8">
-                  Somos una empresa apasionada por brindar soluciones náuticas.
-                  Desde el 2001 nos dedicamos a la comercialización de
-                  embarcaciones nuevas y usadas, representando a los astilleros
-                  Génesis y Segue.
+                Bienvenido a Náutica Ríos, tu socio confiable en el mundo marítimo. En Náutica Ríos, nos apasiona conectar a las personas con la experiencia única de navegar en el rio. Como especialistas en la industria naval, ofrecemos una gama completa de servicios para satisfacer todas tus necesidades en el mundo de los barcos.
+
+
+
                 </h2>
                 <h3 className="text-xl mb-8">
-                  Contamos con experiencia internacional en el rubro. Nuestro
-                  conocimiento comercial y técnico sobre la construcción de
-                  barcos, nos posiciona como un socio ideal para concretar tu
-                  operación de la forma más segura posible.
+                ¿Buscas la embarcación perfecta para tus travesías? Nuestro equipo experto de Náutica Ríos está aquí para asesorarte en cada paso del camino. Desde la selección de la embarcación ideal hasta los detalles más técnicos, te brindamos orientación personalizada para garantizar que encuentres el barco que se adapte perfectamente a tus deseos y requisitos.
+
+Además de facilitar la adquisición de barcos, en Náutica Ríos nos enorgullecemos de ofrecer servicios integrales de mantenimiento y reparación. Nuestros técnicos altamente calificados y equipados con las últimas tecnologías trabajan diligentemente para asegurar que tu embarcación esté siempre en condiciones óptimas. Desde inspecciones regulares hasta reparaciones especializadas, estamos comprometidos a mantener tu barco en excelente estado.
+
+¿Necesitas servicios personalizados para tu embarcación? Náutica Ríos se especializa en adaptarse a tus necesidades específicas. Ofrecemos servicios a medida, desde personalizaciones hasta mejoras de rendimiento, para garantizar que tu experiencia en el mar sea excepcional en todos los aspectos.
+
+
                 </h3>
                 <h4 className="text-xl mb-8">
                   {" "}
-                  Nuestros valores son la seriedad, el compromiso y la
-                  confidencialidad.
+                  En Náutica Ríos, nos apasiona el rio y queremos compartir esa pasión contigo. Sea cual sea tu visión, estamos aquí para convertirla en realidad. Confía en Náutica Ríos para brindarte un servicio de primer nivel, ya sea para comprar, mantener o mejorar tu embarcación. Únete a nosotros en esta emocionante aventura en el agua.
+
                 </h4>
               </div>
               <img
@@ -173,6 +183,7 @@ export default function Home() {
           </div>
         </div>
       </>
+      <a href="home#inicio">🛥</a>
       <h1 className="mt-16 font-bold mb-5">SERVICIOS</h1>
 
       <div
@@ -237,84 +248,92 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+      <a href="home#inicio">🛥</a>
       <h1 className="mt-16 font-bold mb-5">INSTAGRAM</h1>
 
       <div className=" ml-8 mt-8 p-32 grid grid-cols-3 gap-16">
         <div>
-          <img
-            src={destacado3}
-            alt="barco3"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0esTeDJapT/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado4}
-            alt="barco4"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0UrID9pzem/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado5}
-            alt="barco5"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0UY13op_Bg/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado6}
-            alt="barco6"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0UQBXEOwvL/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado7}
-            alt="barco7"
-            className="W-80  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0P5wKwJPQj/embed"
+          ></iframe>
         </div>
         <div>
-          <img
-            src={destacado8}
-            alt="barco8"
-            className="W-80 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
-          />
+          <iframe
+            width="440"
+            height="440"
+            src="http://instagram.com/p/C0LElZvNGNl/embed"
+          ></iframe>
         </div>
       </div>
-
+      <a href="home#inicio">🛥</a>
       <div className=" flex items-end gap-4">
+        <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
         <img src={insta} alt="barco3" className="w-16 ml-44" />
-        <h1 className="text-5xl font-bold ">nauticarios</h1>
+        </a>
+        <h1 className="text-5xl font-bold ">nauticarios_embarcaciones</h1>
       </div>
 
       <div className="bg-black w-full h-[600px] mt-16 p-4 grid grid-cols-2">
         <div className=" text-white w-96 ml-[200px]  mt-16">
           <div className="">
-            <h1 className="  text-3xl font-bold mb-5">CONTACTO</h1>
+            <h1 id="contacto" className="  text-3xl font-bold mb-5">
+              CONTACTO
+            </h1>
           </div>
 
           <div>
             <h1 className="text-xl mb-8">
-              Buenos Aires - Uruguay - Paraguay:<br></br>
+              Operamos en toda la Argentina y alrededores:<br></br>
               <br />
               Ivan Serralta - Cel. y WhatsApp: <br />
+              
               <br />
-              (+549) 11-5601-0255 <br />
+              (+549) 3541-566295 <br />
+
               <br />
-              info@nauticarios.com <br />
+              somosnauticarios@gmail.com <br />
               <br />
-              Aristóbulo Del Valle 3580. Benavidez. (B1621DXH) Tigre. Pcia. de
-              Bs. As. Santa Fé y Paraná: Victor Buyatti -<br />
-              <br /> Cel. y WhatsApp: <br />
+              Ventas: 
               <br />
-              +549-3425-225971
+              <Link to='https://api.whatsapp.com/message/L6R75S3FBG45D1?autoload=1&app_absent=0'>
+              +549-1173632760
+              </Link>
             </h1>
           </div>
         </div>
-        <div className="text-white mt-16 p-8 w-[500px] ml-16 text-xl mb-8  border-2 rounded-md">
+        <Correo ok={ok} />
+        <a href="home#inicio">🛥</a>
+        {/* <div className="text-white mt-16 p-8 w-[500px] ml-16 text-xl mb-8  border-2 rounded-md">
           <div className="flex gap-4 mt-4">
             <label htmlFor="Nombre">Nombre</label>
             <input type="text" className="ml-[-3px] w-[312px]" />
@@ -335,7 +354,7 @@ export default function Home() {
             <label htmlFor="Mensaje">Mensaje</label>
             <textarea className="h-[150px] w-[312px]"></textarea>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

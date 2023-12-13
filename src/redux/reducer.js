@@ -1,4 +1,5 @@
 const initialState = {
+  // totalPagar: 0,
   notificaciones: false,
   allBarcos: [],
   barcos: [],
@@ -12,8 +13,10 @@ const initialState = {
   allAccesorios: [],
   allFiltersAcc: [],
   filterAcc: {},
+  ordenAcc: "",
+  carrito: [],
+  uid:""
 };
-
 const storedState =
   JSON.parse(localStorage.getItem("myAppState")) || initialState;
 const defaultState = { ...initialState, ...storedState };
@@ -25,6 +28,10 @@ export default function reducer(state = initialState, action) {
   };
 
   switch (action.type) {
+
+    case "GET_USUARIO_FIRESTORE":
+      return {...state, usuario: action.payload}
+
     case "GET_BARCOS":
       return { ...state, barcos: action.payload, allBarcos: action.payload };
 
@@ -132,7 +139,6 @@ export default function reducer(state = initialState, action) {
           : newRange(barco.precio);
       });
       //Si hay al menos dos rangos
-      console.log();
       rangos.length > 1
         ? filtros.push({
             precio: rangos.sort((a, b) => {
@@ -186,6 +192,10 @@ export default function reducer(state = initialState, action) {
         orden: { name: "", value: "" },
         filter: {},
         barcos: state.allBarcos,
+        filterAcc: {},
+        ordenAcc: "",
+        accesorios: state.allAccesorios,
+
       };
     case "ORDENAR":
       const name = state.orden.name;
@@ -215,6 +225,7 @@ export default function reducer(state = initialState, action) {
         filterAcc: {},
         allFiltersAcc: [],
       });
+
 
     case "GET_FILTERS_ACC":
       const propertiesAcc = ["tipo", "marca", "material"];
@@ -280,12 +291,9 @@ export default function reducer(state = initialState, action) {
       if (parsedValue === "-") {
         delete newFilterAcc[action.payload.name];
       }
-      //console.log('ADD_FILTER',newFilterAcc);
       return saveState({ ...state, filterAcc: newFilterAcc });
 
     case "SET_FILTER_ACC":
-      console.log("Antes de filtrar", state.allAccesorios);
-      console.log("Filtro Aplicado", state.filterAcc);
       let newAccesorios = state.allAccesorios;
       Object.keys(state.filterAcc).map((prop) => {
         switch (prop) {
@@ -308,64 +316,80 @@ export default function reducer(state = initialState, action) {
             break;
         }
       });
-      console.log("Después de filtrar", state.allAccesorios);
       return saveState({ ...state, accesorios: newAccesorios });
+    
 
-    case "SET_ORDER_ACC":
-      let orderedAccesorios = [...state.allAccesorios];
+    case "ORDENAR_ACC":
+      const valueOr = state.ordenAcc;
+      const ordenadosOr =
+        valueOr === ""
+          ? state.accesorios
+          : valueOr === "pasc"
+          ? [...state.accesorios].sort((a, b) => {
+              return a.precio - b.precio;
+            })
+          : [...state.accesorios].sort((a, b) => {
+              return b.precio - a.precio;
+            });
 
-      // Aplicar otros filtros si existen
-      if (state.filterAcc) {
-        Object.keys(state.filterAcc).forEach((prop) => {
-          switch (prop) {
-            case "precio":
-              orderedAccesorios = orderedAccesorios.filter(
-                (accesorio) =>
-                  accesorio.precio > state.filterAcc.precio.min &&
-                  accesorio.precio < state.filterAcc.precio.max
-              );
-              break;
-            case "marca":
-            case "tipo":
-            case "material":
-              orderedAccesorios = orderedAccesorios.filter(
-                (accesorio) => accesorio[prop] === state.filterAcc[prop]
-              );
-              break;
-            default:
-              break;
-          }
-        });
-      }
-      if (action.payload === "-") {
-        return {
-          ...state,
-          accesorios: orderedAccesorios,
-          order: action.payload,
-        };
-      }
-      // Aplicar ordenamiento
-      switch (action.payload) {
-        case "precioAsc":
-          orderedAccesorios.sort((a, b) => a.precio - b.precio);
-          break;
-        case "precioDesc":
-          orderedAccesorios.sort((a, b) => b.precio - a.precio);
-          break;
-        default:
-          break;
-      }
+      return { ...state, accesorios: ordenadosOr };
+    case "CAMBIAR_ORDENAR_ACC":
+      const theValueOr = action.payload === "-" ? "" : action.payload;
+      return { ...state, ordenAcc:theValueOr };
 
-      return saveState({
-        ...state,
-        accesorios: orderedAccesorios,
-        order: action.payload,
-      });
     case "NOTIFICACIONES":
       state.notificaciones = action.payload;
       return {
         ...state,
       };
+
+    case "AGREGAR_CARRITO":
+      return {
+        ...state,
+        carrito: [...state.carrito, action.payload],
+      };
+
+    case "BORRAR_UNIDAD":
+      let borrado = false;
+      const carrito = state.carrito.filter((x) => {
+        if (borrado) {
+          borrado = true;
+          return true;
+        }
+        if (x.id !== action.payload.id) {
+          return true;
+        }
+        borrado = true;
+        return false;
+      });
+      return {
+        ...state,
+        carrito,
+      };
+    case "BORRAR_PRODUCTO":
+      const carrito2 = state.carrito.filter((x) => x.id != action.payload.id);
+      return {
+        ...state,
+        carrito: carrito2,
+      };
+
+    case "VACIAR_CARRITO":
+      return {
+        ...state,
+        carrito: [],
+      };
+    // case "TOTAL_PAGAR":
+    //   state.totalPagar = action.payload;
+    //   let totalPagar = state.totalPagar;
+    //   return {
+    //     ...state,
+    //     totalPagar,
+    //   };
+    case "SET_UID":
+      return{
+        ...state,
+        uid:action.payload
+      }
     default:
       return state;
   }

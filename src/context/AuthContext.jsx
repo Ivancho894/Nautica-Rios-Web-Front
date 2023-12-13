@@ -8,8 +8,9 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 export const authContext = createContext();
@@ -26,7 +27,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
 
-  useEffect(() => {
+  useEffect( () => {
     const subscribed = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
         console.log("no hay usuario suscrito");
@@ -38,6 +39,7 @@ export function AuthProvider({ children }) {
     return () => subscribed();
   }, []);
 
+
   const register = async (email, password, displayName) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -46,15 +48,21 @@ export function AuthProvider({ children }) {
         password
       );
 
+      const listaDeDeseos = [];
+
+      await sendEmailVerification(auth.currentUser);
+
       const newUser = userCredential.user;
 
       await updateProfile(newUser, { displayName });
       await setDoc(doc(db, "users", newUser.uid), {
         displayName,
         email,
+        listaDeDeseos,
+        permisosAdmin: false
       });
       setUser(newUser);
-      navigate("/home")
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -67,8 +75,21 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = async () => {
     const responseGoogle = new GoogleAuthProvider();
-
-    await signInWithPopup(auth, responseGoogle);
+    const userCredential = await signInWithPopup(auth, responseGoogle)
+    const user = userCredential.user
+    
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    
+    if (!userSnap.exists()) {
+      setDoc(userRef, {
+        email: user.email,
+        displayName: user.displayName,
+        listaDeDeseos: [],
+        permisosAdmin: false
+      })
+    }
+    setUser(user)
     navigate("/home");
     return;
   };

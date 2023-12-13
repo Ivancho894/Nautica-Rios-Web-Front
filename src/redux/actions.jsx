@@ -1,7 +1,6 @@
 //Importo la base de datos
 import { db } from "../../firebase-config";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import { async } from "@firebase/util";
+import { collection, getDocs, addDoc, where, query, doc, getDoc } from "firebase/firestore";
 
 export function NOTIFICACIONES(not) {
   return {
@@ -9,17 +8,21 @@ export function NOTIFICACIONES(not) {
     payload: not,
   };
 }
-export function GET_BARCOS() {
-  return async (dispatch) => {
-    const barcosCollectionRef = collection(db, "barcos");
-    const data = await getDocs(barcosCollectionRef);
+
+export const GET_BARCOS = () => async (dispatch) => {
+  try {
+    const q = query(collection(db, "barcos"), where("eliminado", "==", false));
+    const data = await getDocs(q);
     const barcos = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    return dispatch({
+    dispatch({
       type: "GET_BARCOS",
       payload: barcos,
     });
-  };
-}
+  } catch (error) {
+    console.error("Error obteniendo barcos:", error);
+  }
+};
+
 export function ADD_FILTER(newFilter) {
   return { type: "ADD_FILTER", payload: newFilter };
 }
@@ -40,27 +43,25 @@ export function CAMBIAR_ORDENAR(or) {
   return { type: "CAMBIAR_ORDENAR", payload: or };
 }
 
-export function getAccesorios() {
-  return async (dispatch) => {
-    try {
-      const accesoriosCollectionRef = collection(db, "accesorios");
-      const data = await getDocs(accesoriosCollectionRef);
-      const accesorios = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+export const getAccesorios = () => async (dispatch) => {
+  try {
+    const q = query(
+      collection(db, "accesorios"),
+      where("eliminado", "==", false)
+    );
+    const data = await getDocs(q);
 
-      dispatch({
-        type: "GET_ACCESORIOS",
-        payload: accesorios,
-      });
+    const accesorios = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      dispatch(getFiltersAcc());
-    } catch (error) {
-      console.error("Error obteniendo accesorios:", error);
-    }
-  };
-}
+    dispatch({
+      type: "GET_ACCESORIOS",
+      payload: accesorios,
+    });
+    dispatch(getFiltersAcc());
+  } catch (error) {
+    console.error("Error obteniendo accesorios:", error);
+  }
+};
 
 export function getFiltersAcc() {
   return (dispatch, getState) => {
@@ -86,8 +87,39 @@ export function ADD_FILTER_ACC(newFilterAcc) {
 export function SET_FILTER_ACC() {
   return { type: "SET_FILTER_ACC" };
 }
+export function ORDENAR_ACC() {
+  return { type: "ORDENAR_ACC" };
+}
+export function CAMBIAR_ORDENAR_ACC(or) {
+  return { type: "CAMBIAR_ORDENAR_ACC", payload: or };
+}
 
 export const SET_ORDER_ACC = (order) => ({
   type: "SET_ORDER_ACC",
   payload: order,
 });
+
+export function AGREGAR_CARRITO(acc) {
+  return { type: "AGREGAR_CARRITO", payload: acc };
+}
+export function BORRAR_UNIDAD(acc) {
+  return { type: "BORRAR_UNIDAD", payload: acc };
+}
+
+export function BORRAR_PRODUCTO(acc) {
+  return { type: "BORRAR_PRODUCTO", payload: acc };
+}
+export function VACIAR_CARRITO() {
+  return { type: "VACIAR_CARRITO" };
+}
+export function SET_UID(id){
+  return {type: "SET_UID",payload:id}
+
+}
+
+export function TOTAL_PAGAR(p) {
+  return {
+    type: "TOTAL_PAGAR",
+    payload: p,
+  };
+}
