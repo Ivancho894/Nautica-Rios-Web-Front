@@ -47,7 +47,6 @@ export default function TodosLosAccesorios() {
         accesoriosPagina.map((accesorio) => (
           <div key={accesorio.id}>
             <RenderAccesorios className=" "accesorio={accesorio} />
-            <ReviewStars productId={accesorio.id} />
           </div>
         ))}
     </div>
