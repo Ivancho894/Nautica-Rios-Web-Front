@@ -1,11 +1,13 @@
 import { doc, setDoc } from "firebase/firestore"; 
 import { db } from "../../../firebase-config";
+import axios from "axios";
+
 
 
 
 export default async function handlePay(uid,carr){
     console.log(uid)
-    const endpoint = "http://localhost:3000/create-order?id="
+    const endpoint = "https://nautica-pf-pagos.onrender.com/create-order?id="
 
     try{
         //Agrego carrito a la DB
@@ -15,8 +17,10 @@ export default async function handlePay(uid,carr){
             await setDoc(userRef, { carrito: carr }, { merge: true });
         }
         //Mando la query con el id
-        //const {data} = await axios(endpoint+uid)
+        const {data} = await axios(endpoint+uid)
         //Recibo la res para ver si completo
+        console.log(data, 'ds')
+        
 
     }catch(error){
         console.log(error.message)
