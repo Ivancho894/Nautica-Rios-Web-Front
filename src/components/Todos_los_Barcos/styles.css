@@ -1,0 +1,28 @@
+/* Estilos generales para pantallas grandes */
+.flex {
+    display: flex;
+  }
+  
+  .bg-slate-300 {
+    background-color: slategray;
+  }
+  
+  .w-400 {
+    width: 400px;
+  }
+  
+  /* Media query para pantallas más pequeñas */
+  @media screen and (max-width: 600px) {
+    .flex {
+      flex-direction: column; /* Cambia a disposición de columna en pantallas más pequeñas */
+    }
+  
+    .w-400{
+      width: 100%; /* O ajusta según tus necesidades para pantallas más pequeñas */
+    }
+  
+    .mt-16 {
+      margin-top: 8px; /* O ajusta según tus necesidades para pantallas más pequeñas */
+    }
+  }
+  
