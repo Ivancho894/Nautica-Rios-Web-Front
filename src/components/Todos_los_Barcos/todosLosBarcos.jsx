@@ -10,6 +10,7 @@ import { useState } from "react";
 import baner from "../../assets/homeBaner.png"
 import MostrarBarcos from "../Barco/mostrarBarcos";
 import Paginacion from "./Paginacion";
+import SinBarcos from "./SinBarcos";
 
 
 
@@ -39,7 +40,6 @@ export default function TodosLosBarcos() {
 
 
 
-
   return (
         <>
   <div className="flex flex-col md:flex-row">
@@ -52,7 +52,7 @@ export default function TodosLosBarcos() {
       </div>
     </div>
 
-    <MostrarBarcos barcos={barcos} paginaActual={pagina} className="flex flex-wrap"/>
+    {barcos.length>0?<MostrarBarcos barcos={barcos} paginaActual={pagina} className="flex flex-wrap"/>:<SinBarcos/>}
   </div>
 
   <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} cambioPag={handleNextPage} />
