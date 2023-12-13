@@ -12,6 +12,7 @@ import {
   userExist,
 } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { GET_CARRITO } from "../redux/actions";
 
 export default function AuthProvider({
   children,
@@ -27,6 +28,7 @@ export default function AuthProvider({
         console.log(user.uid);
         const isRegistred = await userExist(user.uid);
         if (isRegistred) {
+            dispatch(GET_CARRITO(user.uid));
           //TODO: redirigir a Dashboard
           const userInfo = await getUserInfo(user.uid);
           console.log(userInfo);

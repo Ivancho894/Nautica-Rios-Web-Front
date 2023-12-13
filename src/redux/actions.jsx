@@ -105,8 +105,6 @@ export const GET_CARRITO = (uid) => async (dispatch) => {
     const userSnap = await getDoc(userRef);
     const datosUsuario = userSnap.data();
     const carr = datosUsuario.carrito
-    console.log(uid);
-    console.log(carr)
     dispatch({
       type: "GET_CARRITO",
       payload: carr,

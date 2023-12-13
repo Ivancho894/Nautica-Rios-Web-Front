@@ -9,6 +9,7 @@ import {
   VACIAR_CARRITO,
   TOTAL_PAGAR,
   SET_UID,
+  UPDATE_CARRITO,
 } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 export default function Header({ uid }) {
@@ -46,6 +47,10 @@ export default function Header({ uid }) {
       }, 0)
     );
     // setAllProducts([...new Set(carrito)])
+    if(uid){
+      dispatch(UPDATE_CARRITO(uid,carrito));
+    }
+    
   }, [carrito]);
 
   const contarProducto = (prod) => {
@@ -60,7 +65,7 @@ export default function Header({ uid }) {
 
   const onDeleteProduct = (product) => {
     dispatch(BORRAR_UNIDAD(product));
-    
+
   };
 
   const onCleanCart = () => {

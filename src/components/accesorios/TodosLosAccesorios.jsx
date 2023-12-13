@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderAccesorios from "./RenderAccesorios";
 import FiltrosAccesorios from "./FiltrosAccesorios";
 import { useEffect } from "react";
-import { getFiltersAcc, getAccesorios } from "../../redux/actions";
+import { getFiltersAcc, getAccesorios, GET_CARRITO } from "../../redux/actions";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
 import ReviewStars from "../Reviews/Reviews";
@@ -10,11 +10,16 @@ import Orden from "./ordenAcc";
 
 export default function TodosLosAccesorios() {
   const accesorios = useSelector((state) => state.accesorios);
+  const uid = useSelector((state) => state.uid);
+  const carr = useSelector((state) => state.carr);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAccesorios());
     dispatch(getFiltersAcc());
     console.log("Get filters acc");
+    if(uid){
+      dispatch(GET_CARRITO(uid,carr));
+    }
   }, []);
 
   //PAGINADO

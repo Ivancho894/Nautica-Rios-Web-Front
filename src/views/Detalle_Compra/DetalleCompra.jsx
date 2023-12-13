@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BORRAR_UNIDAD } from "../../redux/actions";
+import { BORRAR_UNIDAD, UPDATE_CARRITO } from "../../redux/actions";
 import Slider from "react-slick";
 import img_pago from "../../assets/mercado-pago.webp";
 import handlePay from "./handlePay";
@@ -19,7 +19,11 @@ const DetalleCompra = () => {
     ).map((id) => carr.find((prod) => prod.id === id));
 
     setProductos(productosUnicos);
-    setTotalPagar(carr.reduce((sum, prod) => sum + prod.precio, 0));
+    setTotalPagar(carr.reduce((sum, prod) => sum + prod.precio*1, 0));
+    if(uid){
+      dispatch(UPDATE_CARRITO(uid,carr));
+    }
+    
   }, [carr]);
 
   const contarProducto = (producto) => {

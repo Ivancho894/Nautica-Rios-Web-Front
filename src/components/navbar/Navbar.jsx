@@ -53,14 +53,16 @@ const Navbar = ({ activarMensages }) => {
         const uid = user.uid;
         setUid(uid);
         setDisplayName(displayName);
+        dispatch(SET_UID(uid));
       }
     });
     if (uid) {
       obtenerPermisos(uid);
-      dispatch(SET_UID(uid));
-      dispatch(GET_CARRITO(uid));
     }
   });
+  useEffect(() => {
+    dispatch(GET_CARRITO(uid));
+  },[uid])
 
   console.log(uid);
   console.log(displayName);
