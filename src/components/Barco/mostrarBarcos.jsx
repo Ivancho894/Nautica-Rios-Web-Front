@@ -10,7 +10,7 @@ export default function MostrarBarcos({barcos,paginaActual}){
 
 
     return(
-        <div className=" ml-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-16 mt-16">
+        <div className=" flex flex-wrap ml-8 w-fullp-16 mt-16 gap-8 p-16">
             {barcosPagina.map((barco,index)=>(
                 <RenderBarco key={index} barco={barco} />
             ))}
