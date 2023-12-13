@@ -65,7 +65,7 @@ export default function Home() {
       <Toaster />
 
       <div id="inicio" className=" w-full m-0px">
-        <img src={baner} alt="baner" className="w-full" />
+        <img src={baner} alt="baner" className="w-full"style={{ marginTop: '30px' }} />
       </div>
 
       <h1 className="mt-16 font-bold mb-5">DESTACADOS</h1>
@@ -315,10 +315,12 @@ export default function Home() {
       </div>
       <a href="home#inicio">🛥</a>
       <div className=" flex items-end gap-4">
-        <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
+      <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
           <img src={insta} alt="barco3" className="w-16 ml-44" />
         </a>
+        <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
         <h1 className="text-5xl font-bold ">nauticarios_embarcaciones</h1>
+       </a>
       </div>
 
       <div className="bg-black w-full h-[600px] mt-16 p-4 grid grid-cols-2">
