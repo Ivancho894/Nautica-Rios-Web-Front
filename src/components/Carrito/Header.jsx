@@ -21,16 +21,26 @@ export default function Header({ uid }) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
+    console.log(carrito);
+    console.log(allProducts);
+    console.log(totalPagar);
+  
+    let carrAux = []
+
+    //Itero en carrito y busco uno de cada uno 
     carrito.length != 0
       ? carrito.map((prod) =>
-          allProducts.find((x) => x.id === prod.id)
+          carrAux.find((x) => x.id === prod.id)
             ? null
-            : setAllProducts([...allProducts, prod])
+            : carrAux.push(prod)
         )
-      : setAllProducts([]);
+      : null;
+
+    setAllProducts(carrAux);
+
     setTotal(
       carrito.reduce((sum, prod) => {
-        sum = sum + prod.precio;
+        sum = sum + prod.precio*1;
         // dispatch(TOTAL_PAGAR(sum));
         return sum;
       }, 0)
@@ -50,6 +60,7 @@ export default function Header({ uid }) {
 
   const onDeleteProduct = (product) => {
     dispatch(BORRAR_UNIDAD(product));
+    
   };
 
   const onCleanCart = () => {
