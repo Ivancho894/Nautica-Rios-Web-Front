@@ -11,7 +11,7 @@ import {
   SET_UID,
 } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-export default function Header({uid}) {
+export default function Header({ uid }) {
   const navigate = useNavigate();
   const carrito = useSelector((state) => state.carrito);
   const [allProducts, setAllProducts] = useState([]);
@@ -57,8 +57,13 @@ export default function Header({uid}) {
   };
 
   const pagar = (uid) => {
-    dispatch(SET_UID(uid))
-    navigate("/detalleCompra");
+    if (uid) {
+      dispatch(SET_UID(uid));
+      navigate("/detalleCompra");
+    } else {
+      alert("Inicia sesion para pagar");
+      navigate("/login");
+    }
   };
 
   return (
@@ -85,7 +90,9 @@ export default function Header({uid}) {
         </div>
 
         <div
-          className={`bg-slate-300 container-cart-products ${active ? "" : "hidden-cart"}`}
+          className={`bg-slate-300 container-cart-products ${
+            active ? "" : "hidden-cart"
+          }`}
         >
           {allProducts.length ? (
             <>
@@ -126,10 +133,16 @@ export default function Header({uid}) {
                 <h3>Total:</h3>
                 <h2 className="total-pagar">${totalPagar}</h2>
               </div>
-              <button className="p-2 bg-[#7183a2] m-4 text-white h-[50px] w-[190px] mb-4" onClick={onCleanCart}>
+              <button
+                className="p-2 bg-[#7183a2] m-4 text-white h-[50px] w-[190px] mb-4"
+                onClick={onCleanCart}
+              >
                 Vaciar Carrito
               </button>
-              <button className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4" onClick={()=>pagar(uid)}>
+              <button
+                className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4"
+                onClick={() => pagar(uid)}
+              >
                 Pagar
               </button>
             </>

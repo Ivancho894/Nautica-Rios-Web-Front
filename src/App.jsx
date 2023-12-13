@@ -162,6 +162,8 @@ function App() {
 
         <Route element={<ProtectedRoutes authorizedUser="regularUser" />}>
           <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
+          <Route path="/detalleCompra" element={<DetalleCompra />} />
+          <Route path="/paginaerror" element={<PaginaError />} />
         </Route>
 
         <Route element={<ProtectedRoutes authorizedUser="admin" />}>
@@ -169,7 +171,7 @@ function App() {
           <Route path="/gestionBarcos" element={<ListaBarcos />} />
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
-          <Route path="/gestionUsuarios" element={<ListaUsuarios/>}/>
+          <Route path="/gestionUsuarios" element={<ListaUsuarios />} />
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
@@ -185,8 +187,6 @@ function App() {
         {/* <Route path="/signout" element={<SignOutView />} /> */}
         {/* <Route path="/user/:username" element={<PublicProfileView />} /> */}
         {/* <Route path="/choose-username" element={<ChooseUserNameView />} /> */}
-        <Route path="/detalleCompra" element={<DetalleCompra />} />
-        <Route path="/paginaerror" element={<PaginaError />} />
         {/* <Route path="/list" element={<ProductList />} /> */}
       </Routes>
     </div>
