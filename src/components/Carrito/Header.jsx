@@ -11,7 +11,7 @@ import {
   SET_UID,
 } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-export default function Header({uid}) {
+export default function Header({ uid }) {
   const navigate = useNavigate();
   const carrito = useSelector((state) => state.carrito);
   const [allProducts, setAllProducts] = useState([]);
@@ -21,16 +21,26 @@ export default function Header({uid}) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
+    console.log(carrito);
+    console.log(allProducts);
+    console.log(totalPagar);
+  
+    let carrAux = []
+
+    //Itero en carrito y busco uno de cada uno 
     carrito.length != 0
       ? carrito.map((prod) =>
-          allProducts.find((x) => x.id === prod.id)
+          carrAux.find((x) => x.id === prod.id)
             ? null
-            : setAllProducts([...allProducts, prod])
+            : carrAux.push(prod)
         )
-      : setAllProducts([]);
+      : null;
+
+    setAllProducts(carrAux);
+
     setTotal(
       carrito.reduce((sum, prod) => {
-        sum = sum + prod.precio;
+        sum = sum + prod.precio*1;
         // dispatch(TOTAL_PAGAR(sum));
         return sum;
       }, 0)
@@ -50,6 +60,7 @@ export default function Header({uid}) {
 
   const onDeleteProduct = (product) => {
     dispatch(BORRAR_UNIDAD(product));
+    
   };
 
   const onCleanCart = () => {
@@ -57,8 +68,13 @@ export default function Header({uid}) {
   };
 
   const pagar = (uid) => {
-    dispatch(SET_UID(uid))
-    navigate("/detalleCompra");
+    if (uid) {
+      dispatch(SET_UID(uid));
+      navigate("/detalleCompra");
+    } else {
+      alert("Inicia sesion para pagar");
+      navigate("/login");
+    }
   };
 
   return (
@@ -80,12 +96,14 @@ export default function Header({uid}) {
             />
           </svg>
           <div className="count-products h-8 w-8 text-black bg-slate-300 mt-4">
-            <span id="contador-productos">{carrito.length}</span>
+            <span id="contador-productos">{carrito?.length}</span>
           </div>
         </div>
 
         <div
-          className={`bg-slate-300 container-cart-products ${active ? "" : "hidden-cart"}`}
+          className={`bg-slate-300 container-cart-products ${
+            active ? "" : "hidden-cart"
+          }`}
         >
           {allProducts.length ? (
             <>
@@ -126,10 +144,16 @@ export default function Header({uid}) {
                 <h3>Total:</h3>
                 <h2 className="total-pagar">${totalPagar}</h2>
               </div>
-              <button className="p-2 bg-[#7183a2] m-4 text-white h-[50px] w-[190px] mb-4" onClick={onCleanCart}>
+              <button
+                className="p-2 bg-[#7183a2] m-4 text-white h-[50px] w-[190px] mb-4"
+                onClick={onCleanCart}
+              >
                 Vaciar Carrito
               </button>
-              <button className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4" onClick={()=>pagar(uid)}>
+              <button
+                className="p-2 bg-[#7183a2]  text-white h-[50px] w-[190px] mb-4"
+                onClick={() => pagar(uid)}
+              >
                 Pagar
               </button>
             </>

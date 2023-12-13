@@ -50,7 +50,6 @@ const LandingPage = ({ activarMensages }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        paddingTop: "50px",
         height: "100vh",
         overflow: "hidden",
       }}

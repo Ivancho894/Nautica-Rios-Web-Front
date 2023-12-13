@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
       );
 
       const listaDeDeseos = [];
+      const carrito = [];
 
       await sendEmailVerification(auth.currentUser);
 
@@ -58,6 +59,7 @@ export function AuthProvider({ children }) {
       await setDoc(doc(db, "users", newUser.uid), {
         displayName,
         email,
+        carrito,
         listaDeDeseos,
         permisosAdmin: false
       });
@@ -85,9 +87,10 @@ export function AuthProvider({ children }) {
       setDoc(userRef, {
         email: user.email,
         displayName: user.displayName,
+        carrito: [],
         listaDeDeseos: [],
-        permisosAdmin: false
-      })
+        permisosAdmin: false,
+      });
     }
     setUser(user)
     navigate("/home");

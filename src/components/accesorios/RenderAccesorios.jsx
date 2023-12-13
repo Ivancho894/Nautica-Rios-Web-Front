@@ -17,6 +17,7 @@ const RenderAccesorios = ({ accesorio }) => {
   const carr = useSelector((state) => state.carrito);
   const dispatch = useDispatch();
 
+
   const agregarAlCarrito = () => {
     dispatch(AGREGAR_CARRITO(accesorio));
     uid!=""?dispatch(UPDATE_CARRITO(uid,carr)):null;
@@ -30,7 +31,7 @@ const RenderAccesorios = ({ accesorio }) => {
     slidesToScroll: 1,
   };
   return (
-    <div className="border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
+    <div className="  border-2 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]">
       {accesorio.variaciones && accesorio.variaciones.length > 0 && (
         <Slider {...settings} className="w-60 mx-auto">
           {accesorio.variaciones.map(

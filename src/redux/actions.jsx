@@ -98,12 +98,14 @@ export const SET_ORDER_ACC = (order) => ({
   type: "SET_ORDER_ACC",
   payload: order,
 });
+
 export const GET_CARRITO = (uid) => async (dispatch) => {
   try{
     const userRef = doc(db, "users", uid);
     const userSnap = await getDoc(userRef);
-    const datosUsuario = await userSnap.data();
+    const datosUsuario = userSnap.data();
     const carr = datosUsuario.carrito
+    console.log(uid);
     console.log(carr)
     dispatch({
       type: "GET_CARRITO",
@@ -115,7 +117,6 @@ export const GET_CARRITO = (uid) => async (dispatch) => {
   } 
 
 
-  return { type: "GET_CARRITO" };
 }
 
 export const UPDATE_CARRITO = (uid,carr)=>async()=>{

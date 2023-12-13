@@ -10,6 +10,7 @@ import MenuUsuario from "./MenuUsuario";
 import MenuAdmin from "./MenuAdmin";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 
 import Button from "./Button";
 import { GET_CARRITO, SET_UID } from "../../redux/actions";
@@ -19,10 +20,12 @@ const Navbar = ({ activarMensages }) => {
   const isLandingPage = location.pathname === "/";
   const { pathname } = useLocation();
 
-  const dispatch =  useDispatch()
+  const dispatch = useDispatch();
 
   const auth = useAuth();
-  const { displayName, uid } = auth.user;
+  const authF = getAuth();
+  const [uid, setUid] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
 
   const [permisos, setPermisos] = useState(null);
 
@@ -44,35 +47,29 @@ const Navbar = ({ activarMensages }) => {
   };
 
   useEffect(() => {
-    obtenerPermisos(uid);
-    dispatch(SET_UID(uid))
-    dispatch(GET_CARRITO(uid))
-  }, [uid]);
+    onAuthStateChanged(authF, (user) => {
+      if (user) {
+        const displayName = user.displayName;
+        const uid = user.uid;
+        setUid(uid);
+        setDisplayName(displayName);
+      }
+    });
+    if (uid) {
+      obtenerPermisos(uid);
+      dispatch(SET_UID(uid));
+      dispatch(GET_CARRITO(uid));
+    }
+  });
 
-  console.log(permisos);
+  console.log(uid);
+  console.log(displayName);
 
   if (isLandingPage) {
     return null;
   }
 
-  const Links = [
-    {
-      name: "Barcos",
-      link: "/todoslosbarcos",
-    },
-    {
-      name: "Accesorios",
-      link: "/accesorios",
-    },
-    {
-      name: "Contacto",
-      link: "/contactar",
-    },
-    {
-      name: "Nosotros",
-      link: "/quienessomos",
-    },
-  ];
+  
   let [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -123,7 +120,7 @@ const Navbar = ({ activarMensages }) => {
         </ul>
         <div className="w-11 h-11s end-0">
           {/* <Header /> */}
-          {pathname === "/accesorios" ? <Header uid={uid}/> : <></>}
+          {pathname === "/accesorios" ? <Header uid={uid} /> : <></>}
         </div>
         <div>
           {auth.user ? (

@@ -58,8 +58,6 @@ function App() {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
-  console.log(currentUser);
-
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -146,7 +144,7 @@ function App() {
       {pathname !== "/" ? (
         <Navbar />
       ) : (
-        <div className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10"></div>
+        <div className="bg-gray-800"></div>
       )}
       <Routes>
         <Route
@@ -164,6 +162,8 @@ function App() {
 
         <Route element={<ProtectedRoutes authorizedUser="regularUser" />}>
           <Route path="/listaDeDeseos" element={<ListaDeDeseos />} />
+          <Route path="/detalleCompra" element={<DetalleCompra />} />
+          <Route path="/paginaerror" element={<PaginaError />} />
         </Route>
 
         <Route element={<ProtectedRoutes authorizedUser="admin" />}>
@@ -171,7 +171,7 @@ function App() {
           <Route path="/gestionBarcos" element={<ListaBarcos />} />
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
-          <Route path="/gestionUsuarios" element={<ListaUsuarios/>}/>
+          <Route path="/gestionUsuarios" element={<ListaUsuarios />} />
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
@@ -187,8 +187,6 @@ function App() {
         {/* <Route path="/signout" element={<SignOutView />} /> */}
         {/* <Route path="/user/:username" element={<PublicProfileView />} /> */}
         {/* <Route path="/choose-username" element={<ChooseUserNameView />} /> */}
-        <Route path="/detalleCompra" element={<DetalleCompra />} />
-        <Route path="/paginaerror" element={<PaginaError />} />
         {/* <Route path="/list" element={<ProductList />} /> */}
       </Routes>
     </div>
