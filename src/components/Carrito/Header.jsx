@@ -80,7 +80,7 @@ export default function Header({uid}) {
             />
           </svg>
           <div className="count-products h-8 w-8 text-black bg-slate-300 mt-4">
-            <span id="contador-productos">{carrito.length}</span>
+            <span id="contador-productos">{carrito?.length}</span>
           </div>
         </div>
 

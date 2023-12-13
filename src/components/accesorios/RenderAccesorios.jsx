@@ -17,6 +17,7 @@ const RenderAccesorios = ({ accesorio }) => {
   const carr = useSelector((state) => state.carrito);
   const dispatch = useDispatch();
 
+
   const agregarAlCarrito = () => {
     dispatch(AGREGAR_CARRITO(accesorio));
     uid!=""?dispatch(UPDATE_CARRITO(uid,carr)):null;

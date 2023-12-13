@@ -58,8 +58,6 @@ function App() {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
-  console.log(currentUser);
-
   const barcos = useSelector((state) => state.barcos);
   const dispatch = useDispatch();
   const navigate = useNavigate();
