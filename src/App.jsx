@@ -48,6 +48,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import ListaUsuarios from "./components/Borrado Logico/ListaUsuarios";
+import PaginaError from "./views/Detalle_Compra/PaginaError";
 
 function App() {
   // const [allProducts, setAllProducts] = useState([]);
@@ -187,6 +188,7 @@ function App() {
         {/* <Route path="/user/:username" element={<PublicProfileView />} /> */}
         {/* <Route path="/choose-username" element={<ChooseUserNameView />} /> */}
         <Route path="/detalleCompra" element={<DetalleCompra />} />
+        <Route path="/paginaerror" element={<PaginaError />} />
         {/* <Route path="/list" element={<ProductList />} /> */}
       </Routes>
     </div>

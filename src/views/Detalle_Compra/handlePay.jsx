@@ -6,7 +6,10 @@ import axios from "axios";
 
 
 export default async function handlePay(uid,carr){
-    console.log(uid)
+    if(!uid){
+        //Tiene que ir al login y volver
+        // navigate('/login')
+    }
     const endpoint = "https://nautica-pf-pagos.onrender.com/create-order?id="
 
     try{
@@ -19,10 +22,9 @@ export default async function handlePay(uid,carr){
         //Mando la query con el id
         const {data} = await axios(endpoint+uid)
         //Recibo la res para ver si completo
-        console.log(data, 'ds')
-        
+        location.href = data.init_point
 
     }catch(error){
-        console.log(error.message)
+        navigate('/paginaerror')
     }
 }
