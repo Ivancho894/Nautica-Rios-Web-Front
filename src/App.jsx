@@ -144,7 +144,7 @@ function App() {
       {pathname !== "/" ? (
         <Navbar />
       ) : (
-        <div className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10"></div>
+        <div className="bg-gray-800"></div>
       )}
       <Routes>
         <Route
