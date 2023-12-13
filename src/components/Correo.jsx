@@ -68,7 +68,7 @@ const Correo = ({ ok }) => {
               name="user_name"
               value={email.user_name}
               onChange={handleChange}
-              className="ml-[-3px] w-[312px]"
+              className="ml-[-3px] w-[312px] text-black"
             />
           </div>
           <div className="flex gap-4 mt-4">
@@ -78,7 +78,7 @@ const Correo = ({ ok }) => {
               name="user_email"
               value={email.user_email}
               onChange={handleChange}
-              className="ml-[25px] w-[312px]"
+              className="ml-[25px] w-[312px] text-black"
             />
           </div>
           <div className="flex gap-4 mt-4">
@@ -88,7 +88,7 @@ const Correo = ({ ok }) => {
               name="user_tel"
               value={email.user_tel}
               onChange={handleChange}
-              className="ml-[-3px] w-[312px]"
+              className="ml-[-3px] w-[312px] text-black"
             />
           </div>
           <div className="flex gap-4 mt-4">
@@ -98,7 +98,7 @@ const Correo = ({ ok }) => {
               name="user_Motivo"
               value={email.user_Motivo}
               onChange={handleChange}
-              className="ml-[11px] w-[312px]"
+              className="ml-[11px] w-[312px] text-black"
             />
           </div>
           <div className="flex gap-4 mt-4">
@@ -108,7 +108,7 @@ const Correo = ({ ok }) => {
               name="user_message"
               value={email.user_message}
               onChange={handleChange}
-              className="h-[150px] w-[312px]"
+              className="h-[150px] w-[312px] text-black"
             ></textarea>
           </div>
           <button type="submit">Send</button>
