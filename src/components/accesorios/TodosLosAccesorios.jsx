@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderAccesorios from "./RenderAccesorios";
 import FiltrosAccesorios from "./FiltrosAccesorios"
 import { useEffect } from "react";
-import { getFiltersAcc, getAccesorios } from "../../redux/actions";
+import { getFiltersAcc, getAccesorios} from "../../redux/actions";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
+import ReviewStars from "../Reviews/Reviews";
 import Orden from "./ordenAcc";
 
 
 export default function TodosLosAccesorios() {
   
  const accesorios = useSelector((state) => state.accesorios);
-  
  const dispatch = useDispatch();
  useEffect(() => {
     dispatch(getAccesorios());
@@ -49,6 +49,7 @@ export default function TodosLosAccesorios() {
             return (
               <div key={accesorio.id}>
                 <RenderAccesorios accesorio={accesorio} />
+                <ReviewStars productId={accesorio.id} />
               </div>
             );
             

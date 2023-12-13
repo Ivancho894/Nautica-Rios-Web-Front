@@ -8,14 +8,18 @@ import {
   AGREGAR_CARRITO,
   BORRAR_UNIDAD,
   BORRAR_PRODUCTO,
+  UPDATE_CARRITO,
 } from "../../redux/actions";
 import ReviewStars from "../Reviews/Reviews";
 
 const RenderAccesorios = ({ accesorio }) => {
+  const uid = useSelector((state) => state.uid);
+  const carr = useSelector((state) => state.carrito);
   const dispatch = useDispatch();
 
   const agregarAlCarrito = () => {
     dispatch(AGREGAR_CARRITO(accesorio));
+    uid!=""?dispatch(UPDATE_CARRITO(uid,carr)):null;
   };
 
   const settings = {

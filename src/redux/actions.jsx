@@ -1,6 +1,6 @@
 //Importo la base de datos
 import { db } from "../../firebase-config";
-import { collection, getDocs, addDoc, where, query, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, where, query, doc, getDoc, setDoc } from "firebase/firestore";
 
 export function NOTIFICACIONES(not) {
   return {
@@ -99,7 +99,6 @@ export const SET_ORDER_ACC = (order) => ({
   payload: order,
 });
 export const GET_CARRITO = (uid) => async (dispatch) => {
-  console.log(uid)
   try{
     const userRef = doc(db, "users", uid);
     const userSnap = await getDoc(userRef);
@@ -117,6 +116,11 @@ export const GET_CARRITO = (uid) => async (dispatch) => {
 
 
   return { type: "GET_CARRITO" };
+}
+
+export const UPDATE_CARRITO = (uid,carr)=>async()=>{
+  const userRef = doc(db, 'users', uid);
+  await setDoc(userRef, { carrito: carr }, { merge: true });
 }
 export function AGREGAR_CARRITO(acc) {
   return { type: "AGREGAR_CARRITO", payload: acc };
