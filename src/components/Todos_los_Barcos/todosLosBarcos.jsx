@@ -42,19 +42,21 @@ export default function TodosLosBarcos() {
 
   return (
         <>
-          <div className="flex">
-            <div className=" bg-slate-300 w-[400px] ">
-              <div className="bg-slate-300 mt-16 h-[300px] w-full">
-                <Filtros />
-              </div>
-              <div className="bg-slate-300 h-full mt-16 ">
-                  <Orden />
-              </div>
-          </div>
-          
-          <MostrarBarcos barcos={barcos} paginaActual={pagina}/>
-     </div>
-          <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} cambioPag={handleNextPage} />
+  <div className="flex flex-col md:flex-row">
+    <div >
+      <div className="bg-slate-300 md:mt-16 md:h-[400px] md:w-[350px]">
+        <Filtros />
+      </div>
+      <div className="bg-slate-300 mt-4 md:mt-0 md:h-full">
+        <Orden />
+      </div>
+    </div>
+
+    <MostrarBarcos barcos={barcos} paginaActual={pagina} className="flex flex-wrap"/>
+  </div>
+
+  <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} cambioPag={handleNextPage} />
 </>
+
   );
 }

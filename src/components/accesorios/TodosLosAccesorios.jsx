@@ -30,35 +30,31 @@ export default function TodosLosAccesorios() {
       : alert("No hay mas paginas");
   };
 
-  const accesoriosPagina = accesorios.slice(inicio, fin);
-
-  return (
-    <>
-      <div className="flex">
-        <div className=" bg-slate-300 w-[400px] ">
-          <div className="bg-slate-300 mt-16 h-[300px] w-full">
-            <FiltrosAccesorios />
-            <Orden />
-          </div>
-        </div>
-
-        <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
-          {accesoriosPagina &&
-            accesoriosPagina.map((accesorio) => {
-              return (
-                <div key={accesorio.id}>
-                  <RenderAccesorios accesorio={accesorio} />
-                  <ReviewStars productId={accesorio.id} />
-                </div>
-              );
-            })}
-        </div>
+ const accesoriosPagina = accesorios.slice(inicio, fin);
+  
+ return (
+  <>
+  <div className="flex flex-col md:flex-row">
+    <div className="bg-slate-300 md:w-1/4 lg:w-1/4 xl:w-1/4 md:flex-col  ">
+      <div className="bg-slate-300 mt-16 md:h-[300px] md:w-full">
+        <FiltrosAccesorios />
+        <Orden />
       </div>
-      <Paginacion
-        paginaActual={pagina}
-        totalPaginas={totalPaginas}
-        cambioPag={handleNextPage}
-      />
-    </>
-  );
+    </div>
+
+    <div className=" flex flex-wrap gap-16 ml-8 w-full lg:grid-cols-3 xl:grid-cols-4  p-16 mt-16">
+      {accesoriosPagina &&
+        accesoriosPagina.map((accesorio) => (
+          <div key={accesorio.id}>
+            <RenderAccesorios className=" "accesorio={accesorio} />
+            <ReviewStars productId={accesorio.id} />
+          </div>
+        ))}
+    </div>
+  </div>
+
+  <Paginacion paginaActual={pagina} totalPaginas={totalPaginas} cambioPag={handleNextPage} />
+</>
+
+ );
 }
