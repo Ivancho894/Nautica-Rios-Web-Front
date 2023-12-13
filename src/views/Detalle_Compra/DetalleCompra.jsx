@@ -9,7 +9,7 @@ import handlePay from "./handlePay";
 const DetalleCompra = () => {
   const dispatch = useDispatch();
   const carr = useSelector((state) => state.carrito);
-
+  const uid = useSelector((state) => state.uid);
   const [productos, setProductos] = useState([]);
   const [totalPagar, setTotalPagar] = useState(0);
 
