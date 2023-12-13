@@ -22,7 +22,7 @@ import { AiFillChrome } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 import Correo from "../components/Correo";
 import { Link } from "react-router-dom";
-
+import CopiarAlPortapapeles from "../components/CopiarAlPortaPapeles";
 export default function Home() {
   const auth = useAuth();
   const { displayName } = auth.user;
@@ -154,24 +154,42 @@ export default function Home() {
               <div className="text-center px-4">
                 <h1 className="text-3xl font-bold mb-5">Sobre Nosotros</h1>
                 <h2 className="text-2xl mb-8">
-                Bienvenido a Náutica Ríos, tu socio confiable en el mundo marítimo. En Náutica Ríos, nos apasiona conectar a las personas con la experiencia única de navegar en el rio. Como especialistas en la industria naval, ofrecemos una gama completa de servicios para satisfacer todas tus necesidades en el mundo de los barcos.
-
-
-
+                  Bienvenido a Náutica Ríos, tu socio confiable en el mundo
+                  marítimo. En Náutica Ríos, nos apasiona conectar a las
+                  personas con la experiencia única de navegar en el rio. Como
+                  especialistas en la industria naval, ofrecemos una gama
+                  completa de servicios para satisfacer todas tus necesidades en
+                  el mundo de los barcos.
                 </h2>
                 <h3 className="text-xl mb-8">
-                ¿Buscas la embarcación perfecta para tus travesías? Nuestro equipo experto de Náutica Ríos está aquí para asesorarte en cada paso del camino. Desde la selección de la embarcación ideal hasta los detalles más técnicos, te brindamos orientación personalizada para garantizar que encuentres el barco que se adapte perfectamente a tus deseos y requisitos.
-
-Además de facilitar la adquisición de barcos, en Náutica Ríos nos enorgullecemos de ofrecer servicios integrales de mantenimiento y reparación. Nuestros técnicos altamente calificados y equipados con las últimas tecnologías trabajan diligentemente para asegurar que tu embarcación esté siempre en condiciones óptimas. Desde inspecciones regulares hasta reparaciones especializadas, estamos comprometidos a mantener tu barco en excelente estado.
-
-¿Necesitas servicios personalizados para tu embarcación? Náutica Ríos se especializa en adaptarse a tus necesidades específicas. Ofrecemos servicios a medida, desde personalizaciones hasta mejoras de rendimiento, para garantizar que tu experiencia en el mar sea excepcional en todos los aspectos.
-
-
+                  ¿Buscas la embarcación perfecta para tus travesías? Nuestro
+                  equipo experto de Náutica Ríos está aquí para asesorarte en
+                  cada paso del camino. Desde la selección de la embarcación
+                  ideal hasta los detalles más técnicos, te brindamos
+                  orientación personalizada para garantizar que encuentres el
+                  barco que se adapte perfectamente a tus deseos y requisitos.
+                  Además de facilitar la adquisición de barcos, en Náutica Ríos
+                  nos enorgullecemos de ofrecer servicios integrales de
+                  mantenimiento y reparación. Nuestros técnicos altamente
+                  calificados y equipados con las últimas tecnologías trabajan
+                  diligentemente para asegurar que tu embarcación esté siempre
+                  en condiciones óptimas. Desde inspecciones regulares hasta
+                  reparaciones especializadas, estamos comprometidos a mantener
+                  tu barco en excelente estado. ¿Necesitas servicios
+                  personalizados para tu embarcación? Náutica Ríos se
+                  especializa en adaptarse a tus necesidades específicas.
+                  Ofrecemos servicios a medida, desde personalizaciones hasta
+                  mejoras de rendimiento, para garantizar que tu experiencia en
+                  el mar sea excepcional en todos los aspectos.
                 </h3>
                 <h4 className="text-xl mb-8">
                   {" "}
-                  En Náutica Ríos, nos apasiona el rio y queremos compartir esa pasión contigo. Sea cual sea tu visión, estamos aquí para convertirla en realidad. Confía en Náutica Ríos para brindarte un servicio de primer nivel, ya sea para comprar, mantener o mejorar tu embarcación. Únete a nosotros en esta emocionante aventura en el agua.
-
+                  En Náutica Ríos, nos apasiona el rio y queremos compartir esa
+                  pasión contigo. Sea cual sea tu visión, estamos aquí para
+                  convertirla en realidad. Confía en Náutica Ríos para brindarte
+                  un servicio de primer nivel, ya sea para comprar, mantener o
+                  mejorar tu embarcación. Únete a nosotros en esta emocionante
+                  aventura en el agua.
                 </h4>
               </div>
               <img
@@ -298,7 +316,7 @@ Además de facilitar la adquisición de barcos, en Náutica Ríos nos enorgullec
       <a href="home#inicio">🛥</a>
       <div className=" flex items-end gap-4">
         <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
-        <img src={insta} alt="barco3" className="w-16 ml-44" />
+          <img src={insta} alt="barco3" className="w-16 ml-44" />
         </a>
         <h1 className="text-5xl font-bold ">nauticarios_embarcaciones</h1>
       </div>
@@ -316,17 +334,16 @@ Además de facilitar la adquisición de barcos, en Náutica Ríos nos enorgullec
               Operamos en toda la Argentina y alrededores:<br></br>
               <br />
               Ivan Serralta - Cel. y WhatsApp: <br />
-              
               <br />
               (+549) 3541-566295 <br />
-
               <br />
-              somosnauticarios@gmail.com <br />
+              <CopiarAlPortapapeles texto="somosnauticarios@gmail.com" />
               <br />
-              Ventas: 
               <br />
-              <Link to='https://api.whatsapp.com/message/L6R75S3FBG45D1?autoload=1&app_absent=0'>
-              +549-1173632760
+              Ventas:
+              <br />
+              <Link to="https://api.whatsapp.com/message/L6R75S3FBG45D1?autoload=1&app_absent=0">
+                +549-1173632760
               </Link>
             </h1>
           </div>
