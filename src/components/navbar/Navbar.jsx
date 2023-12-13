@@ -120,16 +120,6 @@ const Navbar = ({ activarMensages }) => {
               Accesorios
             </Link>
           </li>
-          <li className="mr-6">
-            <a href="/home#contacto" className="cursor-pointer text-white">
-              Contacto
-            </a>
-          </li>
-          <li>
-            <a href="/home#nosotros" className="cursor-pointer text-white">
-              Nosotros
-            </a>
-          </li>
         </ul>
         <div className="w-11 h-11s end-0">
           {/* <Header /> */}

@@ -9,6 +9,7 @@ import {
   BORRAR_UNIDAD,
   BORRAR_PRODUCTO,
 } from "../../redux/actions";
+import ReviewStars from "../Reviews/Reviews";
 
 const RenderAccesorios = ({ accesorio }) => {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ const RenderAccesorios = ({ accesorio }) => {
           </button>
         </Link>
       </div>
+      <ReviewStars productId={accesorio.id} />
     </div>
   );
 };
