@@ -98,7 +98,26 @@ export const SET_ORDER_ACC = (order) => ({
   type: "SET_ORDER_ACC",
   payload: order,
 });
+export const GET_CARRITO = (uid) => async (dispatch) => {
+  console.log(uid)
+  try{
+    const userRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userRef);
+    const datosUsuario = await userSnap.data();
+    const carr = datosUsuario.carrito
+    console.log(carr)
+    dispatch({
+      type: "GET_CARRITO",
+      payload: carr,
+    })
 
+  }catch(error){
+    console.log(error)
+  } 
+
+
+  return { type: "GET_CARRITO" };
+}
 export function AGREGAR_CARRITO(acc) {
   return { type: "AGREGAR_CARRITO", payload: acc };
 }

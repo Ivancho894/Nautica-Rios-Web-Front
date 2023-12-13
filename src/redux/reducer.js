@@ -342,6 +342,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
       };
+    case "GET_CARRITO":
+      return {
+        ...state,
+        carrito: action.payload,
+      }
 
     case "AGREGAR_CARRITO":
       return {

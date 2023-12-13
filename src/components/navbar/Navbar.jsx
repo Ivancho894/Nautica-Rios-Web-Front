@@ -12,10 +12,14 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 
 import Button from "./Button";
+import { GET_CARRITO, SET_UID } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 const Navbar = ({ activarMensages }) => {
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const { pathname } = useLocation();
+
+  const dispatch =  useDispatch()
 
   const auth = useAuth();
   const { displayName, uid } = auth.user;
@@ -41,6 +45,8 @@ const Navbar = ({ activarMensages }) => {
 
   useEffect(() => {
     obtenerPermisos(uid);
+    dispatch(SET_UID(uid))
+    dispatch(GET_CARRITO(uid))
   }, [uid]);
 
   console.log(permisos);

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import googleicon from "../../assets/google-icon.svg";
+import { useDispatch } from "react-redux";
+import { GET_CARRITO } from "../../redux/actions";
 
 export function Login() {
   const navigate = useNavigate();
-
+  const dispatch  = useDispatch()
   const auth = useAuth();
 
   const [login, setLogin] = useState({
@@ -17,6 +19,7 @@ export function Login() {
     e.preventDefault();
     auth.login(login.correo, login.contraseña);
     if (auth.user) {
+      dispatch(GET_CARRITO(user.uid))
       navigate("/home");
     }
   };
