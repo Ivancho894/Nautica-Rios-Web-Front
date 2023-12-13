@@ -17,10 +17,8 @@ export default function SearchBar({lista,set,prop}){
     }
     
     return (
-        <div className="search-bar">
-            <h1>hola</h1>
-            <h1>hola</h1>
-            <input type="text" placeholder="Search..." onChange={handleChange} value={searching}/>
+        <div className="search-bar p-20 mt-10">
+            <input type="text" placeholder="Search..." onChange={handleChange} value={searching} className="bg-gray-100"/>
             <button onClick={handleSubmit}>Search</button>
         </div>
     )
