@@ -22,7 +22,7 @@ import { AiFillChrome } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 import Correo from "../components/Correo";
 import { Link } from "react-router-dom";
-import CopiarAlPortapapeles from "../components/CopiarAlPortaPapeles";
+import CopiarAlPortapapeles from "../components/CopiarAlPortapapeles";
 export default function Home() {
   const auth = useAuth();
   const { displayName } = auth.user;
