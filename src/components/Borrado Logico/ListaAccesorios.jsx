@@ -3,6 +3,7 @@ import AccesorioItem from './AccesorioItem';
 import { useEffect } from "react";
 import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 import { db } from '../../../firebase-config';
+import SearchBar from './SearchBar';
 
 export default function ListaAccesorios () {
   const [listaAcc, setListaAcc] = useState([]);
@@ -28,13 +29,16 @@ export default function ListaAccesorios () {
   const listaAccArray = Array.from(listaAcc);
   console.log(listaAccArray);
 
-  return (
+  return (    
+  <div className='mt-4'>
+    <SearchBar lista={listaAcc} set={setListaAcc}  prop={'nombre'}/>
     <div className="flex">
 
       <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
         {listaAcc && listaAcc.map((accesorio) => {
           return <AccesorioItem key={accesorio.id} obtenerAccesorios={obtenerAccesorios} accesorio={accesorio} />;
         })}
+      </div>
       </div>
     </div>
   );

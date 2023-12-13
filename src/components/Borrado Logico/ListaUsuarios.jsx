@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 import { db } from '../../../firebase-config';
 import UsuariosItem from './UsuariosItem';
+import SearchBar from './SearchBar';
 
 export default function ListaUsuarios () {
   const [listaUsers, setListaUsers] = useState([]);
@@ -28,7 +29,9 @@ export default function ListaUsuarios () {
   const listaUserArray = Array.from(listaUsers);
   console.log(listaUserArray);
 
-  return (
+  return (    
+  <div className='mt-4'>
+    <SearchBar lista={listaUsers} set={setListaUsers}  prop={'email'}/>
     <div className="flex">
 
       <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
@@ -36,6 +39,7 @@ export default function ListaUsuarios () {
           return <UsuariosItem key={user.id} obtenerUsers={obtenerUsers} user={user} />;
         })}
       </div>
+    </div>
     </div>
   );
 }

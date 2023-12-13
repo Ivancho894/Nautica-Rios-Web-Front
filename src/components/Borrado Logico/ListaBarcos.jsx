@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 import { db } from '../../../firebase-config';
 import BarcosItem from './BarcosItem';
+import SearchBar from './SearchBar';
+import SinBarcos from '../Todos_los_Barcos/SinBarcos';
 
 export default function ListaBarcos () {
   const [listaBarc, setListaBarc] = useState([]);
@@ -29,13 +31,15 @@ export default function ListaBarcos () {
   console.log(listaBarcArray);
 
   return (
+    <div className='mt-4'>
+      <SearchBar lista={listaBarc} set={setListaBarc}  prop={'marcaBarco'}/>
     <div className="flex">
-
       <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
-        {listaBarc && listaBarc.map((barco) => {
+        {listaBarc.length<0?listaBarc.map((barco) => {
           return <BarcosItem key={barco.id} obtenerBarcos={obtenerBarcos} barco={barco} />;
-        })}
+        }):<SinBarcos/>}
       </div>
     </div>
+        </div>
   );
 }
