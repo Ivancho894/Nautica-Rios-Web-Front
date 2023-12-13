@@ -101,7 +101,7 @@ const PublicarBarco = () => {
     }
   };
   return (
-    <div className="mt-20">
+    <div className="mt-20 p-5">
       <h1>Nueva embarcacion</h1>
     <form onSubmit={handleSubmit} className=" max-w  mx-auto grid grid-cols-1 md:grid-cols-2 gap-8  p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md max-h-full" >
   <div className="mb-4">
@@ -324,11 +324,12 @@ const PublicarBarco = () => {
       required
     />
   </div>
-  <div className="flex items-center mb-4 ">
+  <div className="flex justify-center mb-4  ">
 
   <button
     type="submit"
     className="bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm w-full p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
   >
     Publicar
   </button></div>
