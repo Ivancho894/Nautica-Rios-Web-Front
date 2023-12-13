@@ -36,14 +36,14 @@ const ListaDeDeseos = () => {
 
   console.log(listaDeDeseos);
   return listaDeDeseos ? (
-    <div className="bg-slate-300">
-      <h1 className="mt-20 ">Lista de deseos</h1>
-      <div className=" ml-8 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-16 mt-16">
+    <div className="bg-slate-300 min-h-screen">
+      <h1 className="mt-20 p-5 text-center">Lista de deseos</h1>
+      <div className=" w-full max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-16 mt-16">
         {listaDeDeseos.map((deseo, index) => {
           return (
             <div
               key={index}
-              className="border-2 mb-4 border-slate-200 p-5 w-80 h-85 rounded-3xlflex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
+              className="border-2 mb-4 border-slate-200 p-5 w-90 h-95 rounded-none flex flex-col items-center justify-center text-center mb-5 shadow-[0_5px_40px_1px_rgba(0,0,0,2)] mt-5 mr-5 mb-5 ml-5"
             >
               <img
                 className="w-[350px] h-60 object-cover "
