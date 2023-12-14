@@ -95,7 +95,7 @@ const Navbar = ({ activarMensages }) => {
   return (
     <nav className="bg-gray-800 p-1 fixed top-0 left-0 w-full z-10">
       <Toaster />
-      <div className="flex justify-space-between items-center">
+      <div className="flex justify-between items-center">
         <NavLink to="/home" className="">
           <img src={Logo} alt="Logo" className=" ml-4 h-[80px]" />
         </NavLink>
