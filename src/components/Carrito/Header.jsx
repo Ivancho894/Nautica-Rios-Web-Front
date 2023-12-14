@@ -84,7 +84,7 @@ export default function Header({ uid }) {
 
   return (
     <header>
-      <div className="container-icon  bg-white">
+      <div className="container-icon  ">
         <div className="container-cart-icon" onClick={() => setActive(!active)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
