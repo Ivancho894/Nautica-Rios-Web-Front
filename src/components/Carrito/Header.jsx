@@ -22,10 +22,6 @@ export default function Header({ uid }) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    console.log(carrito);
-    console.log(allProducts);
-    console.log(totalPagar);
-  
     let carrAux = []
 
     //Itero en carrito y busco uno de cada uno 

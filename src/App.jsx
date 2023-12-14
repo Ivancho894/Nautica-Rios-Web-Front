@@ -51,6 +51,7 @@ import { db } from "../firebase-config";
 import ListaUsuarios from "./components/Borrado Logico/ListaUsuarios";
 import PaginaError from "./views/Detalle_Compra/PaginaError";
 import ListaAcceso from "./components/Borrado Logico/Acceso/ListaAcceso";
+import NoAcceso from "./components/Usuario/NoAcceso";
 
 function App() {
   // const [allProducts, setAllProducts] = useState([]);
@@ -64,24 +65,7 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const obtenerPermisos = async (uid) => {
-    try {
-      if (currentUser) {
-        const userRef = doc(db, "users", uid);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-          const permiso = userSnap.data().permisosAdmin;
-          console.log("Permisos:", permiso);
-          return permiso;
-        } else {
-          console.log("No sirve");
-        }
-      }
-    } catch (error) {
-      console.log("error");
-    }
-  };
+  
 
   useEffect(() => {
     const auth = getAuth();
@@ -143,7 +127,7 @@ function App() {
     <div className="r">
       <ToastContainer />
 
-      {pathname !== "/" && pathname !== "/login"? (
+      {pathname !== "/" ? (
         <Navbar />
       ) : (
         <div className="bg-gray-800"></div>
@@ -168,21 +152,23 @@ function App() {
           <Route path="/paginaerror" element={<PaginaError />} />
         </Route>
 
+        <Route path="/noAcceso" element={<NoAcceso />} />
+
         <Route element={<ProtectedRoutes authorizedUser="admin" />}>
           <Route path="/gestionAccesorios" element={<ListaAccesorios />} />
           <Route path="/gestionBarcos" element={<ListaBarcos />} />
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
           <Route path="/gestionUsuarios" element={<ListaUsuarios />} />
-          <Route path="/accesoUsuarios" element={<ListaAcceso/>}/>
+          <Route path="/accesoUsuarios" element={<ListaAcceso />} />
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
         <Route path="/detalle/:id" element={<Detalle />} />
         <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
         <Route path="/accesorios" element={<TodosLosAccesorios />} />
-        <Route path="/succes/:id" element={< SuccessPage/>} />
-        <Route path="/fail" element={< PaginaError/>} />
+        <Route path="/succes/:id" element={<SuccessPage />} />
+        <Route path="/fail" element={<PaginaError />} />
         <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
         {/* //*  mis rutas  */}
         {/* <Route path="/login" element={<LoginView />} /> */}

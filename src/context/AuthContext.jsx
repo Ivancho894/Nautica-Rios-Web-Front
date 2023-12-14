@@ -74,21 +74,21 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      // navigate("/");
+      navigate("/home");
 
-      const { uid } = response.user;
+      // const { uid } = response.user;
 
-      console.log(uid);
+      // console.log(uid);
 
-      const userRef = doc(db, "users", uid);
-      const userSnap = await getDoc(userRef);
-      if (userSnap.exists()) {
-        const { acceso } = userSnap.data();
-        if (!acceso) {
-          alert("Tu cuenta ha sido baneada");
-          logout();
-        }
-      }
+      // const userRef = doc(db, "users", uid);
+      // const userSnap = await getDoc(userRef);
+      // if (userSnap.exists()) {
+      //   const { acceso } = userSnap.data();
+      //   if (!acceso) {
+      //     alert("Tu cuenta ha sido baneada");
+      //     logout();
+      //   }
+      // }
     } catch (error) {
       console.log(error.message);
     }
@@ -112,12 +112,6 @@ export function AuthProvider({ children }) {
         permisosAdmin: false,
         acceso: true,
       });
-    } else {
-      const { acceso } = userSnap.data();
-      if (!acceso) {
-        alert("Tu cuenta ha sido baneada");
-        logout();
-      }
     }
     setUser(user);
     navigate("/home");

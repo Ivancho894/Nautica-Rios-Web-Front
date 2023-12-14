@@ -58,21 +58,21 @@ const Navbar = ({ activarMensages }) => {
         setUid(uid);
         setDisplayName(displayName);
         dispatch(SET_UID(uid));
-        const userRef = doc(db, "users", uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          const { acceso } = userSnap.data();
-          if (!acceso) {
-            alert("Tu cuenta ha sido baneada");
-            auth.logout();
-          }
-        }
+        // const userRef = doc(db, "users", uid);
+        // const userSnap = await getDoc(userRef);
+        // if (userSnap.exists()) {
+        //   const { acceso } = userSnap.data();
+        //   if (!acceso) {
+        //     alert("Tu cuenta ha sido baneada");
+        //     auth.logout();
+        //   }
+        // }
       }
     });
     if (uid) {
       obtenerPermisos(uid);
     }
-  }, [uid]);
+  },[uid]);
 
   // if (isLandingPage) {
   //   return null;
@@ -104,7 +104,7 @@ const Navbar = ({ activarMensages }) => {
 
   return (
     <>
-      {pathname !== "/" && pathname !== "/login"? (
+      {pathname !== "/"? (
         <nav className="bg-gray-800 p-1 fixed top-0 left-0 w-full z-10">
           <Toaster />
           <div className="flex justify-between items-center">
@@ -148,7 +148,8 @@ const Navbar = ({ activarMensages }) => {
                 //   </button>
                 // </div>
                 <div>
-                  {!permisos ? (
+                  {
+                    !permisos ? (
                     <MenuUsuario
                       handleLogout={handleLogout}
                       displayName={displayName}
