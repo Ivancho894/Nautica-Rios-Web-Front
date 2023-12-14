@@ -41,6 +41,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import DetalleCompra from "./views/Detalle_Compra/DetalleCompra";
+import SuccessPage from "./views/Detalle_Compra/Succes";
 import PublicarAccesorio from "./views/Administrador/publicarAccesorio";
 // import { Toaster,toast } from "sonner";
 
@@ -49,6 +50,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import ListaUsuarios from "./components/Borrado Logico/ListaUsuarios";
 import PaginaError from "./views/Detalle_Compra/PaginaError";
+import ListaAcceso from "./components/Borrado Logico/Acceso/ListaAcceso";
 
 function App() {
   // const [allProducts, setAllProducts] = useState([]);
@@ -172,12 +174,15 @@ function App() {
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
           <Route path="/gestionUsuarios" element={<ListaUsuarios />} />
+          <Route path="/accesoUsuarios" element={<ListaAcceso/>}/>
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />
         <Route path="/detalle/:id" element={<Detalle />} />
         <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
         <Route path="/accesorios" element={<TodosLosAccesorios />} />
+        <Route path="/succes/:id" element={< SuccessPage/>} />
+        <Route path="/fail" element={< PaginaError/>} />
         <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
         {/* //*  mis rutas  */}
         {/* <Route path="/login" element={<LoginView />} /> */}

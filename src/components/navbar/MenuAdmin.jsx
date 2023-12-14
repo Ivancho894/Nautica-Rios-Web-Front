@@ -31,6 +31,11 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
     navigate("/gestionUsuarios");
   };
 
+  const irGestionAcceso = (e) => {
+    e.preventDefault();
+    navigate("/accesoUsuarios");
+  };
+
   const irPublicarBarcos = (e) => {
     e.preventDefault();
     navigate("/publicarBarco");
@@ -176,6 +181,23 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
                 </a>
               )}
             </Menu.Item>
+
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href=""
+                  type="submit"
+                  onClick={irGestionAcceso}
+                  className={classNames(
+                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    "block w-full px-4 py-2 text-left text-sm"
+                  )}
+                >
+                  Gestion acceso de usuarios
+                </a>
+              )}
+            </Menu.Item>
+
 
             <Menu.Item>
               {({ active }) => (

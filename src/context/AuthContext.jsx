@@ -110,6 +110,7 @@ export function AuthProvider({ children }) {
         carrito: [],
         listaDeDeseos: [],
         permisosAdmin: false,
+        acceso: true,
       });
     } else {
       const { acceso } = userSnap.data();
