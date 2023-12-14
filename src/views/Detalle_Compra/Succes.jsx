@@ -18,7 +18,7 @@ export default function successPage(){
 
 
     return(
-        <div class="w-full max-w-md mx-auto mt-20">
+        <div class="w-full max-w-md mx-auto mt-20 p-10">
         <h1 class="text-5xl font-bold text-center mb-6">Gracias por tu compra</h1>
         <p class="text-xl text-center mb-6">
             Estamos encantados de que hayas elegido nuestros productos. 
