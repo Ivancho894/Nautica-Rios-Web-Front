@@ -143,7 +143,7 @@ function App() {
     <div className="r">
       <ToastContainer />
 
-      {pathname !== "/" && pathname !== "/login"? (
+      {pathname !== "/" ? (
         <Navbar />
       ) : (
         <div className="bg-gray-800"></div>

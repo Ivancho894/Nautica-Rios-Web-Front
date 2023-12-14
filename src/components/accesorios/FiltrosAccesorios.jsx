@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccesorios, ADD_FILTER_ACC, SET_FILTER_ACC, getFiltersAcc, SET_ORDER_ACC ,RESET_FILTERS} from '../../redux/actions';
 import { useEffect } from 'react';
+import getNombreFiltro from './getNombreFiltro';
 
 export default function FiltrosAcce() {
   const allFilters = useSelector(state => state.allFiltersAcc);
@@ -45,7 +46,7 @@ export default function FiltrosAcce() {
               {
                 return (
                   <div key={i} className="flex flex-row justify-between mt-4 ml-2">
-                    <label className="ml-4">{prop}:</label>
+                    <label className="ml-4">{getNombreFiltro(prop)}:</label>
                     <select className="ml-4 h-[20px] w-[100px] mr-2" onChange={(event) => handleChange(event)} value={filtrosAplicados[prop]?`{"min":${filtrosAplicados[prop].min},"max":${filtrosAplicados[prop].max}}`:'-'} name={prop} >
                       <option value="-">-</option>
 
@@ -62,7 +63,7 @@ export default function FiltrosAcce() {
               {
                 return (
                   <div key={i} className="flex flex-row justify-between mt-4 ml-2">
-                    <label className="ml-4 ">{prop}:</label>
+                    <label className="ml-4 ">{getNombreFiltro(prop)}:</label>
                     <select className="ml-4 h-[20px] w-[100px] mr-2" onChange={(event) => handleChange(event)} value={filtrosAplicados[prop]?filtrosAplicados[prop]:'-'} name={prop}>
                       <option value="-">-</option>
 
