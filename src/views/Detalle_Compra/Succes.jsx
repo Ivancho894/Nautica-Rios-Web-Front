@@ -17,15 +17,15 @@ export default function successPage(){
 
 
     return(
-        <div class="w-full max-w-md mx-auto mt-20 p-10">
+        <div class="min-h-screen items-center justify-center p-40 w-full ">
         <h1 class="text-5xl font-bold text-center mb-6">Gracias por tu compra</h1>
         <p class="text-xl text-center mb-6">
             Estamos encantados de que hayas elegido nuestros productos. 
             <br/>
-            Un encargado de ventas se va a comunicar con usted en breves
+            Un encargado de ventas se va a comunicar con usted en breve.
             Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nosotros.
         </p>
-        <a href="home#inicio" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
+        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
             Regresar al inicio
         </a>
     </div>
