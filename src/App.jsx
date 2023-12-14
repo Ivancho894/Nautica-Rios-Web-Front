@@ -179,7 +179,7 @@ function App() {
         <Route path="/detalle/:id" element={<Detalle />} />
         <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
         <Route path="/accesorios" element={<TodosLosAccesorios />} />
-        <Route path="/succes" element={< SuccessPage/>} />
+        <Route path="/succes:id" element={< SuccessPage/>} />
         <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
         {/* //*  mis rutas  */}
         {/* <Route path="/login" element={<LoginView />} /> */}
