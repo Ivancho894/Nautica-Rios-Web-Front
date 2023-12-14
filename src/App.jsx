@@ -180,6 +180,7 @@ function App() {
         <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
         <Route path="/accesorios" element={<TodosLosAccesorios />} />
         <Route path="/succes/:id" element={< SuccessPage/>} />
+        <Route path="/fail" element={< PaginaError/>} />
         <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
         {/* //*  mis rutas  */}
         {/* <Route path="/login" element={<LoginView />} /> */}
