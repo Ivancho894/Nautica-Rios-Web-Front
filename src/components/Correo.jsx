@@ -68,7 +68,7 @@ const Correo = ({ ok }) => {
               name="user_name"
               value={email.user_name}
               onChange={handleChange}
-              className="ml-[-3px] w-[312px] text-black"
+              className="ml-[-3px] w-[312px] text-black "
             />
           </div>
           <div className="flex gap-4 mt-4">

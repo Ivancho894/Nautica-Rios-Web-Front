@@ -41,6 +41,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import DetalleCompra from "./views/Detalle_Compra/DetalleCompra";
+import SuccessPage from "./views/Detalle_Compra/Succes";
 import PublicarAccesorio from "./views/Administrador/publicarAccesorio";
 // import { Toaster,toast } from "sonner";
 
@@ -178,6 +179,8 @@ function App() {
         <Route path="/detalle/:id" element={<Detalle />} />
         <Route path="/todoslosbarcos" element={<TodosLosBarcos />} />
         <Route path="/accesorios" element={<TodosLosAccesorios />} />
+        <Route path="/succes/:id" element={< SuccessPage/>} />
+        <Route path="/fail" element={< PaginaError/>} />
         <Route path="/detalleaccesorio/:id" element={<DetalleAccesorios />} />
         {/* //*  mis rutas  */}
         {/* <Route path="/login" element={<LoginView />} /> */}
