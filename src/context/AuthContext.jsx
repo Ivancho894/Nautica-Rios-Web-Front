@@ -50,6 +50,7 @@ export function AuthProvider({ children }) {
 
       const listaDeDeseos = [];
       const carrito = [];
+      const acceso = true;
 
       await sendEmailVerification(auth.currentUser);
 
@@ -61,7 +62,8 @@ export function AuthProvider({ children }) {
         email,
         carrito,
         listaDeDeseos,
-        permisosAdmin: false
+        permisosAdmin: false,
+        acceso,
       });
       setUser(newUser);
       navigate("/home");
@@ -90,6 +92,7 @@ export function AuthProvider({ children }) {
         carrito: [],
         listaDeDeseos: [],
         permisosAdmin: false,
+        acceso: true,
       });
     }
     setUser(user)
