@@ -20,8 +20,9 @@ const UsuariosItem = ({ user, obtenerUsers }) => {
 
   return (
     <div>
-      <p>{user.displayName} {user.email}</p>
-      <button onClick={handleToggleEstado} className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>
+      <p>{user.displayName} <br/> {user.email}</p>
+      <button onClick={handleToggleEstado} className={`ml-4 p-2 text-center mt-1 mb-6 h-[40px] w-[130px] ${
+    user.permisosAdmin ? 'bg-red-500' : 'bg-green-500'} text-white`}>
         {user.permisosAdmin ? 'Deshabilitar' : 'Habilitar'}
       </button>
     </div>

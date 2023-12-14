@@ -34,7 +34,7 @@ export default function ListaAccesorios () {
     <SearchBar lista={listaAcc} set={setListaAcc}  prop={'nombre'}/>
     <div className="flex">
 
-      <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
+      <div className=" ml-8 w-full grid grid-cols-3 ">
         {listaAcc && listaAcc.map((accesorio) => {
           return <AccesorioItem key={accesorio.id} obtenerAccesorios={obtenerAccesorios} accesorio={accesorio} />;
         })}

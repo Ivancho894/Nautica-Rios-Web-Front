@@ -34,7 +34,7 @@ export default function ListaUsuarios () {
     <SearchBar lista={listaUsers} set={setListaUsers}  prop={'email'}/>
     <div className="flex">
 
-      <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
+      <div className=" ml-8 w-full grid grid-cols-3 ">
         {listaUsers && listaUsers.map((user) => {
           return <UsuariosItem key={user.id} obtenerUsers={obtenerUsers} user={user} />;
         })}
