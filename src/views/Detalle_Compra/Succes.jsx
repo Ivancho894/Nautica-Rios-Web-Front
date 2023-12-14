@@ -25,7 +25,7 @@ export default function successPage(){
             <br/>
             Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nosotros.
         </p>
-        <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
+        <a href="home#inicio" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
             Regresar al inicio
         </a>
     </div>
