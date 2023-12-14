@@ -21,7 +21,8 @@ const BarcosItem = ({ barco, obtenerBarcos }) => {
   return (
     <div>
       <p>{barco.marcaBarco} {barco.modelo}</p>
-      <button onClick={handleToggleEstado} className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-1 mb-6 h-[40px] w-[130px]'>
+      <button onClick={handleToggleEstado} className={`ml-4 p-2 text-center mt-1 mb-6 h-[40px] w-[130px] ${
+    barco.eliminado ? 'bg-red-500' : 'bg-green-500'} text-white`}>
         {barco.eliminado ? 'Habilitar' : 'Deshabilitar'}
       </button>
     </div>

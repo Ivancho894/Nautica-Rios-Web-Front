@@ -177,7 +177,7 @@ const MenuAdmin = ({ handleLogout, displayName }) => {
                     "block w-full px-4 py-2 text-left text-sm"
                   )}
                 >
-                  Gestion de usuarios
+                  Gestion de permisos admin
                 </a>
               )}
             </Menu.Item>
