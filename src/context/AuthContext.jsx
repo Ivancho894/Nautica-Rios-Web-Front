@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
 
-  useEffect( () => {
+  useEffect(() => {
     const subscribed = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
         console.log("no hay usuario suscrito");
@@ -39,7 +39,6 @@ export function AuthProvider({ children }) {
     return () => subscribed();
   }, []);
 
-
   const register = async (email, password, displayName) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -50,6 +49,7 @@ export function AuthProvider({ children }) {
 
       const listaDeDeseos = [];
       const carrito = [];
+      const acceso = true;
 
       await sendEmailVerification(auth.currentUser);
 
@@ -61,7 +61,8 @@ export function AuthProvider({ children }) {
         email,
         carrito,
         listaDeDeseos,
-        permisosAdmin: false
+        permisosAdmin: false,
+        acceso,
       });
       setUser(newUser);
       navigate("/home");
@@ -71,18 +72,37 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
-    const response = await signInWithEmailAndPassword(auth, email, password);
-    console.log(response);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      // navigate("/");
+
+      const { uid } = response.user;
+
+      console.log(uid);
+
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const { acceso } = userSnap.data();
+        if (!acceso) {
+          alert("Tu cuenta ha sido baneada");
+          logout();
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const loginWithGoogle = async () => {
     const responseGoogle = new GoogleAuthProvider();
-    const userCredential = await signInWithPopup(auth, responseGoogle)
-    const user = userCredential.user
-    
+    const userCredential = await signInWithPopup(auth, responseGoogle);
+    const user = userCredential.user;
+
+    console.log(user);
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
-    
+
     if (!userSnap.exists()) {
       setDoc(userRef, {
         email: user.email,
@@ -91,8 +111,14 @@ export function AuthProvider({ children }) {
         listaDeDeseos: [],
         permisosAdmin: false,
       });
+    } else {
+      const { acceso } = userSnap.data();
+      if (!acceso) {
+        alert("Tu cuenta ha sido baneada");
+        logout();
+      }
     }
-    setUser(user)
+    setUser(user);
     navigate("/home");
     return;
   };
