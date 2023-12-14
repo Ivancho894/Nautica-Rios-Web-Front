@@ -21,7 +21,7 @@ const AccesorioItem = ({ accesorio, obtenerAccesorios }) => {
   return (
     <div>
       <p>{accesorio.nombre}</p>
-      <button onClick={handleToggleEstado} className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-8 h-[40px] w-[130px]'>
+      <button onClick={handleToggleEstado} className='ml-4 p-2 bg-[#3b82f6] text-center text-white mt-1 mb-6 h-[40px] w-[130px]'>
         {accesorio.eliminado ? 'Habilitar' : 'Deshabilitar'}
       </button>
     </div>
