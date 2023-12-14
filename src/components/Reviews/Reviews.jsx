@@ -89,9 +89,7 @@ const ReviewStars = ({ productId }) => {
           className={`cursor-pointer ${
             star <= (hoveredRating || rating) ? 'text-yellow-500' : 'text-gray-300'
           }`}
-          onClick={() => handleStarClick(star)}
-          onMouseEnter={() => setHoveredRating(star)}
-          onMouseLeave={() => setHoveredRating(0)}
+          
           aria-label={`Calificar con ${star} estrellas`}
         >
           ★
