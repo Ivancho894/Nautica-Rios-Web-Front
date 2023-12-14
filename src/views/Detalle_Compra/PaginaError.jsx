@@ -7,10 +7,10 @@ export default function () {
     <p class="text-xl text-center mb-6">
         Algo salio mal con la compra.
         <br/>
-        Un encargado de ventas se va a comunicar con usted en breve
+        Un encargado de ventas se va a comunicar con usted en breve.
         Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nosotros.
     </p>
-    <a href="home#inicio" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
+    <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
         Regresar al inicio
     </a>
 </div>;
