@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logo.ico";
+import Logo from "../../assets/sss.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -93,11 +93,11 @@ const Navbar = ({ activarMensages }) => {
   };
 
   return (
-    <nav className="bg-gray-800 p-5 fixed top-0 left-0 w-full z-10">
+    <nav className="bg-gray-800 p-1 fixed top-0 left-0 w-full z-10">
       <Toaster />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-space-between items-center">
         <NavLink to="/home" className="">
-          <img src={Logo} alt="Logo" className=" ml-4 h-[50px]" />
+          <img src={Logo} alt="Logo" className=" ml-4 h-[80px]" />
         </NavLink>
 
         <ul className="flex">
@@ -107,7 +107,7 @@ const Navbar = ({ activarMensages }) => {
               className="cursor-pointier text-white"
               disabled={!isLoggedIn}
             >
-              Barcos
+              BARCOS
             </Link>
           </li>
           <li className="mr-6">
@@ -116,7 +116,7 @@ const Navbar = ({ activarMensages }) => {
               className="cursor-pointier text-white"
               disabled={!isLoggedIn}
             >
-              Accesorios
+              ACCESORIOS
             </Link>
           </li>
         </ul>

@@ -6,11 +6,20 @@ import { db } from "../../../firebase-config";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { async } from "@firebase/util";
 
 export default function Detalle() {
-  const barcos = useSelector((state) => state.barcos);
+  // const barcos = useSelector((state) => state.barcos);
   const { id } = useParams();
-  const barco = barcos.find((x) => x.id === id);
+  // let barco = barcos.find((x) => x.id === id);
+  const [barco, setBarco] = useState(false);
+  async () => {
+    const snap = await getDoc(doc(db, 'barcos', id))
+    if (snap.exists()) {
+      console.log(snap.data())
+      setBarco(snap.data())
+    }
+  }
   const auth = useAuth();
   const [listaDeDeseos, setListaDeDeseos] = useState(null);
   const { uid } = auth.user;
