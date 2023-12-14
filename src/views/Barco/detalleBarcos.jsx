@@ -12,14 +12,7 @@ export default function Detalle() {
   // const barcos = useSelector((state) => state.barcos);
   const { id } = useParams();
   // let barco = barcos.find((x) => x.id === id);
-  const [barco, setBarco] = useState(false);
-  async () => {
-    const snap = await getDoc(doc(db, 'barcos', id))
-    if (snap.exists()) {
-      console.log(snap.data())
-      setBarco(snap.data())
-    }
-  }
+  const barco = barcos.find((x) => x.id === id);
   const auth = useAuth();
   const [listaDeDeseos, setListaDeDeseos] = useState(null);
   const { uid } = auth.user;
