@@ -49,6 +49,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
 import ListaUsuarios from "./components/Borrado Logico/ListaUsuarios";
 import PaginaError from "./views/Detalle_Compra/PaginaError";
+import ListaAcceso from "./components/Borrado Logico/Acceso/ListaAcceso";
+import AccesoControl from "./components/Borrado Logico/Acceso/AccesoControl";
+import AccesoDenegadoPage from "./components/Borrado Logico/Acceso/AccesoDenegado";
 
 function App() {
   // const [allProducts, setAllProducts] = useState([]);
@@ -172,6 +175,8 @@ function App() {
           <Route path="/publicarBarco" element={<PublicarBarco />} />
           <Route path="/publicarAccesorio" element={<PublicarAccesorio />} />
           <Route path="/gestionUsuarios" element={<ListaUsuarios />} />
+          <Route path="/accesoUsuarios" element={<AccesoControl><ListaAcceso/></AccesoControl>}/>
+          <Route path="/acceso-denegado" element={<AccesoDenegadoPage/>} />
         </Route>
 
         <Route path="/quienessomos" element={<QuienesSomos />} />

@@ -17,7 +17,7 @@ import { GET_CARRITO, SET_UID } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 const Navbar = ({ activarMensages }) => {
   const location = useLocation();
-  const isLandingPage = location.pathname === "/";
+  const isLandingPage = location.pathname === "/" || location.pathname === "/acceso-denegado";
   const { pathname } = useLocation();
 
   const dispatch = useDispatch();
