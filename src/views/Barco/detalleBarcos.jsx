@@ -9,9 +9,8 @@ import Slider from "react-slick";
 import { async } from "@firebase/util";
 
 export default function Detalle() {
-  // const barcos = useSelector((state) => state.barcos);
+  const barcos = useSelector((state) => state.barcos);
   const { id } = useParams();
-  // let barco = barcos.find((x) => x.id === id);
   const barco = barcos.find((x) => x.id === id);
   const auth = useAuth();
   const [listaDeDeseos, setListaDeDeseos] = useState(null);
