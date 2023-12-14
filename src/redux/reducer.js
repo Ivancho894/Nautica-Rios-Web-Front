@@ -15,7 +15,10 @@ const initialState = {
   filterAcc: {},
   ordenAcc: "",
   carrito: [],
-  uid:""
+  uid:"",
+  miReviews:[],
+  miCompras:[],
+  reviews:[]
 };
 const storedState =
   JSON.parse(localStorage.getItem("myAppState")) || initialState;
@@ -396,6 +399,30 @@ export default function reducer(state = initialState, action) {
         ...state,
         uid:action.payload
       }
+    case "GET_REVIEWS":
+      return{
+        ...state,
+        reviews:action.payload
+      }
+      case "UPDATE_REVIEWS":
+        return{
+          ...state,
+          reviews:[...reviews,action.payload]
+        }
+    case "CREATE_REV_AND_COMPRAS":
+      return {
+        ...state
+      }
+    case "GET_USER_REVIEWS":
+      return {
+        ...state,
+        compras: [...state.compras,...action.payload.compras],
+        miReviews: [...state.miReviews,...action.payload.miReviews]
+      }
+    
+    
+
+
     default:
       return state;
   }

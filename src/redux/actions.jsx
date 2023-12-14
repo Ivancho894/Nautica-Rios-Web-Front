@@ -145,3 +145,64 @@ export function TOTAL_PAGAR(p) {
     payload: p,
   };
 }
+
+export function GET_REVIEWS(){async ()=>{
+  const reviewsRef = collection(db, 'reviews');
+  const reviews = await getDoccs(reviewsRef);
+  if(reviews.data()){
+    return {
+      type:"GET_REVIEWS",
+      payload:reviews.data()
+    }
+  }
+
+}}
+export function GET_USER_REVIEWS(){async ()=>{
+  const userDoc = doc(db, "user", state.id)
+  const userSnapshot = await getDoc(userDoc);
+  if(userSnapshot.data()){
+    const userReviews = userSnapshot.data().userReviews?userSnapshot.data().userReviews:[]
+    const compras = userSnapshot.data().compras?userSnapshot.data().compras:[]
+    return {
+      type:"GET_USER_REVIEWS",
+      payload:{
+        miReviews:userReviews,
+        compras: compras
+      }
+    }
+  }
+
+}}
+export function UPDATE_REVIEWS(id){
+  const reviewsRef = collection(db, 'reviews', id);
+  const reviews =async () => await getDocs(reviewsRef);
+
+  const laReview = reviews.find(r=>r.productId===id)
+  if(laReview){
+    const total = laReview.totalReviews+action.payload.newreview
+    const average = total/laReview.cantidad+1
+    async ()=> await setDocs(reviewsRef,{totalReviews:total,cantidad:laReview.cantidad+1, average}, { merge: true });
+  }else{
+    async ()=>await addDoc(collection(db, "lasReviews"), {totalReviews:action.payload.newreview,cantidad:1, average:action.payload.newreview,productId:action.payload.id});
+  }
+  return {
+    type:"UPDATE_REVIEWS"
+
+  }
+  
+}
+export function CREATE_REV_AND_COMPRAS(){
+  const userRef = doc(db, 'users', state.id);
+  async ()=> await setDoc(userRef, { userReviews:[],compras:[]}, { merge: true });
+  return {type:"CREATE_REV_AND_COMPRAS"}
+}
+export function UPDATE_USER_REVIEWS(){
+  const userRef = doc(db, 'users', state.id);
+  async ()=> await setDoc(userRef, { userReviews:[...userReviews,...action.payload.userReviews]}, { merge: true });
+  return {type:"UPDATE_USER_REVIEWS"}
+}
+export function UPDATE_USER_COMPRAS(){
+  const userRef = doc(db, 'users', state.id);
+  async ()=> await setDoc(userRef, { compras: [...compras,...state.carrito] }, { merge: true });
+  return {type:"UPDATE_USER_COMPRAS"}
+}

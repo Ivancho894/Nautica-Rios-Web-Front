@@ -22,7 +22,7 @@ const RenderAccesorios = ({ accesorio }) => {
     dispatch(AGREGAR_CARRITO(accesorio));
     uid!=""?dispatch(UPDATE_CARRITO(uid,carr)):null;
   };
-
+// map del res y hacer el promedio
   const settings = {
     dots: true,
     infinite: true,

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderAccesorios from "./RenderAccesorios";
 import FiltrosAccesorios from "./FiltrosAccesorios";
 import { useEffect } from "react";
-import { getFiltersAcc, getAccesorios, GET_CARRITO } from "../../redux/actions";
+import { getFiltersAcc, getAccesorios, GET_CARRITO, GET_REVIEWS } from "../../redux/actions";
 import { useState } from "react";
 import Paginacion from "./Paginacion";
 import ReviewStars from "../Reviews/Reviews";
@@ -12,13 +12,21 @@ export default function TodosLosAccesorios() {
   const accesorios = useSelector((state) => state.accesorios);
   const uid = useSelector((state) => state.uid);
   const carr = useSelector((state) => state.carr);
+  const compras = useSelector((state) => state.compras);
+  const rev = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAccesorios());
     dispatch(getFiltersAcc());
+    //get reviews
     console.log("Get filters acc");
-    if(uid){
+    if(uid!=1 && uid){
       dispatch(GET_CARRITO(uid,carr));
+      // dispatch(GET_USER_REVIEWS())
+      // console.log(compras,rev,"vvvvd")
+      dispatch(GET_REVIEWS())
+      console.log(rev,"ddd")
+
     }
   }, []);
 

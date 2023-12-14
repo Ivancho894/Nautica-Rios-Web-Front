@@ -1,15 +1,25 @@
 import { useParams } from 'react-router-dom'
-import { useDispatch } from "react-redux"
-import { UPDATE_CARRITO, VACIAR_CARRITO } from "../../redux/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { GET_CARRITO, UPDATE_CARRITO, UPDATE_USER_REVIEWS, VACIAR_CARRITO } from "../../redux/actions"
 import { useEffect } from "react"
+import { doc, setDoc } from '@firebase/firestore'
+import { db } from '../../../firebase-config'
 
 
 
 export default function successPage(){
     const dispatch = useDispatch()
     const {id} = useParams()
+
+    //Crear prop review y comprado
+
+
     //Vaciar carrito
     useEffect(()=>{
+        dispatch(GET_CARRITO)
+        dispatch(UPDATE_USER_REVIEWS({}))
+        //update reviews
+
         dispatch(UPDATE_CARRITO(id,[]))}
         ,[])
 
@@ -24,6 +34,7 @@ export default function successPage(){
             <br/>
             Un encargado de ventas se va a comunicar con usted en breve.
             Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nosotros.
+            Cuando recibas tus productos, te invitamos a dejar una opinion de su compra.
         </p>
         <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
             Regresar al inicio

@@ -7,26 +7,42 @@ import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_USER_REVIEWS } from "../../redux/actions";
 
 const DetalleAccesorio = () => {
   const { id } = useParams();
   const [accesorio, setAccesorio] = useState(null);
+  const uid = useSelector(state=>state.uid)
+  const [miReview,setmiReview] = useState({})
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchAccesorio = async () => {
       const accesorioDoc = doc(db, "accesorios", id);
       const accesorioSnapshot = await getDoc(accesorioDoc);
+      
 
       if (accesorioSnapshot.exists()) {
         setAccesorio({
           id: accesorioSnapshot.id,
           ...accesorioSnapshot.data(),
         });
+
       }
     };
 
     fetchAccesorio();
   }, [id]);
+
+  //Get review 
+
+// si compro puede opinar -> Update reviews todas
+//get reviews todas
+
+
+
+
 
   if (!accesorio) {
     return <p>Cargando...</p>;
