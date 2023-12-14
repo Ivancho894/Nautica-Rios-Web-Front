@@ -103,7 +103,7 @@ export default function Detalle() {
           <h2 className="text-4xl font-bold mb-2 mt-16 text-left">
             {barco.marcaBarco}
           </h2>
-          <h2 className="text-2xl font-bold mt-1 mb-4 text-left">
+          <h2 >
             ${barco.precio}
           </h2>
         </div>
