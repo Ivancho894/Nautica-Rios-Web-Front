@@ -34,7 +34,7 @@ export default function ListaBarcos () {
     <div className='mt-4'>
       <SearchBar lista={listaBarc} set={setListaBarc}  prop={'marcaBarco'}/>
     <div className="flex">
-      <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
+      <div className=" ml-8 w-full grid grid-cols-3 ">
         {listaBarc.length>0?listaBarc.map((barco) => {
           return <BarcosItem key={barco.id} obtenerBarcos={obtenerBarcos} barco={barco} />;
         }):<SinBarcos/>}

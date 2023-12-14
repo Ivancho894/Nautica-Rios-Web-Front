@@ -1,46 +1,9 @@
-// // ListaAcceso.jsx
-// import React, { useEffect, useState } from 'react';
-// import AccesoUsuario from './AccesoUsuario';
-// import { collection, getDocs } from 'firebase/firestore';
-// import { db } from '../../../firebase-config';
-
-// export default function ListaAcceso() {
-//   const [listaUser, setListaUser] = useState([]);
-
-//   useEffect(() => {
-//     const obtenerUsuarios = async () => {
-//       try {
-//         const users = await getDocs(collection(db, 'users'));
-//         const arrayUsers = users.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-//         setListaUser(arrayUsers);
-//         console.log(users);
-//       } catch (error) {
-//         console.error('Error al obtener usuarios:', error);
-//       }
-//     };
-
-//     obtenerUsuarios();
-//   }, []);
-
-//   return (
-//     <div className="flex">
-//       <div className="ml-8 w-full grid grid-cols-3 p-16 mt-16">
-//         {listaUser.map((user) => (
-//           <AccesoUsuario key={user.id} user={user} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
 import React, { useState } from 'react';
 import { useEffect } from "react";
 import { collection, getDocs, addDoc, where, query } from "firebase/firestore";
 import { db } from '../../../../firebase-config';
 import AccesoItem from './AccesoItem';
+import SearchBar from '../SearchBar';
 
 export default function ListaAcceso () {
   const [listaUsers, setListaUsers] = useState([]);
@@ -67,9 +30,9 @@ export default function ListaAcceso () {
   console.log(listaUserArray);
 
   return (
-    <div className="flex">
-
-      <div className=" ml-8 w-full grid grid-cols-3 p-16 mt-16">
+    <div className="mt-4">
+      <SearchBar lista={listaUsers} set={setListaUsers}  prop={'email'}/>
+      <div className=" ml-8 w-full grid grid-cols-3">
         {listaUsers && listaUsers.map((user) => {
           return <AccesoItem key={user.id} obtenerUsers={obtenerUsers} user={user} />;
         })}
