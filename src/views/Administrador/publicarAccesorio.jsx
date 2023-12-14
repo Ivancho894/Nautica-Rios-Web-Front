@@ -89,7 +89,7 @@ const PublicarAccesorio = () => {
   };
   return (
     <div className="mt-20 p-5">
-      <h1>Nuevo accesorio</h1>
+      <h1>Nuevo Accesorio</h1>
     <form onSubmit={handleSubmit} className=" max-w  mx-auto grid grid-cols-1 md:grid-cols-2 gap-8  p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md max-h-full" >
   <div className="mb-4">
     <label htmlFor="nombre" className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -107,7 +107,7 @@ const PublicarAccesorio = () => {
 
   <div className="mb-4">
     <label htmlFor="descripcion" className="block text-sm font-medium text-gray-900 dark:text-white">
-    descripcion
+    Descripcion
     </label>
     <input
       type="text"
