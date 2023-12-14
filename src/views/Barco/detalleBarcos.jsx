@@ -6,6 +6,7 @@ import { db } from "../../../firebase-config";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { async } from "@firebase/util";
 
 export default function Detalle() {
   const barcos = useSelector((state) => state.barcos);

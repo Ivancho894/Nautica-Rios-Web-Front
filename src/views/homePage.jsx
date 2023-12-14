@@ -3,15 +3,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { GET_BARCOS, GET_FILTERS } from "../redux/actions";
-import baner from "../assets/homeBaner.png";
-import destacado1 from "../assets/destacado1.png";
-import destacado2 from "../assets/destacado2.png";
-import destacado3 from "../assets/destacado3.png";
-import destacado4 from "../assets/destacado4.png";
-import destacado5 from "../assets/destacado5.png";
-import destacado6 from "../assets/destacado6.png";
-import destacado7 from "../assets/destacado7.png";
-import destacado8 from "../assets/destacado8.png";
+import baner from "../assets/Nautica Rios Web .png";
+import destacado1 from "../assets/1.png";
+import destacado2 from "../assets/2.png";
+import destacado3 from "../assets/3.png";
+import destacado4 from "../assets/4.png";
+import destacado5 from "../assets/5.png";
+import destacado6 from "../assets/6.png";
+import destacado7 from "../assets/7.png";
+import destacado8 from "../assets/8.png";
 import ventas from "../assets/ventas.png";
 import gestoria from "../assets/gestoria.png";
 import asesor from "../assets/asesor.png";
@@ -68,7 +68,7 @@ export default function Home() {
         <img src={baner} alt="baner" className="w-full"style={{ marginTop: '30px' }} />
       </div>
 
-      <h1 className="mt-16 font-bold mb-5">DESTACADOS</h1>
+      <h1 className="mt-16 font-bold mb-5">EMBARCACIONES DESTACADAS</h1>
       <div className="ml-8 mt-8 p-4 grid grid-cols-4 gap-4">
         <div className="">
           <img
@@ -76,7 +76,7 @@ export default function Home() {
             alt="barco1"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4">GENESIS 350 - Entrega Inmediata!</h2>
+          <h2 className="mt-4">Regnicoli Dorado</h2>
         </div>
         <div className="">
           <img
@@ -84,7 +84,7 @@ export default function Home() {
             alt="barco2"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4">MOTORYACHT 70 - Astillero San Isidro</h2>
+          <h2 className="mt-4">QuickSilver 1600</h2>
         </div>
         <div>
           <img
@@ -92,7 +92,7 @@ export default function Home() {
             alt="barco3"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4">SEGUE 720 - 2014</h2>
+          <h2 className="mt-4">Bermuda Sport 180</h2>
         </div>
         <div>
           <img
@@ -100,7 +100,7 @@ export default function Home() {
             alt="barco4"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4">GENESIS DEL MAR 46 - 2017</h2>
+          <h2 className="mt-4">Yamaha VXR</h2>
         </div>
         <div>
           <img
@@ -108,7 +108,7 @@ export default function Home() {
             alt="barco5"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4"> GENESIS DELTA 40 - 2018</h2>
+          <h2 className="mt-4">Geuna F185 GSS</h2>
         </div>
         <div>
           <img
@@ -116,7 +116,7 @@ export default function Home() {
             alt="barco6"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4">SEGUE 34 GT - 2021</h2>
+          <h2 className="mt-4">QuickSilver 2000</h2>
         </div>
         <div>
           <img
@@ -124,7 +124,7 @@ export default function Home() {
             alt="barco7"
             className="w-96  shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4">GENESIS 350X - 2023</h2>
+          <h2 className="mt-4">Prinz 700</h2>
         </div>
         <div>
           <img
@@ -132,7 +132,7 @@ export default function Home() {
             alt="barco8"
             className="w-96 shadow-[0_5px_40px_1px_rgba(0,0,0,2)]"
           />
-          <h2 className="mt-4"> GENESIS 350 - 2018!</h2>
+          <h2 className="mt-4">Canestrari 275</h2>
         </div>
       </div>
 
@@ -161,27 +161,7 @@ export default function Home() {
                   completa de servicios para satisfacer todas tus necesidades en
                   el mundo de los barcos.
                 </h2>
-                <h3 className="text-xl mb-8">
-                  ¿Buscas la embarcación perfecta para tus travesías? Nuestro
-                  equipo experto de Náutica Ríos está aquí para asesorarte en
-                  cada paso del camino. Desde la selección de la embarcación
-                  ideal hasta los detalles más técnicos, te brindamos
-                  orientación personalizada para garantizar que encuentres el
-                  barco que se adapte perfectamente a tus deseos y requisitos.
-                  Además de facilitar la adquisición de barcos, en Náutica Ríos
-                  nos enorgullecemos de ofrecer servicios integrales de
-                  mantenimiento y reparación. Nuestros técnicos altamente
-                  calificados y equipados con las últimas tecnologías trabajan
-                  diligentemente para asegurar que tu embarcación esté siempre
-                  en condiciones óptimas. Desde inspecciones regulares hasta
-                  reparaciones especializadas, estamos comprometidos a mantener
-                  tu barco en excelente estado. ¿Necesitas servicios
-                  personalizados para tu embarcación? Náutica Ríos se
-                  especializa en adaptarse a tus necesidades específicas.
-                  Ofrecemos servicios a medida, desde personalizaciones hasta
-                  mejoras de rendimiento, para garantizar que tu experiencia en
-                  el mar sea excepcional en todos los aspectos.
-                </h3>
+                
                 <h4 className="text-xl mb-8">
                   {" "}
                   En Náutica Ríos, nos apasiona el rio y queremos compartir esa
@@ -192,11 +172,7 @@ export default function Home() {
                   aventura en el agua.
                 </h4>
               </div>
-              <img
-                src={Logo}
-                alt="Nautica Rios"
-                className="mt-5 object-contain w-96"
-              />
+            
             </div>
           </div>
         </div>
@@ -217,8 +193,8 @@ export default function Home() {
           </div>
           <div>
             <h1 className="text-xl mb-8">
-              Te ofrecemos una gran variedad de barcos: cruceros, veleros,
-              motoveleros y lanchas tanto usados, como 0km. Buscamos la
+              Te ofrecemos una gran variedad de barcos: cruceros,
+              lanchas tanto usados, como 0km. Buscamos la
               embarcación acorde a tu presupuesto También tasamos tu barco,
               hacemos traslados, gestoría, inspección del estado general de las
               embarcaciones, clases de adaptación a su nueva embarcación.
@@ -235,7 +211,7 @@ export default function Home() {
           </div>
           <div>
             <h1 className="text-xl mb-8">
-              En Cenáutica te ofrecemos el servicio de gestoría náutica para
+              En Náutica Ríos te ofrecemos el servicio de gestoría náutica para
               realizar todos los trámites necesarios para que puedas obtener tu
               título náutico, renovarlo en caso de que haya caducado o solicitar
               un duplicado, si lo has perdido, te lo han robado y se te ha
@@ -266,7 +242,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <a href="home#inicio">🛥</a>
       <h1 className="mt-16 font-bold mb-5">INSTAGRAM</h1>
 
       <div className=" ml-8 mt-8 p-32 grid grid-cols-3 gap-16">
@@ -313,7 +288,6 @@ export default function Home() {
           ></iframe>
         </div>
       </div>
-      <a href="home#inicio">🛥</a>
       <div className=" flex items-end gap-4">
       <a href="https://www.instagram.com/nauticarios_embarcaciones/ ">
           <img src={insta} alt="barco3" className="w-16 ml-44" />
