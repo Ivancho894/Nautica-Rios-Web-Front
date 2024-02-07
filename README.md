@@ -37,3 +37,5 @@ We care about the convenience of our customers. We offer an efficient home deliv
 This website is designed to become the main destination for those looking to buy boats and nautical accessories. We are committed to providing a comprehensive experience that meets the needs of our users.
 
 [Watch our introductory video here](https://www.youtube.com/watch?v=lqReilpHGro)
+
+[Deploy](https://nautica-rios-pf-deploy.netlify.app/)
